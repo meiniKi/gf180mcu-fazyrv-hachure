@@ -1,0 +1,9 @@
+[submodule "ip/FazyRV"]
+	path = ip/FazyRV
+	url = git@github.com:meiniKi/FazyRV.git
+[submodule "ip/wb_intercon"]
+	path = ip/wb_intercon
+	url = https://github.com/olofk/wb_intercon.git
+[submodule "ip/EF_UART"]
+	path = ip/EF_UART
+	url = https://github.com/efabless/EF_UART.git

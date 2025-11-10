@@ -1,0 +1,29 @@
+vlnv: meiniki:gf180fazyrv:wb:0
+parameters:
+  endian: little
+  hosts:
+    fazyrv1:
+      devices: [memhr, memqspi, uart, spi]
+    fazyrv2:
+      devices: [memhr, memqspi, uart, spi]
+    fazyrv4:
+      devices: [memhr, memqspi, uart, spi]
+    fazyrv8:
+      devices: [memhr, memqspi, uart, spi]
+    oled_dma:
+      devices: [memqspi]
+        
+  devices:
+    memhr:
+      offset : 0x00000000
+      size   : 0x00001000
+    memqspi:
+      offset : 0x00001000
+      size   : 0x00000040
+    uart:
+      offset : 0x00001040
+      size   : 0x00000040
+      datawidth : 8
+    spi:
+      offset : 0x00002000
+      size   : 0x00001000

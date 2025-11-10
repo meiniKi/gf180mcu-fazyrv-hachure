@@ -1,0 +1,27 @@
+register_blocks:
+  - name: GPIO
+    byte_size: 12
+    registers:
+      - name: GPI
+        bit_fields: 
+          - { name: gpi, bit_assignment: { width: 8 }, type: ro}
+          - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
+      - name: GPO
+        bit_fields: 
+          - { name: gpo, bit_assignment: { width: 8 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
+      - name: GPOE
+        bit_fields: 
+          - { name: gpoe, bit_assignment: { width: 8 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
+
+  - name: SPI
+    byte_size: 4
+    registers:
+      - name: Cntrl
+        bit_fields: 
+          - { name: presc, bit_assignment: { width: 4 }, type: rw, initial_value: 1}
+          - { name: cpol, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: auto_cs, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: size, bit_assignment: { width: 2 }, type: rw, initial_value: 1}
+          - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
