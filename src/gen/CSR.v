@@ -33,26 +33,27 @@ module CSR #(
   output [3:0] o_OLED_Conf_presc,
   output o_OLED_Conf_inc,
   output [13:0] o_OLED_Conf_size,
-  output [31:0] o_OLED_Dma_addr
+  output [31:0] o_OLED_Dma_addr,
+  input i_UART_Irq_irq
 );
   wire w_register_valid;
   wire [1:0] w_register_access;
   wire [4:0] w_register_address;
   wire [31:0] w_register_write_data;
   wire [31:0] w_register_strobe;
-  wire [6:0] w_register_active;
-  wire [6:0] w_register_ready;
-  wire [13:0] w_register_status;
-  wire [223:0] w_register_read_data;
-  wire [223:0] w_register_value;
+  wire [7:0] w_register_active;
+  wire [7:0] w_register_ready;
+  wire [15:0] w_register_status;
+  wire [255:0] w_register_read_data;
+  wire [255:0] w_register_value;
   rggen_wishbone_adapter #(
     .ADDRESS_WIDTH        (ADDRESS_WIDTH),
     .LOCAL_ADDRESS_WIDTH  (5),
     .BUS_WIDTH            (32),
-    .REGISTERS            (7),
+    .REGISTERS            (8),
     .PRE_DECODE           (PRE_DECODE),
     .BASE_ADDRESS         (BASE_ADDRESS),
-    .BYTE_SIZE            (28),
+    .BYTE_SIZE            (32),
     .ERROR_STATUS         (ERROR_STATUS),
     .DEFAULT_READ_DATA    (DEFAULT_READ_DATA),
     .INSERT_SLICER        (INSERT_SLICER),
@@ -665,6 +666,70 @@ module CSR #(
         .i_value            ({32{1'b0}}),
         .i_mask             ({32{1'b1}}),
         .o_value            (o_OLED_Dma_addr),
+        .o_value_unmasked   ()
+      );
+    end
+  end endgenerate
+  generate if (1) begin : g_UART_Irq
+    wire w_bit_field_read_valid;
+    wire w_bit_field_write_valid;
+    wire [31:0] w_bit_field_mask;
+    wire [31:0] w_bit_field_write_data;
+    wire [31:0] w_bit_field_read_data;
+    wire [31:0] w_bit_field_value;
+    `rggen_tie_off_unused_signals(32, 32'h00000001, w_bit_field_read_data, w_bit_field_value)
+    rggen_default_register #(
+      .READABLE       (1),
+      .WRITABLE       (0),
+      .ADDRESS_WIDTH  (5),
+      .OFFSET_ADDRESS (5'h1c),
+      .BUS_WIDTH      (32),
+      .DATA_WIDTH     (32)
+    ) u_register (
+      .i_clk                    (i_clk),
+      .i_rst_n                  (i_rst_n),
+      .i_register_valid         (w_register_valid),
+      .i_register_access        (w_register_access),
+      .i_register_address       (w_register_address),
+      .i_register_write_data    (w_register_write_data),
+      .i_register_strobe        (w_register_strobe),
+      .o_register_active        (w_register_active[7+:1]),
+      .o_register_ready         (w_register_ready[7+:1]),
+      .o_register_status        (w_register_status[14+:2]),
+      .o_register_read_data     (w_register_read_data[224+:32]),
+      .o_register_value         (w_register_value[224+:32]),
+      .o_bit_field_read_valid   (w_bit_field_read_valid),
+      .o_bit_field_write_valid  (w_bit_field_write_valid),
+      .o_bit_field_mask         (w_bit_field_mask),
+      .o_bit_field_write_data   (w_bit_field_write_data),
+      .i_bit_field_read_data    (w_bit_field_read_data),
+      .i_bit_field_value        (w_bit_field_value)
+    );
+    if (1) begin : g_irq
+      rggen_bit_field #(
+        .WIDTH              (1),
+        .STORAGE            (0),
+        .EXTERNAL_READ_DATA (1),
+        .TRIGGER            (0)
+      ) u_bit_field (
+        .i_clk              (i_clk),
+        .i_rst_n            (i_rst_n),
+        .i_sw_read_valid    (w_bit_field_read_valid),
+        .i_sw_write_valid   (w_bit_field_write_valid),
+        .i_sw_write_enable  (1'b0),
+        .i_sw_mask          (w_bit_field_mask[0+:1]),
+        .i_sw_write_data    (w_bit_field_write_data[0+:1]),
+        .o_sw_read_data     (w_bit_field_read_data[0+:1]),
+        .o_sw_value         (w_bit_field_value[0+:1]),
+        .o_write_trigger    (),
+        .o_read_trigger     (),
+        .i_hw_write_enable  (1'b0),
+        .i_hw_write_data    ({1{1'b0}}),
+        .i_hw_set           ({1{1'b0}}),
+        .i_hw_clear         ({1{1'b0}}),
+        .i_value            (i_UART_Irq_irq),
+        .i_mask             ({1{1'b1}}),
+        .o_value            (),
         .o_value_unmasked   ()
       );
     end

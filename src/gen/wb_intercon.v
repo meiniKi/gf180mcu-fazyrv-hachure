@@ -393,7 +393,7 @@ wire        wb_oled_dma_ram_rty;
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe0}))
  wb_mux_fazyrv1
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -425,7 +425,7 @@ wb_mux
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe0}))
  wb_mux_fazyrv2
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -457,7 +457,7 @@ wb_mux
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe0}))
  wb_mux_fazyrv4
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -489,7 +489,7 @@ wb_mux
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe0}))
  wb_mux_fazyrv8
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),

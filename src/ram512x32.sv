@@ -15,15 +15,15 @@
 
 module ram512x32 (
   `ifdef USE_POWER_PINS
-  inout  wire         VDD,
-  inout  wire         VSS,
+  inout  wire          VDD,
+  inout  wire          VSS,
   `endif
   input  logic         clk_i,
   input  logic         wen_i,
   input  logic [ 3:0]  sel_i,
-  input  logic [ 6:0]  adr_i,
+  input  logic [ 8:0]  adr_i,
   input  logic [31:0]  dat_i,
-  input  logic [31:0]  dat_o
+  output logic [31:0]  dat_o
 );
 
 genvar i;

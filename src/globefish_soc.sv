@@ -47,7 +47,7 @@ module globefish_soc (
 //####################################                                 
                                    
 
-localparam MAX_SPI_LENGTH = 2048*64/8;
+localparam MAX_SPI_LENGTH = 1024*64/8;
 // Note: 14-bit address hard-coded in CSR bitfield
 
 localparam SPI_PREFETCH   = 0;
@@ -350,7 +350,7 @@ logic [31:0] wb_p_uart_wdat;
 logic [31:0] wb_p_uart_rdat;
 logic [ 3:0] wb_p_uart_sel;
 
-
+logic uart_irq;
 
 //                                                                             
 // mmmmm                  "           #                           ""#          
@@ -394,12 +394,13 @@ CSR #(
   .o_SPI_Conf_cpol      ( spi_cpol            ),
   .o_SPI_Conf_auto_cs   ( spi_auto_cs         ),
   .o_SPI_Conf_size      ( spi_size            ),
-  .o_OLED_Start_Status_start_rdy ( oled_rdy   ),
-  .i_OLED_Start_Status_start_rdy ( oled_start ),
+  .o_OLED_Start_Status_start_rdy ( oled_start ),
+  .i_OLED_Start_Status_start_rdy ( oled_rdy   ),
   .o_OLED_Conf_presc    ( oled_presc          ),
   .o_OLED_Conf_inc      ( oled_spi_inc        ),
   .o_OLED_Conf_size     ( oled_size           ),
-  .o_OLED_Dma_addr      ( oled_spi_adr        )
+  .o_OLED_Dma_addr      ( oled_spi_adr        ),
+  .i_UART_Irq_irq       ( uart_irq            )
 );                               
 
 
@@ -447,7 +448,7 @@ wb_qspi_mem i_wb_qspi_mem (
   // select mem before, one module to reduce area
   .sel_rom_ram_i  ( wb_p_qspi_mem_adr[28]   ),
   // wishbone
-  .wb_mem_stb_i   ( wb_p_qspi_mem_stb & wb_qspi_mem_cyc ),
+  .wb_mem_stb_i   ( wb_p_qspi_mem_stb & wb_p_qspi_mem_cyc ),
   .wb_mem_we_i    ( wb_p_qspi_mem_we        ),
   .wb_mem_ack_o   ( wb_p_qspi_mem_ack       ),
   .wb_mem_be_i    ( wb_p_qspi_mem_sel       ),
@@ -486,7 +487,8 @@ EF_UART_WB #(
   .stb_i  ( wb_p_uart_stb   ),
   .ack_o  ( wb_p_uart_ack   ),
   .we_i   ( wb_p_uart_we    ),
-  .IRQ    ( TODO            ),  
+  // TODO: check if that needs to be registered
+  .IRQ    ( uart_irq        ),  
   .rx     ( uart_rx_i       ),
   .tx     ( uart_tx_o       )
 );
@@ -570,9 +572,9 @@ frv_1 i_frv_1 (
   .wb_dmem_we_o  ( wb_c_frv_1_dmem_we   ),
   .wb_dmem_ack_i ( wb_c_frv_1_dmem_ack  ),
   .wb_dmem_be_o  ( wb_c_frv_1_dmem_be   ),
-  .wb_dmem_dat_i ( wb_c_frv_1_dmem_wdat ),
+  .wb_dmem_dat_i ( wb_c_frv_1_dmem_rdat ),
   .wb_dmem_adr_o ( wb_c_frv_1_dmem_adr  ),
-  .wb_dmem_dat_o ( wb_c_frv_1_dmem_rdat )
+  .wb_dmem_dat_o ( wb_c_frv_1_dmem_wdat )
 );
 
 
@@ -586,7 +588,7 @@ assign wb_c_frv_2_dmem_stb  = 'b0;
 assign wb_c_frv_2_dmem_we   = 'b0;
 assign wb_c_frv_2_dmem_be   = 'b0;
 assign wb_c_frv_2_dmem_adr  = 'b0;
-assign wb_c_frv_2_dmem_rdat = 'b0;
+assign wb_c_frv_2_dmem_wdat = 'b0;
 
 assign wb_c_frv_4_imem_stb  = 'b0; 
 assign wb_c_frv_4_imem_cyc  = 'b0;
@@ -596,7 +598,7 @@ assign wb_c_frv_4_dmem_stb  = 'b0;
 assign wb_c_frv_4_dmem_we   = 'b0;
 assign wb_c_frv_4_dmem_be   = 'b0;
 assign wb_c_frv_4_dmem_adr  = 'b0;
-assign wb_c_frv_4_dmem_rdat = 'b0;
+assign wb_c_frv_4_dmem_wdat = 'b0;
 
 assign wb_c_frv_8_imem_stb  = 'b0; 
 assign wb_c_frv_8_imem_cyc  = 'b0;
@@ -606,7 +608,7 @@ assign wb_c_frv_8_dmem_stb  = 'b0;
 assign wb_c_frv_8_dmem_we   = 'b0;
 assign wb_c_frv_8_dmem_be   = 'b0;
 assign wb_c_frv_8_dmem_adr  = 'b0;
-assign wb_c_frv_8_dmem_rdat = 'b0;
+assign wb_c_frv_8_dmem_wdat = 'b0;
 
 /*
 frv_2 i_frv_2 (
@@ -624,9 +626,9 @@ frv_2 i_frv_2 (
   .wb_dmem_we_o  ( wb_c_frv_2_dmem_we   ),
   .wb_dmem_ack_i ( wb_c_frv_2_dmem_ack  ),
   .wb_dmem_be_o  ( wb_c_frv_2_dmem_be   ),
-  .wb_dmem_dat_i ( wb_c_frv_2_dmem_wdat ),
+  .wb_dmem_dat_i ( wb_c_frv_2_dmem_rdat ),
   .wb_dmem_adr_o ( wb_c_frv_2_dmem_adr  ),
-  .wb_dmem_dat_o ( wb_c_frv_2_dmem_rdat ),
+  .wb_dmem_dat_o ( wb_c_frv_2_dmem_wdat ),
 );
 
 frv_4 i_frv_4 (
@@ -644,9 +646,9 @@ frv_4 i_frv_4 (
   .wb_dmem_we_o  ( wb_c_frv_4_dmem_we   ),
   .wb_dmem_ack_i ( wb_c_frv_4_dmem_ack  ),
   .wb_dmem_be_o  ( wb_c_frv_4_dmem_be   ),
-  .wb_dmem_dat_i ( wb_c_frv_4_dmem_wdat ),
+  .wb_dmem_dat_i ( wb_c_frv_4_dmem_rdat ),
   .wb_dmem_adr_o ( wb_c_frv_4_dmem_adr  ),
-  .wb_dmem_dat_o ( wb_c_frv_4_dmem_rdat ),
+  .wb_dmem_dat_o ( wb_c_frv_4_dmem_wdat ),
 );
 
 frv_8 i_frv_8 (
@@ -664,9 +666,9 @@ frv_8 i_frv_8 (
   .wb_dmem_we_o  ( wb_c_frv_8_dmem_we   ),
   .wb_dmem_ack_i ( wb_c_frv_8_dmem_ack  ),
   .wb_dmem_be_o  ( wb_c_frv_8_dmem_be   ),
-  .wb_dmem_dat_i ( wb_c_frv_8_dmem_wdat ),
+  .wb_dmem_dat_i ( wb_c_frv_8_dmem_rdat ),
   .wb_dmem_adr_o ( wb_c_frv_8_dmem_adr  ),
-  .wb_dmem_dat_o ( wb_c_frv_8_dmem_rdat ),
+  .wb_dmem_dat_o ( wb_c_frv_8_dmem_wdat ),
 );
 */
                                                         
@@ -689,8 +691,8 @@ wb_intercon i_wb_intercon (
   .wb_fazyrv1_we_i        ( wb_c_frv_1_we       ),
   .wb_fazyrv1_cyc_i       ( wb_c_frv_1_cyc      ),
   .wb_fazyrv1_stb_i       ( wb_c_frv_1_stb      ),
-  .wb_fazyrv1_cti_i       ( 'b0                 ),
-  .wb_fazyrv1_bte_i       ( 'b0                 ),
+  .wb_fazyrv1_cti_i       ( 3'b0                ),
+  .wb_fazyrv1_bte_i       ( 2'b0                ),
   .wb_fazyrv1_rdt_o       ( wb_c_frv_1_rdat     ),
   .wb_fazyrv1_ack_o       ( wb_c_frv_1_ack      ),
   .wb_fazyrv1_err_o       ( /* nc */            ),
@@ -702,8 +704,8 @@ wb_intercon i_wb_intercon (
   .wb_fazyrv2_we_i        ( wb_c_frv_2_we       ),
   .wb_fazyrv2_cyc_i       ( wb_c_frv_2_cyc      ),
   .wb_fazyrv2_stb_i       ( wb_c_frv_2_stb      ),
-  .wb_fazyrv2_cti_i       ( 'b0                 ),
-  .wb_fazyrv2_bte_i       ( 'b0                 ),
+  .wb_fazyrv2_cti_i       ( 3'b0                ),
+  .wb_fazyrv2_bte_i       ( 2'b0                ),
   .wb_fazyrv2_rdt_o       ( wb_c_frv_2_rdat     ),
   .wb_fazyrv2_ack_o       ( wb_c_frv_2_ack      ),
   .wb_fazyrv2_err_o       ( /* nc */            ),
@@ -715,8 +717,8 @@ wb_intercon i_wb_intercon (
   .wb_fazyrv4_we_i        ( wb_c_frv_4_we       ),
   .wb_fazyrv4_cyc_i       ( wb_c_frv_4_cyc      ),
   .wb_fazyrv4_stb_i       ( wb_c_frv_4_stb      ),
-  .wb_fazyrv4_cti_i       ( 'b0                 ),
-  .wb_fazyrv4_bte_i       ( 'b0                 ),
+  .wb_fazyrv4_cti_i       ( 3'b0                ),
+  .wb_fazyrv4_bte_i       ( 2'b0                ),
   .wb_fazyrv4_rdt_o       ( wb_c_frv_4_rdat     ),
   .wb_fazyrv4_ack_o       ( wb_c_frv_4_ack      ),
   .wb_fazyrv4_err_o       ( /* nc */            ),
@@ -728,21 +730,21 @@ wb_intercon i_wb_intercon (
   .wb_fazyrv8_we_i        ( wb_c_frv_8_we       ),
   .wb_fazyrv8_cyc_i       ( wb_c_frv_8_cyc      ),
   .wb_fazyrv8_stb_i       ( wb_c_frv_8_stb      ),
-  .wb_fazyrv8_cti_i       ( 'b0                 ),
-  .wb_fazyrv8_bte_i       ( 'b0                 ),
+  .wb_fazyrv8_cti_i       ( 3'b0                ),
+  .wb_fazyrv8_bte_i       ( 2'b0                ),
   .wb_fazyrv8_rdt_o       ( wb_c_frv_8_rdat     ),
   .wb_fazyrv8_ack_o       ( wb_c_frv_8_ack      ),
   .wb_fazyrv8_err_o       ( /* nc */            ),
   .wb_fazyrv8_rty_o       ( /* nc */            ),
   //
   .wb_oled_dma_adr_i      ( wb_c_oled_dma_adr   ),
-  .wb_oled_dma_dat_i      ( 'b0                 ),
-  .wb_oled_dma_sel_i      ( 'b0                 ),
-  .wb_oled_dma_we_i       ( 'b0                 ),
+  .wb_oled_dma_dat_i      ( 32'b0               ),
+  .wb_oled_dma_sel_i      ( 4'b0                ),
+  .wb_oled_dma_we_i       ( 1'b0                ),
   .wb_oled_dma_cyc_i      ( wb_c_oled_dma_cyc   ),
   .wb_oled_dma_stb_i      ( wb_c_oled_dma_stb   ),
-  .wb_oled_dma_cti_i      ( 'b0                 ),
-  .wb_oled_dma_bte_i      ( 'b0                 ),
+  .wb_oled_dma_cti_i      ( 3'b0                ),
+  .wb_oled_dma_bte_i      ( 2'b0                ),
   .wb_oled_dma_rdt_o      ( wb_c_oled_dma_rdat  ),
   .wb_oled_dma_ack_o      ( wb_c_oled_dma_ack   ),
   .wb_oled_dma_err_o      ( /* nc */            ),
@@ -758,8 +760,8 @@ wb_intercon i_wb_intercon (
   .wb_qspi_ram_rom_bte_o  ( /* nc */            ),
   .wb_qspi_ram_rom_rdt_i  ( wb_p_qspi_mem_rdat  ),
   .wb_qspi_ram_rom_ack_i  ( wb_p_qspi_mem_ack   ),
-  .wb_qspi_ram_rom_err_i  ( 'b0                 ),
-  .wb_qspi_ram_rom_rty_i  ( 'b0                 ),
+  .wb_qspi_ram_rom_err_i  ( 1'b0                ),
+  .wb_qspi_ram_rom_rty_i  ( 1'b0                ),
   //
   .wb_ram_adr_o           ( wb_p_ram_adr        ),
   .wb_ram_dat_o           ( wb_p_ram_wdat       ),
@@ -771,8 +773,8 @@ wb_intercon i_wb_intercon (
   .wb_ram_bte_o           ( /* nc */            ),
   .wb_ram_rdt_i           ( wb_p_ram_rdat       ),
   .wb_ram_ack_i           ( wb_p_ram_ack        ),
-  .wb_ram_err_i           ( 'b0                 ),
-  .wb_ram_rty_i           ( 'b0                 ),
+  .wb_ram_err_i           ( 1'b0                ),
+  .wb_ram_rty_i           ( 1'b0                ),
   //
   .wb_uart_adr_o          ( wb_p_uart_adr       ),
   .wb_uart_dat_o          ( wb_p_uart_wdat      ),
@@ -784,8 +786,8 @@ wb_intercon i_wb_intercon (
   .wb_uart_bte_o          ( /* nc */            ),
   .wb_uart_rdt_i          ( wb_p_uart_rdat      ),
   .wb_uart_ack_i          ( wb_p_uart_ack       ),
-  .wb_uart_err_i          ( 'b0                 ),
-  .wb_uart_rty_i          ( 'b0                 ),
+  .wb_uart_err_i          ( 1'b0                ),
+  .wb_uart_rty_i          ( 1'b0                ),
   //
   .wb_spi_adr_o           ( wb_p_spi_adr        ),
   .wb_spi_dat_o           ( wb_p_spi_wdat       ),
@@ -797,8 +799,8 @@ wb_intercon i_wb_intercon (
   .wb_spi_bte_o           ( /* nc */            ),
   .wb_spi_rdt_i           ( wb_p_spi_rdat       ),
   .wb_spi_ack_i           ( wb_p_spi_ack        ),
-  .wb_spi_err_i           ( 'b0                 ),
-  .wb_spi_rty_i           ( 'b0                 ),
+  .wb_spi_err_i           ( 1'b0                ),
+  .wb_spi_rty_i           ( 1'b0                ),
   //
   .wb_csr_adr_o           ( wb_p_csr_adr        ),
   .wb_csr_dat_o           ( wb_p_csr_wdat       ),
@@ -810,8 +812,8 @@ wb_intercon i_wb_intercon (
   .wb_csr_bte_o           ( /* nc */            ),
   .wb_csr_rdt_i           ( wb_p_csr_rdat       ),
   .wb_csr_ack_i           ( wb_p_csr_ack        ),
-  .wb_csr_err_i           ( 'b0                 ),
-  .wb_csr_rty_i           ( 'b0                 )
+  .wb_csr_err_i           ( 1'b0                ),
+  .wb_csr_rty_i           ( 1'b0                )
 );
 
 

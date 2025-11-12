@@ -24,7 +24,8 @@ simple_test = { 'firmware': '../firmware/simple/build/simple.hex' }
 enabled = simple_test
 
 async def set_defaults(dut):
-    dut.input_PAD.value = 0
+    #dut.input_PAD.value = 0
+    pass
 
 async def enable_power(dut):
     dut.VDD.value = 1
@@ -52,8 +53,8 @@ async def start_up(dut):
     await set_defaults(dut)
     if gl:
         await enable_power(dut)
-    await start_clock(dut.clk_PAD)
-    await reset(dut.rst_n_PAD)
+    await start_clock(dut.clk)
+    await reset(dut.rst_n)
 
 
 @cocotb.test(skip=enabled!=simple_test)
@@ -65,7 +66,7 @@ async def test_simple(dut):
     logger.info("Running the test...")
 
     # Wait for some time...
-    await ClockCycles(dut.clk_PAD, int(10000))
+    await ClockCycles(dut.clk, int(10000))
 
     logger.info("Check Traces!")
 
@@ -164,7 +165,7 @@ def chip_top_runner():
 
     runner.test(
         hdl_toplevel=hdl_toplevel,
-        test_module="chip_top_tb,",
+        test_module="globefish_tb,",
         plusargs=plusargs,
         waves=True,
     )

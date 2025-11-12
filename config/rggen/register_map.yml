@@ -1,6 +1,6 @@
 register_blocks:
   - name: CSR
-    byte_size: 28
+    byte_size: 32
     registers:
       - name: GPI
         bit_fields: 
@@ -34,3 +34,7 @@ register_blocks:
       - name: OLED_Dma
         bit_fields:
           - { name: addr, bit_assignment: { width: 32 }, type: rw, initial_value: 0}
+      - name: UART_Irq
+        bit_fields:
+          - { name: irq, bit_assignment: { width: 1 }, type: ro}
+          - { name: reserved, bit_assignment: { width: 31 }, type: reserved } 

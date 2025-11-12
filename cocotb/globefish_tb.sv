@@ -90,12 +90,12 @@ globefish_soc i_globefish_soc (
   .en_frv4_i          ( en_frv4         ),
   .en_frv8_i          ( en_frv8         ),
   // QSPI XIP Memory
-  .spi_mem_cs_ram_on  ( mem_cs_ram_n    ),
-  .spi_mem_cs_rom_on  ( mem_cs_rom_n    ),
-  .spi_mem_sck_o      ( mem_sck         ),
-  .spi_mem_sd_i       ( mem_sdio        ),
-  .spi_mem_sd_o       ( mem_core_sdo    ),
-  .spi_mem_oen_o      ( mem_core_sdoen  ),
+  .qspi_mem_cs_ram_on ( mem_cs_ram_n    ),
+  .qspi_mem_cs_rom_on ( mem_cs_rom_n    ),
+  .qspi_mem_sck_o     ( mem_sck         ),
+  .qspi_mem_sd_i      ( mem_sdio        ),
+  .qspi_mem_sd_o      ( mem_core_sdo    ),
+  .qspi_mem_oen_o     ( mem_core_sdoen  ),
   // UART
   .uart_tx_o          ( uart_tx         ),
   .uart_rx_i          ( uart_rx         ),

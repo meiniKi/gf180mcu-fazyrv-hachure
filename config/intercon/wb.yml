@@ -27,4 +27,4 @@ parameters:
       size   : 0x00000004
     csr:
       offset : 0x50000000
-      size   : 0x0000001C
+      size   : 0x00000020

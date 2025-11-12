@@ -37,16 +37,14 @@ module wb_ram #(
 localparam int NR_INSTANCES = (DEPTH + 511) / 512;
 localparam int BANK_SEL_BITS = $clog2(NR_INSTANCES);
 
-logic [31:0] wb_rdat_bank [0:NR_INSTANCES-1];
-logic        wb_we_bank   [0:NR_INSTANCES-1];
+logic [31:0]              wb_rdat_bank [0:NR_INSTANCES-1];
+logic [NR_INSTANCES-1:0]  wb_we_bank;
 
-// One-hot encoding the banks
-// [8:0] address within one 512x32 ram block
-assign wb_we_bank = wb_cyc_i & wb_stb_i & wb_we_i ? 
-                      (1'b1 << wb_adr_i[9 + BANK_SEL_BITS - 1 : 9])
-                      : '0;
+assign wb_we_bank = (wb_cyc_i & wb_stb_i & wb_we_i) ?
+                    (1'b1 << wb_adr_i[9 + BANK_SEL_BITS - 1 : 9]) :
+                    '0;
 
-assign wb_dat_o   = wb_rdat_bank[wb_adr_i[9 + BANK_SEL_BITS - 1 : 9]];
+assign wb_dat_o = wb_rdat_bank[wb_adr_i[9 + BANK_SEL_BITS - 1 : 9]];
 
 // Memory macros
 genvar i;

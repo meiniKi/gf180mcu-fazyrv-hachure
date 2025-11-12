@@ -19,25 +19,25 @@ module ram512x8 (
   `endif
   input  logic        clk_i,
   input  logic        wen_i,
-  input  logic [6:0]  adr_i,
-  input  logic [8:0]  dat_i,
-  input  logic [8:0]  dat_o
+  input  logic [8:0]  adr_i,
+  input  logic [7:0]  dat_i,
+  output logic [7:0]  dat_o
 );
 
 `ifndef SIM
   (* keep *)
   gf180mcu_fd_ip_sram__sram512x8m8wm1 sram_0 (
     `ifdef USE_POWER_PINS
-    .VDD  ( VDD   ),
-    .VSS  ( VSS   ),
+    .VDD  ( VDD     ),
+    .VSS  ( VSS     ),
     `endif
-    .CLK  ( clk_i ),
-    .CEN  ( 1'b0  ),
-    .GWEN ( ~wen  ),
-    .WEN  ( 'b0   ),
-    .A    ( adr_i ),
-    .D    ( dat_i ),
-    .Q    ( dat_o )
+    .CLK  ( clk_i   ),
+    .CEN  ( 1'b0    ),
+    .GWEN ( ~wen_i  ),
+    .WEN  ( 8'b0    ),
+    .A    ( adr_i   ),
+    .D    ( dat_i   ),
+    .Q    ( dat_o   )
   );
 
 `else
