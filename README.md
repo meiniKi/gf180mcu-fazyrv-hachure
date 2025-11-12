@@ -4,14 +4,14 @@ FazyRV globefish SoC WiP.
 
 ## Memory Map
 
-| Base Address | Name      | Description         |
-| ------------ | --------- | ------------------- |
-| 0x0000_0000  | XIP_ROM   | QSPI XIP ROM        |
-| 0x1000_0000  | QSPI_SRAM | QSPI SRAM           |
-| 0x2000_0000  | RAM       | On-Chip RAM         |
-| 0x3000_0000  | UART      | UART Peripheral     |
-| 0x4000_0000  | SPI       | SPI Peripheral      |
-| 0x5000_0000  | GPIO      | Chip GPIO Registers |
+| Base Address | Name      | Description                    |
+| ------------ | --------- | ------------------------------ |
+| 0x0000_0000  | XIP_ROM   | QSPI XIP ROM                   |
+| 0x1000_0000  | QSPI_SRAM | QSPI SRAM                      |
+| 0x2000_0000  | RAM       | On-Chip RAM                    |
+| 0x3000_0000  | UART      | UART Peripheral                |
+| 0x4000_0000  | SPI       | SPI Peripheral                 |
+| 0x5000_0000  | CSRs      | GPIOs, SPI Config, Oled Config |
 
 ## Prerequisites
 

@@ -112,18 +112,18 @@ module wb_intercon
     input  wire        wb_spi_ack_i,
     input  wire        wb_spi_err_i,
     input  wire        wb_spi_rty_i,
-    output wire [31:0] wb_gpio_adr_o,
-    output wire [31:0] wb_gpio_dat_o,
-    output wire  [3:0] wb_gpio_sel_o,
-    output wire        wb_gpio_we_o,
-    output wire        wb_gpio_cyc_o,
-    output wire        wb_gpio_stb_o,
-    output wire  [2:0] wb_gpio_cti_o,
-    output wire  [1:0] wb_gpio_bte_o,
-    input  wire [31:0] wb_gpio_rdt_i,
-    input  wire        wb_gpio_ack_i,
-    input  wire        wb_gpio_err_i,
-    input  wire        wb_gpio_rty_i);
+    output wire [31:0] wb_csr_adr_o,
+    output wire [31:0] wb_csr_dat_o,
+    output wire  [3:0] wb_csr_sel_o,
+    output wire        wb_csr_we_o,
+    output wire        wb_csr_cyc_o,
+    output wire        wb_csr_stb_o,
+    output wire  [2:0] wb_csr_cti_o,
+    output wire  [1:0] wb_csr_bte_o,
+    input  wire [31:0] wb_csr_rdt_i,
+    input  wire        wb_csr_ack_i,
+    input  wire        wb_csr_err_i,
+    input  wire        wb_csr_rty_i);
 
 wire [31:0] wb_fazyrv1_qspi_ram_rom_adr;
 wire [31:0] wb_fazyrv1_qspi_ram_rom_dat;
@@ -173,18 +173,18 @@ wire [31:0] wb_fazyrv1_spi_rdt;
 wire        wb_fazyrv1_spi_ack;
 wire        wb_fazyrv1_spi_err;
 wire        wb_fazyrv1_spi_rty;
-wire [31:0] wb_fazyrv1_gpio_adr;
-wire [31:0] wb_fazyrv1_gpio_dat;
-wire  [3:0] wb_fazyrv1_gpio_sel;
-wire        wb_fazyrv1_gpio_we;
-wire        wb_fazyrv1_gpio_cyc;
-wire        wb_fazyrv1_gpio_stb;
-wire  [2:0] wb_fazyrv1_gpio_cti;
-wire  [1:0] wb_fazyrv1_gpio_bte;
-wire [31:0] wb_fazyrv1_gpio_rdt;
-wire        wb_fazyrv1_gpio_ack;
-wire        wb_fazyrv1_gpio_err;
-wire        wb_fazyrv1_gpio_rty;
+wire [31:0] wb_fazyrv1_csr_adr;
+wire [31:0] wb_fazyrv1_csr_dat;
+wire  [3:0] wb_fazyrv1_csr_sel;
+wire        wb_fazyrv1_csr_we;
+wire        wb_fazyrv1_csr_cyc;
+wire        wb_fazyrv1_csr_stb;
+wire  [2:0] wb_fazyrv1_csr_cti;
+wire  [1:0] wb_fazyrv1_csr_bte;
+wire [31:0] wb_fazyrv1_csr_rdt;
+wire        wb_fazyrv1_csr_ack;
+wire        wb_fazyrv1_csr_err;
+wire        wb_fazyrv1_csr_rty;
 wire [31:0] wb_fazyrv2_qspi_ram_rom_adr;
 wire [31:0] wb_fazyrv2_qspi_ram_rom_dat;
 wire  [3:0] wb_fazyrv2_qspi_ram_rom_sel;
@@ -233,18 +233,18 @@ wire [31:0] wb_fazyrv2_spi_rdt;
 wire        wb_fazyrv2_spi_ack;
 wire        wb_fazyrv2_spi_err;
 wire        wb_fazyrv2_spi_rty;
-wire [31:0] wb_fazyrv2_gpio_adr;
-wire [31:0] wb_fazyrv2_gpio_dat;
-wire  [3:0] wb_fazyrv2_gpio_sel;
-wire        wb_fazyrv2_gpio_we;
-wire        wb_fazyrv2_gpio_cyc;
-wire        wb_fazyrv2_gpio_stb;
-wire  [2:0] wb_fazyrv2_gpio_cti;
-wire  [1:0] wb_fazyrv2_gpio_bte;
-wire [31:0] wb_fazyrv2_gpio_rdt;
-wire        wb_fazyrv2_gpio_ack;
-wire        wb_fazyrv2_gpio_err;
-wire        wb_fazyrv2_gpio_rty;
+wire [31:0] wb_fazyrv2_csr_adr;
+wire [31:0] wb_fazyrv2_csr_dat;
+wire  [3:0] wb_fazyrv2_csr_sel;
+wire        wb_fazyrv2_csr_we;
+wire        wb_fazyrv2_csr_cyc;
+wire        wb_fazyrv2_csr_stb;
+wire  [2:0] wb_fazyrv2_csr_cti;
+wire  [1:0] wb_fazyrv2_csr_bte;
+wire [31:0] wb_fazyrv2_csr_rdt;
+wire        wb_fazyrv2_csr_ack;
+wire        wb_fazyrv2_csr_err;
+wire        wb_fazyrv2_csr_rty;
 wire [31:0] wb_fazyrv4_qspi_ram_rom_adr;
 wire [31:0] wb_fazyrv4_qspi_ram_rom_dat;
 wire  [3:0] wb_fazyrv4_qspi_ram_rom_sel;
@@ -293,18 +293,18 @@ wire [31:0] wb_fazyrv4_spi_rdt;
 wire        wb_fazyrv4_spi_ack;
 wire        wb_fazyrv4_spi_err;
 wire        wb_fazyrv4_spi_rty;
-wire [31:0] wb_fazyrv4_gpio_adr;
-wire [31:0] wb_fazyrv4_gpio_dat;
-wire  [3:0] wb_fazyrv4_gpio_sel;
-wire        wb_fazyrv4_gpio_we;
-wire        wb_fazyrv4_gpio_cyc;
-wire        wb_fazyrv4_gpio_stb;
-wire  [2:0] wb_fazyrv4_gpio_cti;
-wire  [1:0] wb_fazyrv4_gpio_bte;
-wire [31:0] wb_fazyrv4_gpio_rdt;
-wire        wb_fazyrv4_gpio_ack;
-wire        wb_fazyrv4_gpio_err;
-wire        wb_fazyrv4_gpio_rty;
+wire [31:0] wb_fazyrv4_csr_adr;
+wire [31:0] wb_fazyrv4_csr_dat;
+wire  [3:0] wb_fazyrv4_csr_sel;
+wire        wb_fazyrv4_csr_we;
+wire        wb_fazyrv4_csr_cyc;
+wire        wb_fazyrv4_csr_stb;
+wire  [2:0] wb_fazyrv4_csr_cti;
+wire  [1:0] wb_fazyrv4_csr_bte;
+wire [31:0] wb_fazyrv4_csr_rdt;
+wire        wb_fazyrv4_csr_ack;
+wire        wb_fazyrv4_csr_err;
+wire        wb_fazyrv4_csr_rty;
 wire [31:0] wb_fazyrv8_qspi_ram_rom_adr;
 wire [31:0] wb_fazyrv8_qspi_ram_rom_dat;
 wire  [3:0] wb_fazyrv8_qspi_ram_rom_sel;
@@ -353,18 +353,18 @@ wire [31:0] wb_fazyrv8_spi_rdt;
 wire        wb_fazyrv8_spi_ack;
 wire        wb_fazyrv8_spi_err;
 wire        wb_fazyrv8_spi_rty;
-wire [31:0] wb_fazyrv8_gpio_adr;
-wire [31:0] wb_fazyrv8_gpio_dat;
-wire  [3:0] wb_fazyrv8_gpio_sel;
-wire        wb_fazyrv8_gpio_we;
-wire        wb_fazyrv8_gpio_cyc;
-wire        wb_fazyrv8_gpio_stb;
-wire  [2:0] wb_fazyrv8_gpio_cti;
-wire  [1:0] wb_fazyrv8_gpio_bte;
-wire [31:0] wb_fazyrv8_gpio_rdt;
-wire        wb_fazyrv8_gpio_ack;
-wire        wb_fazyrv8_gpio_err;
-wire        wb_fazyrv8_gpio_rty;
+wire [31:0] wb_fazyrv8_csr_adr;
+wire [31:0] wb_fazyrv8_csr_dat;
+wire  [3:0] wb_fazyrv8_csr_sel;
+wire        wb_fazyrv8_csr_we;
+wire        wb_fazyrv8_csr_cyc;
+wire        wb_fazyrv8_csr_stb;
+wire  [2:0] wb_fazyrv8_csr_cti;
+wire  [1:0] wb_fazyrv8_csr_bte;
+wire [31:0] wb_fazyrv8_csr_rdt;
+wire        wb_fazyrv8_csr_ack;
+wire        wb_fazyrv8_csr_err;
+wire        wb_fazyrv8_csr_rty;
 wire [31:0] wb_oled_dma_qspi_ram_rom_adr;
 wire [31:0] wb_oled_dma_qspi_ram_rom_dat;
 wire  [3:0] wb_oled_dma_qspi_ram_rom_sel;
@@ -393,7 +393,7 @@ wire        wb_oled_dma_ram_rty;
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffff0, 32'hfffffff0, 32'hfffffff0}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
  wb_mux_fazyrv1
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -409,23 +409,23 @@ wb_mux
     .wbm_ack_o (wb_fazyrv1_ack_o),
     .wbm_err_o (wb_fazyrv1_err_o),
     .wbm_rty_o (wb_fazyrv1_rty_o),
-    .wbs_adr_o ({wb_fazyrv1_qspi_ram_rom_adr, wb_fazyrv1_ram_adr, wb_fazyrv1_uart_adr, wb_fazyrv1_spi_adr, wb_fazyrv1_gpio_adr}),
-    .wbs_dat_o ({wb_fazyrv1_qspi_ram_rom_dat, wb_fazyrv1_ram_dat, wb_fazyrv1_uart_dat, wb_fazyrv1_spi_dat, wb_fazyrv1_gpio_dat}),
-    .wbs_sel_o ({wb_fazyrv1_qspi_ram_rom_sel, wb_fazyrv1_ram_sel, wb_fazyrv1_uart_sel, wb_fazyrv1_spi_sel, wb_fazyrv1_gpio_sel}),
-    .wbs_we_o  ({wb_fazyrv1_qspi_ram_rom_we, wb_fazyrv1_ram_we, wb_fazyrv1_uart_we, wb_fazyrv1_spi_we, wb_fazyrv1_gpio_we}),
-    .wbs_cyc_o ({wb_fazyrv1_qspi_ram_rom_cyc, wb_fazyrv1_ram_cyc, wb_fazyrv1_uart_cyc, wb_fazyrv1_spi_cyc, wb_fazyrv1_gpio_cyc}),
-    .wbs_stb_o ({wb_fazyrv1_qspi_ram_rom_stb, wb_fazyrv1_ram_stb, wb_fazyrv1_uart_stb, wb_fazyrv1_spi_stb, wb_fazyrv1_gpio_stb}),
-    .wbs_cti_o ({wb_fazyrv1_qspi_ram_rom_cti, wb_fazyrv1_ram_cti, wb_fazyrv1_uart_cti, wb_fazyrv1_spi_cti, wb_fazyrv1_gpio_cti}),
-    .wbs_bte_o ({wb_fazyrv1_qspi_ram_rom_bte, wb_fazyrv1_ram_bte, wb_fazyrv1_uart_bte, wb_fazyrv1_spi_bte, wb_fazyrv1_gpio_bte}),
-    .wbs_dat_i ({wb_fazyrv1_qspi_ram_rom_rdt, wb_fazyrv1_ram_rdt, wb_fazyrv1_uart_rdt, wb_fazyrv1_spi_rdt, wb_fazyrv1_gpio_rdt}),
-    .wbs_ack_i ({wb_fazyrv1_qspi_ram_rom_ack, wb_fazyrv1_ram_ack, wb_fazyrv1_uart_ack, wb_fazyrv1_spi_ack, wb_fazyrv1_gpio_ack}),
-    .wbs_err_i ({wb_fazyrv1_qspi_ram_rom_err, wb_fazyrv1_ram_err, wb_fazyrv1_uart_err, wb_fazyrv1_spi_err, wb_fazyrv1_gpio_err}),
-    .wbs_rty_i ({wb_fazyrv1_qspi_ram_rom_rty, wb_fazyrv1_ram_rty, wb_fazyrv1_uart_rty, wb_fazyrv1_spi_rty, wb_fazyrv1_gpio_rty}));
+    .wbs_adr_o ({wb_fazyrv1_qspi_ram_rom_adr, wb_fazyrv1_ram_adr, wb_fazyrv1_uart_adr, wb_fazyrv1_spi_adr, wb_fazyrv1_csr_adr}),
+    .wbs_dat_o ({wb_fazyrv1_qspi_ram_rom_dat, wb_fazyrv1_ram_dat, wb_fazyrv1_uart_dat, wb_fazyrv1_spi_dat, wb_fazyrv1_csr_dat}),
+    .wbs_sel_o ({wb_fazyrv1_qspi_ram_rom_sel, wb_fazyrv1_ram_sel, wb_fazyrv1_uart_sel, wb_fazyrv1_spi_sel, wb_fazyrv1_csr_sel}),
+    .wbs_we_o  ({wb_fazyrv1_qspi_ram_rom_we, wb_fazyrv1_ram_we, wb_fazyrv1_uart_we, wb_fazyrv1_spi_we, wb_fazyrv1_csr_we}),
+    .wbs_cyc_o ({wb_fazyrv1_qspi_ram_rom_cyc, wb_fazyrv1_ram_cyc, wb_fazyrv1_uart_cyc, wb_fazyrv1_spi_cyc, wb_fazyrv1_csr_cyc}),
+    .wbs_stb_o ({wb_fazyrv1_qspi_ram_rom_stb, wb_fazyrv1_ram_stb, wb_fazyrv1_uart_stb, wb_fazyrv1_spi_stb, wb_fazyrv1_csr_stb}),
+    .wbs_cti_o ({wb_fazyrv1_qspi_ram_rom_cti, wb_fazyrv1_ram_cti, wb_fazyrv1_uart_cti, wb_fazyrv1_spi_cti, wb_fazyrv1_csr_cti}),
+    .wbs_bte_o ({wb_fazyrv1_qspi_ram_rom_bte, wb_fazyrv1_ram_bte, wb_fazyrv1_uart_bte, wb_fazyrv1_spi_bte, wb_fazyrv1_csr_bte}),
+    .wbs_dat_i ({wb_fazyrv1_qspi_ram_rom_rdt, wb_fazyrv1_ram_rdt, wb_fazyrv1_uart_rdt, wb_fazyrv1_spi_rdt, wb_fazyrv1_csr_rdt}),
+    .wbs_ack_i ({wb_fazyrv1_qspi_ram_rom_ack, wb_fazyrv1_ram_ack, wb_fazyrv1_uart_ack, wb_fazyrv1_spi_ack, wb_fazyrv1_csr_ack}),
+    .wbs_err_i ({wb_fazyrv1_qspi_ram_rom_err, wb_fazyrv1_ram_err, wb_fazyrv1_uart_err, wb_fazyrv1_spi_err, wb_fazyrv1_csr_err}),
+    .wbs_rty_i ({wb_fazyrv1_qspi_ram_rom_rty, wb_fazyrv1_ram_rty, wb_fazyrv1_uart_rty, wb_fazyrv1_spi_rty, wb_fazyrv1_csr_rty}));
 
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffff0, 32'hfffffff0, 32'hfffffff0}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
  wb_mux_fazyrv2
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -441,23 +441,23 @@ wb_mux
     .wbm_ack_o (wb_fazyrv2_ack_o),
     .wbm_err_o (wb_fazyrv2_err_o),
     .wbm_rty_o (wb_fazyrv2_rty_o),
-    .wbs_adr_o ({wb_fazyrv2_qspi_ram_rom_adr, wb_fazyrv2_ram_adr, wb_fazyrv2_uart_adr, wb_fazyrv2_spi_adr, wb_fazyrv2_gpio_adr}),
-    .wbs_dat_o ({wb_fazyrv2_qspi_ram_rom_dat, wb_fazyrv2_ram_dat, wb_fazyrv2_uart_dat, wb_fazyrv2_spi_dat, wb_fazyrv2_gpio_dat}),
-    .wbs_sel_o ({wb_fazyrv2_qspi_ram_rom_sel, wb_fazyrv2_ram_sel, wb_fazyrv2_uart_sel, wb_fazyrv2_spi_sel, wb_fazyrv2_gpio_sel}),
-    .wbs_we_o  ({wb_fazyrv2_qspi_ram_rom_we, wb_fazyrv2_ram_we, wb_fazyrv2_uart_we, wb_fazyrv2_spi_we, wb_fazyrv2_gpio_we}),
-    .wbs_cyc_o ({wb_fazyrv2_qspi_ram_rom_cyc, wb_fazyrv2_ram_cyc, wb_fazyrv2_uart_cyc, wb_fazyrv2_spi_cyc, wb_fazyrv2_gpio_cyc}),
-    .wbs_stb_o ({wb_fazyrv2_qspi_ram_rom_stb, wb_fazyrv2_ram_stb, wb_fazyrv2_uart_stb, wb_fazyrv2_spi_stb, wb_fazyrv2_gpio_stb}),
-    .wbs_cti_o ({wb_fazyrv2_qspi_ram_rom_cti, wb_fazyrv2_ram_cti, wb_fazyrv2_uart_cti, wb_fazyrv2_spi_cti, wb_fazyrv2_gpio_cti}),
-    .wbs_bte_o ({wb_fazyrv2_qspi_ram_rom_bte, wb_fazyrv2_ram_bte, wb_fazyrv2_uart_bte, wb_fazyrv2_spi_bte, wb_fazyrv2_gpio_bte}),
-    .wbs_dat_i ({wb_fazyrv2_qspi_ram_rom_rdt, wb_fazyrv2_ram_rdt, wb_fazyrv2_uart_rdt, wb_fazyrv2_spi_rdt, wb_fazyrv2_gpio_rdt}),
-    .wbs_ack_i ({wb_fazyrv2_qspi_ram_rom_ack, wb_fazyrv2_ram_ack, wb_fazyrv2_uart_ack, wb_fazyrv2_spi_ack, wb_fazyrv2_gpio_ack}),
-    .wbs_err_i ({wb_fazyrv2_qspi_ram_rom_err, wb_fazyrv2_ram_err, wb_fazyrv2_uart_err, wb_fazyrv2_spi_err, wb_fazyrv2_gpio_err}),
-    .wbs_rty_i ({wb_fazyrv2_qspi_ram_rom_rty, wb_fazyrv2_ram_rty, wb_fazyrv2_uart_rty, wb_fazyrv2_spi_rty, wb_fazyrv2_gpio_rty}));
+    .wbs_adr_o ({wb_fazyrv2_qspi_ram_rom_adr, wb_fazyrv2_ram_adr, wb_fazyrv2_uart_adr, wb_fazyrv2_spi_adr, wb_fazyrv2_csr_adr}),
+    .wbs_dat_o ({wb_fazyrv2_qspi_ram_rom_dat, wb_fazyrv2_ram_dat, wb_fazyrv2_uart_dat, wb_fazyrv2_spi_dat, wb_fazyrv2_csr_dat}),
+    .wbs_sel_o ({wb_fazyrv2_qspi_ram_rom_sel, wb_fazyrv2_ram_sel, wb_fazyrv2_uart_sel, wb_fazyrv2_spi_sel, wb_fazyrv2_csr_sel}),
+    .wbs_we_o  ({wb_fazyrv2_qspi_ram_rom_we, wb_fazyrv2_ram_we, wb_fazyrv2_uart_we, wb_fazyrv2_spi_we, wb_fazyrv2_csr_we}),
+    .wbs_cyc_o ({wb_fazyrv2_qspi_ram_rom_cyc, wb_fazyrv2_ram_cyc, wb_fazyrv2_uart_cyc, wb_fazyrv2_spi_cyc, wb_fazyrv2_csr_cyc}),
+    .wbs_stb_o ({wb_fazyrv2_qspi_ram_rom_stb, wb_fazyrv2_ram_stb, wb_fazyrv2_uart_stb, wb_fazyrv2_spi_stb, wb_fazyrv2_csr_stb}),
+    .wbs_cti_o ({wb_fazyrv2_qspi_ram_rom_cti, wb_fazyrv2_ram_cti, wb_fazyrv2_uart_cti, wb_fazyrv2_spi_cti, wb_fazyrv2_csr_cti}),
+    .wbs_bte_o ({wb_fazyrv2_qspi_ram_rom_bte, wb_fazyrv2_ram_bte, wb_fazyrv2_uart_bte, wb_fazyrv2_spi_bte, wb_fazyrv2_csr_bte}),
+    .wbs_dat_i ({wb_fazyrv2_qspi_ram_rom_rdt, wb_fazyrv2_ram_rdt, wb_fazyrv2_uart_rdt, wb_fazyrv2_spi_rdt, wb_fazyrv2_csr_rdt}),
+    .wbs_ack_i ({wb_fazyrv2_qspi_ram_rom_ack, wb_fazyrv2_ram_ack, wb_fazyrv2_uart_ack, wb_fazyrv2_spi_ack, wb_fazyrv2_csr_ack}),
+    .wbs_err_i ({wb_fazyrv2_qspi_ram_rom_err, wb_fazyrv2_ram_err, wb_fazyrv2_uart_err, wb_fazyrv2_spi_err, wb_fazyrv2_csr_err}),
+    .wbs_rty_i ({wb_fazyrv2_qspi_ram_rom_rty, wb_fazyrv2_ram_rty, wb_fazyrv2_uart_rty, wb_fazyrv2_spi_rty, wb_fazyrv2_csr_rty}));
 
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffff0, 32'hfffffff0, 32'hfffffff0}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
  wb_mux_fazyrv4
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -473,23 +473,23 @@ wb_mux
     .wbm_ack_o (wb_fazyrv4_ack_o),
     .wbm_err_o (wb_fazyrv4_err_o),
     .wbm_rty_o (wb_fazyrv4_rty_o),
-    .wbs_adr_o ({wb_fazyrv4_qspi_ram_rom_adr, wb_fazyrv4_ram_adr, wb_fazyrv4_uart_adr, wb_fazyrv4_spi_adr, wb_fazyrv4_gpio_adr}),
-    .wbs_dat_o ({wb_fazyrv4_qspi_ram_rom_dat, wb_fazyrv4_ram_dat, wb_fazyrv4_uart_dat, wb_fazyrv4_spi_dat, wb_fazyrv4_gpio_dat}),
-    .wbs_sel_o ({wb_fazyrv4_qspi_ram_rom_sel, wb_fazyrv4_ram_sel, wb_fazyrv4_uart_sel, wb_fazyrv4_spi_sel, wb_fazyrv4_gpio_sel}),
-    .wbs_we_o  ({wb_fazyrv4_qspi_ram_rom_we, wb_fazyrv4_ram_we, wb_fazyrv4_uart_we, wb_fazyrv4_spi_we, wb_fazyrv4_gpio_we}),
-    .wbs_cyc_o ({wb_fazyrv4_qspi_ram_rom_cyc, wb_fazyrv4_ram_cyc, wb_fazyrv4_uart_cyc, wb_fazyrv4_spi_cyc, wb_fazyrv4_gpio_cyc}),
-    .wbs_stb_o ({wb_fazyrv4_qspi_ram_rom_stb, wb_fazyrv4_ram_stb, wb_fazyrv4_uart_stb, wb_fazyrv4_spi_stb, wb_fazyrv4_gpio_stb}),
-    .wbs_cti_o ({wb_fazyrv4_qspi_ram_rom_cti, wb_fazyrv4_ram_cti, wb_fazyrv4_uart_cti, wb_fazyrv4_spi_cti, wb_fazyrv4_gpio_cti}),
-    .wbs_bte_o ({wb_fazyrv4_qspi_ram_rom_bte, wb_fazyrv4_ram_bte, wb_fazyrv4_uart_bte, wb_fazyrv4_spi_bte, wb_fazyrv4_gpio_bte}),
-    .wbs_dat_i ({wb_fazyrv4_qspi_ram_rom_rdt, wb_fazyrv4_ram_rdt, wb_fazyrv4_uart_rdt, wb_fazyrv4_spi_rdt, wb_fazyrv4_gpio_rdt}),
-    .wbs_ack_i ({wb_fazyrv4_qspi_ram_rom_ack, wb_fazyrv4_ram_ack, wb_fazyrv4_uart_ack, wb_fazyrv4_spi_ack, wb_fazyrv4_gpio_ack}),
-    .wbs_err_i ({wb_fazyrv4_qspi_ram_rom_err, wb_fazyrv4_ram_err, wb_fazyrv4_uart_err, wb_fazyrv4_spi_err, wb_fazyrv4_gpio_err}),
-    .wbs_rty_i ({wb_fazyrv4_qspi_ram_rom_rty, wb_fazyrv4_ram_rty, wb_fazyrv4_uart_rty, wb_fazyrv4_spi_rty, wb_fazyrv4_gpio_rty}));
+    .wbs_adr_o ({wb_fazyrv4_qspi_ram_rom_adr, wb_fazyrv4_ram_adr, wb_fazyrv4_uart_adr, wb_fazyrv4_spi_adr, wb_fazyrv4_csr_adr}),
+    .wbs_dat_o ({wb_fazyrv4_qspi_ram_rom_dat, wb_fazyrv4_ram_dat, wb_fazyrv4_uart_dat, wb_fazyrv4_spi_dat, wb_fazyrv4_csr_dat}),
+    .wbs_sel_o ({wb_fazyrv4_qspi_ram_rom_sel, wb_fazyrv4_ram_sel, wb_fazyrv4_uart_sel, wb_fazyrv4_spi_sel, wb_fazyrv4_csr_sel}),
+    .wbs_we_o  ({wb_fazyrv4_qspi_ram_rom_we, wb_fazyrv4_ram_we, wb_fazyrv4_uart_we, wb_fazyrv4_spi_we, wb_fazyrv4_csr_we}),
+    .wbs_cyc_o ({wb_fazyrv4_qspi_ram_rom_cyc, wb_fazyrv4_ram_cyc, wb_fazyrv4_uart_cyc, wb_fazyrv4_spi_cyc, wb_fazyrv4_csr_cyc}),
+    .wbs_stb_o ({wb_fazyrv4_qspi_ram_rom_stb, wb_fazyrv4_ram_stb, wb_fazyrv4_uart_stb, wb_fazyrv4_spi_stb, wb_fazyrv4_csr_stb}),
+    .wbs_cti_o ({wb_fazyrv4_qspi_ram_rom_cti, wb_fazyrv4_ram_cti, wb_fazyrv4_uart_cti, wb_fazyrv4_spi_cti, wb_fazyrv4_csr_cti}),
+    .wbs_bte_o ({wb_fazyrv4_qspi_ram_rom_bte, wb_fazyrv4_ram_bte, wb_fazyrv4_uart_bte, wb_fazyrv4_spi_bte, wb_fazyrv4_csr_bte}),
+    .wbs_dat_i ({wb_fazyrv4_qspi_ram_rom_rdt, wb_fazyrv4_ram_rdt, wb_fazyrv4_uart_rdt, wb_fazyrv4_spi_rdt, wb_fazyrv4_csr_rdt}),
+    .wbs_ack_i ({wb_fazyrv4_qspi_ram_rom_ack, wb_fazyrv4_ram_ack, wb_fazyrv4_uart_ack, wb_fazyrv4_spi_ack, wb_fazyrv4_csr_ack}),
+    .wbs_err_i ({wb_fazyrv4_qspi_ram_rom_err, wb_fazyrv4_ram_err, wb_fazyrv4_uart_err, wb_fazyrv4_spi_err, wb_fazyrv4_csr_err}),
+    .wbs_rty_i ({wb_fazyrv4_qspi_ram_rom_rty, wb_fazyrv4_ram_rty, wb_fazyrv4_uart_rty, wb_fazyrv4_spi_rty, wb_fazyrv4_csr_rty}));
 
 wb_mux
   #(.num_devices (5),
     .MATCH_ADDR  ({32'h00000000, 32'h20000000, 32'h30000000, 32'h40000000, 32'h50000000}),
-    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffff0, 32'hfffffff0, 32'hfffffff0}))
+    .MATCH_MASK  ({32'hffff0000, 32'hffff0000, 32'hfffffffc, 32'hfffffffc, 32'hffffffe4}))
  wb_mux_fazyrv8
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
@@ -505,18 +505,18 @@ wb_mux
     .wbm_ack_o (wb_fazyrv8_ack_o),
     .wbm_err_o (wb_fazyrv8_err_o),
     .wbm_rty_o (wb_fazyrv8_rty_o),
-    .wbs_adr_o ({wb_fazyrv8_qspi_ram_rom_adr, wb_fazyrv8_ram_adr, wb_fazyrv8_uart_adr, wb_fazyrv8_spi_adr, wb_fazyrv8_gpio_adr}),
-    .wbs_dat_o ({wb_fazyrv8_qspi_ram_rom_dat, wb_fazyrv8_ram_dat, wb_fazyrv8_uart_dat, wb_fazyrv8_spi_dat, wb_fazyrv8_gpio_dat}),
-    .wbs_sel_o ({wb_fazyrv8_qspi_ram_rom_sel, wb_fazyrv8_ram_sel, wb_fazyrv8_uart_sel, wb_fazyrv8_spi_sel, wb_fazyrv8_gpio_sel}),
-    .wbs_we_o  ({wb_fazyrv8_qspi_ram_rom_we, wb_fazyrv8_ram_we, wb_fazyrv8_uart_we, wb_fazyrv8_spi_we, wb_fazyrv8_gpio_we}),
-    .wbs_cyc_o ({wb_fazyrv8_qspi_ram_rom_cyc, wb_fazyrv8_ram_cyc, wb_fazyrv8_uart_cyc, wb_fazyrv8_spi_cyc, wb_fazyrv8_gpio_cyc}),
-    .wbs_stb_o ({wb_fazyrv8_qspi_ram_rom_stb, wb_fazyrv8_ram_stb, wb_fazyrv8_uart_stb, wb_fazyrv8_spi_stb, wb_fazyrv8_gpio_stb}),
-    .wbs_cti_o ({wb_fazyrv8_qspi_ram_rom_cti, wb_fazyrv8_ram_cti, wb_fazyrv8_uart_cti, wb_fazyrv8_spi_cti, wb_fazyrv8_gpio_cti}),
-    .wbs_bte_o ({wb_fazyrv8_qspi_ram_rom_bte, wb_fazyrv8_ram_bte, wb_fazyrv8_uart_bte, wb_fazyrv8_spi_bte, wb_fazyrv8_gpio_bte}),
-    .wbs_dat_i ({wb_fazyrv8_qspi_ram_rom_rdt, wb_fazyrv8_ram_rdt, wb_fazyrv8_uart_rdt, wb_fazyrv8_spi_rdt, wb_fazyrv8_gpio_rdt}),
-    .wbs_ack_i ({wb_fazyrv8_qspi_ram_rom_ack, wb_fazyrv8_ram_ack, wb_fazyrv8_uart_ack, wb_fazyrv8_spi_ack, wb_fazyrv8_gpio_ack}),
-    .wbs_err_i ({wb_fazyrv8_qspi_ram_rom_err, wb_fazyrv8_ram_err, wb_fazyrv8_uart_err, wb_fazyrv8_spi_err, wb_fazyrv8_gpio_err}),
-    .wbs_rty_i ({wb_fazyrv8_qspi_ram_rom_rty, wb_fazyrv8_ram_rty, wb_fazyrv8_uart_rty, wb_fazyrv8_spi_rty, wb_fazyrv8_gpio_rty}));
+    .wbs_adr_o ({wb_fazyrv8_qspi_ram_rom_adr, wb_fazyrv8_ram_adr, wb_fazyrv8_uart_adr, wb_fazyrv8_spi_adr, wb_fazyrv8_csr_adr}),
+    .wbs_dat_o ({wb_fazyrv8_qspi_ram_rom_dat, wb_fazyrv8_ram_dat, wb_fazyrv8_uart_dat, wb_fazyrv8_spi_dat, wb_fazyrv8_csr_dat}),
+    .wbs_sel_o ({wb_fazyrv8_qspi_ram_rom_sel, wb_fazyrv8_ram_sel, wb_fazyrv8_uart_sel, wb_fazyrv8_spi_sel, wb_fazyrv8_csr_sel}),
+    .wbs_we_o  ({wb_fazyrv8_qspi_ram_rom_we, wb_fazyrv8_ram_we, wb_fazyrv8_uart_we, wb_fazyrv8_spi_we, wb_fazyrv8_csr_we}),
+    .wbs_cyc_o ({wb_fazyrv8_qspi_ram_rom_cyc, wb_fazyrv8_ram_cyc, wb_fazyrv8_uart_cyc, wb_fazyrv8_spi_cyc, wb_fazyrv8_csr_cyc}),
+    .wbs_stb_o ({wb_fazyrv8_qspi_ram_rom_stb, wb_fazyrv8_ram_stb, wb_fazyrv8_uart_stb, wb_fazyrv8_spi_stb, wb_fazyrv8_csr_stb}),
+    .wbs_cti_o ({wb_fazyrv8_qspi_ram_rom_cti, wb_fazyrv8_ram_cti, wb_fazyrv8_uart_cti, wb_fazyrv8_spi_cti, wb_fazyrv8_csr_cti}),
+    .wbs_bte_o ({wb_fazyrv8_qspi_ram_rom_bte, wb_fazyrv8_ram_bte, wb_fazyrv8_uart_bte, wb_fazyrv8_spi_bte, wb_fazyrv8_csr_bte}),
+    .wbs_dat_i ({wb_fazyrv8_qspi_ram_rom_rdt, wb_fazyrv8_ram_rdt, wb_fazyrv8_uart_rdt, wb_fazyrv8_spi_rdt, wb_fazyrv8_csr_rdt}),
+    .wbs_ack_i ({wb_fazyrv8_qspi_ram_rom_ack, wb_fazyrv8_ram_ack, wb_fazyrv8_uart_ack, wb_fazyrv8_spi_ack, wb_fazyrv8_csr_ack}),
+    .wbs_err_i ({wb_fazyrv8_qspi_ram_rom_err, wb_fazyrv8_ram_err, wb_fazyrv8_uart_err, wb_fazyrv8_spi_err, wb_fazyrv8_csr_err}),
+    .wbs_rty_i ({wb_fazyrv8_qspi_ram_rom_rty, wb_fazyrv8_ram_rty, wb_fazyrv8_uart_rty, wb_fazyrv8_spi_rty, wb_fazyrv8_csr_rty}));
 
 wb_mux
   #(.num_devices (2),
@@ -672,32 +672,32 @@ wb_arbiter
 
 wb_arbiter
   #(.num_hosts (4))
- wb_arbiter_gpio
+ wb_arbiter_csr
    (.wb_clk_i  (wb_clk_i),
     .wb_rst_i  (wb_rst_i),
-    .wbm_adr_i ({wb_fazyrv1_gpio_adr, wb_fazyrv2_gpio_adr, wb_fazyrv4_gpio_adr, wb_fazyrv8_gpio_adr}),
-    .wbm_dat_i ({wb_fazyrv1_gpio_dat, wb_fazyrv2_gpio_dat, wb_fazyrv4_gpio_dat, wb_fazyrv8_gpio_dat}),
-    .wbm_sel_i ({wb_fazyrv1_gpio_sel, wb_fazyrv2_gpio_sel, wb_fazyrv4_gpio_sel, wb_fazyrv8_gpio_sel}),
-    .wbm_we_i  ({wb_fazyrv1_gpio_we, wb_fazyrv2_gpio_we, wb_fazyrv4_gpio_we, wb_fazyrv8_gpio_we}),
-    .wbm_cyc_i ({wb_fazyrv1_gpio_cyc, wb_fazyrv2_gpio_cyc, wb_fazyrv4_gpio_cyc, wb_fazyrv8_gpio_cyc}),
-    .wbm_stb_i ({wb_fazyrv1_gpio_stb, wb_fazyrv2_gpio_stb, wb_fazyrv4_gpio_stb, wb_fazyrv8_gpio_stb}),
-    .wbm_cti_i ({wb_fazyrv1_gpio_cti, wb_fazyrv2_gpio_cti, wb_fazyrv4_gpio_cti, wb_fazyrv8_gpio_cti}),
-    .wbm_bte_i ({wb_fazyrv1_gpio_bte, wb_fazyrv2_gpio_bte, wb_fazyrv4_gpio_bte, wb_fazyrv8_gpio_bte}),
-    .wbm_dat_o ({wb_fazyrv1_gpio_rdt, wb_fazyrv2_gpio_rdt, wb_fazyrv4_gpio_rdt, wb_fazyrv8_gpio_rdt}),
-    .wbm_ack_o ({wb_fazyrv1_gpio_ack, wb_fazyrv2_gpio_ack, wb_fazyrv4_gpio_ack, wb_fazyrv8_gpio_ack}),
-    .wbm_err_o ({wb_fazyrv1_gpio_err, wb_fazyrv2_gpio_err, wb_fazyrv4_gpio_err, wb_fazyrv8_gpio_err}),
-    .wbm_rty_o ({wb_fazyrv1_gpio_rty, wb_fazyrv2_gpio_rty, wb_fazyrv4_gpio_rty, wb_fazyrv8_gpio_rty}),
-    .wbs_adr_o (wb_gpio_adr_o),
-    .wbs_dat_o (wb_gpio_dat_o),
-    .wbs_sel_o (wb_gpio_sel_o),
-    .wbs_we_o  (wb_gpio_we_o),
-    .wbs_cyc_o (wb_gpio_cyc_o),
-    .wbs_stb_o (wb_gpio_stb_o),
-    .wbs_cti_o (wb_gpio_cti_o),
-    .wbs_bte_o (wb_gpio_bte_o),
-    .wbs_dat_i (wb_gpio_rdt_i),
-    .wbs_ack_i (wb_gpio_ack_i),
-    .wbs_err_i (wb_gpio_err_i),
-    .wbs_rty_i (wb_gpio_rty_i));
+    .wbm_adr_i ({wb_fazyrv1_csr_adr, wb_fazyrv2_csr_adr, wb_fazyrv4_csr_adr, wb_fazyrv8_csr_adr}),
+    .wbm_dat_i ({wb_fazyrv1_csr_dat, wb_fazyrv2_csr_dat, wb_fazyrv4_csr_dat, wb_fazyrv8_csr_dat}),
+    .wbm_sel_i ({wb_fazyrv1_csr_sel, wb_fazyrv2_csr_sel, wb_fazyrv4_csr_sel, wb_fazyrv8_csr_sel}),
+    .wbm_we_i  ({wb_fazyrv1_csr_we, wb_fazyrv2_csr_we, wb_fazyrv4_csr_we, wb_fazyrv8_csr_we}),
+    .wbm_cyc_i ({wb_fazyrv1_csr_cyc, wb_fazyrv2_csr_cyc, wb_fazyrv4_csr_cyc, wb_fazyrv8_csr_cyc}),
+    .wbm_stb_i ({wb_fazyrv1_csr_stb, wb_fazyrv2_csr_stb, wb_fazyrv4_csr_stb, wb_fazyrv8_csr_stb}),
+    .wbm_cti_i ({wb_fazyrv1_csr_cti, wb_fazyrv2_csr_cti, wb_fazyrv4_csr_cti, wb_fazyrv8_csr_cti}),
+    .wbm_bte_i ({wb_fazyrv1_csr_bte, wb_fazyrv2_csr_bte, wb_fazyrv4_csr_bte, wb_fazyrv8_csr_bte}),
+    .wbm_dat_o ({wb_fazyrv1_csr_rdt, wb_fazyrv2_csr_rdt, wb_fazyrv4_csr_rdt, wb_fazyrv8_csr_rdt}),
+    .wbm_ack_o ({wb_fazyrv1_csr_ack, wb_fazyrv2_csr_ack, wb_fazyrv4_csr_ack, wb_fazyrv8_csr_ack}),
+    .wbm_err_o ({wb_fazyrv1_csr_err, wb_fazyrv2_csr_err, wb_fazyrv4_csr_err, wb_fazyrv8_csr_err}),
+    .wbm_rty_o ({wb_fazyrv1_csr_rty, wb_fazyrv2_csr_rty, wb_fazyrv4_csr_rty, wb_fazyrv8_csr_rty}),
+    .wbs_adr_o (wb_csr_adr_o),
+    .wbs_dat_o (wb_csr_dat_o),
+    .wbs_sel_o (wb_csr_sel_o),
+    .wbs_we_o  (wb_csr_we_o),
+    .wbs_cyc_o (wb_csr_cyc_o),
+    .wbs_stb_o (wb_csr_stb_o),
+    .wbs_cti_o (wb_csr_cti_o),
+    .wbs_bte_o (wb_csr_bte_o),
+    .wbs_dat_i (wb_csr_rdt_i),
+    .wbs_ack_i (wb_csr_ack_i),
+    .wbs_err_i (wb_csr_err_i),
+    .wbs_rty_i (wb_csr_rty_i));
 
 endmodule

@@ -106,18 +106,18 @@ wire [31:0] wb_spi_rdt;
 wire        wb_spi_ack;
 wire        wb_spi_err;
 wire        wb_spi_rty;
-wire [31:0] wb_gpio_adr;
-wire [31:0] wb_gpio_dat;
-wire  [3:0] wb_gpio_sel;
-wire        wb_gpio_we;
-wire        wb_gpio_cyc;
-wire        wb_gpio_stb;
-wire  [2:0] wb_gpio_cti;
-wire  [1:0] wb_gpio_bte;
-wire [31:0] wb_gpio_rdt;
-wire        wb_gpio_ack;
-wire        wb_gpio_err;
-wire        wb_gpio_rty;
+wire [31:0] wb_csr_adr;
+wire [31:0] wb_csr_dat;
+wire  [3:0] wb_csr_sel;
+wire        wb_csr_we;
+wire        wb_csr_cyc;
+wire        wb_csr_stb;
+wire  [2:0] wb_csr_cti;
+wire  [1:0] wb_csr_bte;
+wire [31:0] wb_csr_rdt;
+wire        wb_csr_ack;
+wire        wb_csr_err;
+wire        wb_csr_rty;
 
 wb_intercon wb_intercon0
    (.wb_clk_i              (wb_clk),
@@ -230,16 +230,16 @@ wb_intercon wb_intercon0
     .wb_spi_ack_i          (wb_spi_ack),
     .wb_spi_err_i          (wb_spi_err),
     .wb_spi_rty_i          (wb_spi_rty),
-    .wb_gpio_adr_o         (wb_gpio_adr),
-    .wb_gpio_dat_o         (wb_gpio_dat),
-    .wb_gpio_sel_o         (wb_gpio_sel),
-    .wb_gpio_we_o          (wb_gpio_we),
-    .wb_gpio_cyc_o         (wb_gpio_cyc),
-    .wb_gpio_stb_o         (wb_gpio_stb),
-    .wb_gpio_cti_o         (wb_gpio_cti),
-    .wb_gpio_bte_o         (wb_gpio_bte),
-    .wb_gpio_rdt_i         (wb_gpio_rdt),
-    .wb_gpio_ack_i         (wb_gpio_ack),
-    .wb_gpio_err_i         (wb_gpio_err),
-    .wb_gpio_rty_i         (wb_gpio_rty));
+    .wb_csr_adr_o          (wb_csr_adr),
+    .wb_csr_dat_o          (wb_csr_dat),
+    .wb_csr_sel_o          (wb_csr_sel),
+    .wb_csr_we_o           (wb_csr_we),
+    .wb_csr_cyc_o          (wb_csr_cyc),
+    .wb_csr_stb_o          (wb_csr_stb),
+    .wb_csr_cti_o          (wb_csr_cti),
+    .wb_csr_bte_o          (wb_csr_bte),
+    .wb_csr_rdt_i          (wb_csr_rdt),
+    .wb_csr_ack_i          (wb_csr_ack),
+    .wb_csr_err_i          (wb_csr_err),
+    .wb_csr_rty_i          (wb_csr_rty));
 

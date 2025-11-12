@@ -1,6 +1,6 @@
 register_blocks:
-  - name: wb_gpio
-    byte_size: 12
+  - name: CSR
+    byte_size: 28
     registers:
       - name: GPI
         bit_fields: 
@@ -14,14 +14,23 @@ register_blocks:
         bit_fields: 
           - { name: gpoe, bit_assignment: { width: 8 }, type: rw, initial_value: 0}
           - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
-
-  - name: wb_spi_conf
-    byte_size: 4
-    registers:
-      - name: Cntrl
+      - name: SPI_Conf
         bit_fields: 
           - { name: presc, bit_assignment: { width: 4 }, type: rw, initial_value: 1}
           - { name: cpol, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
           - { name: auto_cs, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
           - { name: size, bit_assignment: { width: 2 }, type: rw, initial_value: 1}
           - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
+      - name: OLED_Start_Status
+        bit_fields: 
+          - { name: start_rdy, bit_assignment: { width: 1 }, type: rowo, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 31 }, type: reserved } 
+      - name: OLED_Conf
+        bit_fields:          
+          - { name: presc, bit_assignment: { width: 4 }, type: rw, initial_value: 1}
+          - { name: inc, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 3 }, type: reserved } 
+          - { name: size, bit_assignment: { width: 14 }, type: rw, initial_value: 0}
+      - name: OLED_Dma
+        bit_fields:
+          - { name: addr, bit_assignment: { width: 32 }, type: rw, initial_value: 0}
