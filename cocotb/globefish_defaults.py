@@ -22,12 +22,14 @@ hdl_toplevel = "globefish_tb"
 async def set_defaults(dut, core):
     assert core in [1,2,4,8]
     dut.en_p.value = 1
+    dut.en_p2.value = 0
     dut.en_wb.value = 1
 
     dut.en_frv1.value = 0
     dut.en_frv2.value = 0
     dut.en_frv4.value = 0
     dut.en_frv8.value = 0
+    dut.en_frv4ccx.value = 0 # TODO
     
     if core == 1:
         dut.en_frv1.value = 1
@@ -97,11 +99,15 @@ def sim_setup(test_module, firmware):
             sources.append(proj_path / "../macros/frv_2/frv_2_nl.sv")
             sources.append(proj_path / "../macros/frv_4/frv_4_nl.sv")
             sources.append(proj_path / "../macros/frv_8/frv_8_nl.sv")
+            sources.append(proj_path / "../macros/frv_4ccx/frv_4ccx_nl.sv")
         else:
             sources.append(proj_path / "../macros/frv_1/frv_1.sv")
             sources.append(proj_path / "../macros/frv_2/frv_2.sv")
             sources.append(proj_path / "../macros/frv_4/frv_4.sv")
             sources.append(proj_path / "../macros/frv_8/frv_8.sv")
+            
+            # For frv4ccx we keep the nl to avoid issues with uniquification
+            #sources.append(proj_path / "../macros/frv_8/frv_4ccx_nl.sv")
             
             sources.append(proj_path / "../ip/FazyRV/rtl/fazyrv_hadd.v")
             sources.append(proj_path / "../ip/FazyRV/rtl/fazyrv_fadd.v")
@@ -163,6 +169,12 @@ def sim_setup(test_module, firmware):
         proj_path / "../ip/EF_IP_UTIL/hdl/ef_util_lib.v",
         proj_path / "../ip/EF_UART/hdl/rtl/EF_UART.v",
         proj_path / "../ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v",
+        proj_path / "../ip/EF_SPI/hdl/rtl/spi_master.v",
+        proj_path / "../ip/EF_SPI/hdl/rtl/EF_SPI.v",
+        proj_path / "../ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v",
+        proj_path / "../ip/ahb3lite_wb_bridge/wb_to_ahb3lite.v",
+        proj_path / "../ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v",
+        proj_path / "../ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v",
         
         # Testbench and helpers
         "spiflash.v",

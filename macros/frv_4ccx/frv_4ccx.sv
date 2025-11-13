@@ -1,12 +1,12 @@
 // Copyright (c) 2025 Meinhard Kissich
 // SPDX-License-Identifier: MIT
 // -----------------------------------------------------------------------------
-// File  :  frv_4.sv
-// Usage :  Wrapper for frv_4 macro hardening.
+// File  :  frv_4ccx.sv
+// Usage :  Wrapper for frv_4ccx macro hardening.
 // -----------------------------------------------------------------------------
 
 
-module frv_4 (
+module frv_4ccx (
   input  logic        clk_i,
   input  logic        rst_in,
 
@@ -23,12 +23,19 @@ module frv_4 (
   output logic [3:0]  wb_dmem_be_o,
   input  logic [31:0] wb_dmem_dat_i,
   output logic [31:0] wb_dmem_adr_o,
-  output logic [31:0] wb_dmem_dat_o
+  output logic [31:0] wb_dmem_dat_o,
+
+  output logic [3:0]  ccx_rs_a_o,
+  output logic [3:0]  ccx_rs_b_o,
+  input  logic [3:0]  ccx_res_i,
+  output logic [1:0]  ccx_sel_o,
+  output logic        ccx_req_o,
+  input  logic        ccx_resp_i
 );
 
 localparam CHUNKSIZE = 4;
 localparam CONF      = "MIN";
-localparam BOOTADR   = 'h30;
+localparam BOOTADR   = 'h60;
 localparam RFTYPE    = "LOGIC";
 
 fazyrv_top #(
@@ -36,7 +43,7 @@ fazyrv_top #(
   .CONF      ( CONF       ),
   .BOOTADR   ( BOOTADR    ),
   .RFTYPE    ( RFTYPE     )
-) i_fazyrv_top_4 (
+) i_fazyrv_top_4ccx (
   .clk_i         ( clk_i    ),
   .rst_in        ( rst_in   ),
   .tirq_i        ( 1'b0     ),

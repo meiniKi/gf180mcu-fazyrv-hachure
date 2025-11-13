@@ -3,13 +3,15 @@ parameters:
   endian: little
   hosts:
     fazyrv1:
-      devices: [qspi_ram_rom, ram, uart, spi, csr]
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
     fazyrv2:
-      devices: [qspi_ram_rom, ram, uart, spi, csr]
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
     fazyrv4:
-      devices: [qspi_ram_rom, ram, uart, spi, csr]
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
     fazyrv8:
-      devices: [qspi_ram_rom, ram, uart, spi, csr]
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv4ccx:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
     oled_dma:
       devices: [qspi_ram_rom, ram] 
   devices:
@@ -27,4 +29,10 @@ parameters:
       size   : 0x00010000
     csr:
       offset : 0x50000000
+      size   : 0x00010000
+    efspi:
+      offset : 0x60000000
+      size   : 0x00010000
+    efxip:
+      offset : 0x70000000
       size   : 0x00010000

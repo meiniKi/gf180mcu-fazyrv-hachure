@@ -1,3 +1,12 @@
+// Copyright (c) 2025 Meinhard Kissich
+// SPDX-License-Identifier: MIT
+// -----------------------------------------------------------------------------
+// File  :  globefish_soc.sv
+// Usage :  FazyRV globefish SoC
+//
+// Ports
+//  - TODO
+// -----------------------------------------------------------------------------
 
 module globefish_soc (
   `ifdef USE_POWER_PINS
@@ -8,11 +17,13 @@ module globefish_soc (
   input  logic        rst_in,
   // Enables
   input  logic        en_p_i,
+  input  logic        en_p2_i,
   input  logic        en_wb_i,
   input  logic        en_frv1_i,
   input  logic        en_frv2_i,
   input  logic        en_frv4_i,
   input  logic        en_frv8_i,
+  input  logic        en_frv4ccx_i,
   // QSPI XIP Memory
   output logic        qspi_mem_cs_ram_on,
   output logic        qspi_mem_cs_rom_on,
@@ -20,6 +31,13 @@ module globefish_soc (
   input  logic [ 3:0] qspi_mem_sd_i,
   output logic [ 3:0] qspi_mem_sd_o,
   output logic [ 3:0] qspi_mem_oen_o,
+  // FazyRV CCX
+  output logic [ 3:0] ccx4_rs_a_o,
+  output logic [ 3:0] ccx4_rs_b_o,
+  input  logic [ 3:0] ccx4_res_i,
+  output logic [ 1:0] ccx4_sel_o,
+  output logic        ccx4_req_o,
+  input  logic        ccx4_resp_i,
   // UART
   output logic        uart_tx_o,
   input  logic        uart_rx_i,
@@ -27,14 +45,29 @@ module globefish_soc (
   output logic        spi_oled_sck_o,
   output logic        spi_oled_sdo_o,
   // GPIO
-  input  logic [ 7:0] gpi_i,
-  output logic [ 7:0] gpo_o,
-  output logic [ 7:0] gpeo_o,
+  input  logic [15:0] gpi_i,
+  output logic [15:0] gpo_o,
+  output logic [15:0] gpeo_o,
+  output logic [15:0] gpcs_o,
+  output logic [15:0] gpsl_o,
+  output logic [15:0] gppu_o,
+  output logic [15:0] gppd_o,
   // SPI
   output logic        spi_cs_o,
   output logic        spi_sck_o,
   output logic        spi_sdo_o,
-  input  logic        spi_sdi_i
+  input  logic        spi_sdi_i,
+  // EF SPI
+  output logic        efspi_cs_o,
+  output logic        efspi_sck_o,
+  output logic        efspi_sdo_o,
+  input  logic        efspi_sdi_i,
+  //
+  output logic        xip_cs_on,
+  output logic        xip_sck_o,
+  input  logic [ 3:0] xip_sd_i,
+  output logic [ 3:0] xip_sd_o,
+  output logic [ 3:0] xip_oen_o
 );
 
                                    
@@ -54,11 +87,13 @@ localparam SPI_PREFETCH   = 0;
 
 // Clocks
 logic clk_p;
+logic clk_p2;
 logic clk_wb;
 logic clk_c_frv_1;
 logic clk_c_frv_2;
 logic clk_c_frv_4;
 logic clk_c_frv_8;
+logic clk_c_frv_4ccx;
 
 // Resets
 logic rst_p_n;
@@ -67,6 +102,7 @@ logic rst_c_frv_1_n;
 logic rst_c_frv_2_n;
 logic rst_c_frv_4_n;
 logic rst_c_frv_8_n;
+logic rst_c_frv_4ccx_n;
 
 
 //  m     m   "                        
@@ -228,6 +264,43 @@ assign wb_c_frv_8_dmem_ack  = wb_c_frv_8_ack & wb_c_frv_8_dmem_stb;;
 assign wb_c_frv_8_imem_rdat = wb_c_frv_8_rdat;
 assign wb_c_frv_8_dmem_rdat = wb_c_frv_8_rdat;
 
+// FazyRV 4-bit CCX
+logic        wb_c_frv_4ccx_imem_stb;
+logic        wb_c_frv_4ccx_imem_cyc;
+logic        wb_c_frv_4ccx_imem_ack;
+logic [31:0] wb_c_frv_4ccx_imem_adr;
+logic [31:0] wb_c_frv_4ccx_imem_rdat;
+
+logic        wb_c_frv_4ccx_dmem_cyc;
+logic        wb_c_frv_4ccx_dmem_stb;
+logic        wb_c_frv_4ccx_dmem_we;
+logic        wb_c_frv_4ccx_dmem_ack;
+logic [ 3:0] wb_c_frv_4ccx_dmem_be;
+logic [31:0] wb_c_frv_4ccx_dmem_adr;
+logic [31:0] wb_c_frv_4ccx_dmem_rdat;
+logic [31:0] wb_c_frv_4ccx_dmem_wdat;
+
+logic        wb_c_frv_4ccx_cyc;
+logic        wb_c_frv_4ccx_stb;
+logic        wb_c_frv_4ccx_we;
+logic        wb_c_frv_4ccx_ack;
+logic [ 3:0] wb_c_frv_4ccx_be;
+logic [31:0] wb_c_frv_4ccx_adr;
+logic [31:0] wb_c_frv_4ccx_rdat;
+logic [31:0] wb_c_frv_4ccx_wdat;
+
+assign wb_c_frv_4ccx_cyc  = wb_c_frv_4ccx_imem_cyc | wb_c_frv_4ccx_dmem_cyc;
+assign wb_c_frv_4ccx_stb  = wb_c_frv_4ccx_imem_stb | wb_c_frv_4ccx_dmem_stb;
+assign wb_c_frv_4ccx_be   = wb_c_frv_4ccx_imem_stb ? 4'b1111 : wb_c_frv_4ccx_dmem_be;
+assign wb_c_frv_4ccx_adr  = wb_c_frv_4ccx_imem_stb ? wb_c_frv_4ccx_imem_adr : wb_c_frv_4ccx_dmem_adr;
+assign wb_c_frv_4ccx_we   = wb_c_frv_4ccx_dmem_stb & wb_c_frv_4ccx_dmem_we;
+assign wb_c_frv_4ccx_wdat = wb_c_frv_4ccx_dmem_wdat;
+
+assign wb_c_frv_4ccx_imem_ack  = wb_c_frv_4ccx_ack & wb_c_frv_4ccx_imem_stb;;
+assign wb_c_frv_4ccx_dmem_ack  = wb_c_frv_4ccx_ack & wb_c_frv_4ccx_dmem_stb;;
+assign wb_c_frv_4ccx_imem_rdat = wb_c_frv_4ccx_rdat;
+assign wb_c_frv_4ccx_dmem_rdat = wb_c_frv_4ccx_rdat;
+
 // Wishbone CSR
 logic        wb_p_csr_cyc;
 logic        wb_p_csr_stb;
@@ -254,6 +327,18 @@ logic [31:0] wb_p_spi_wdat;
 logic [31:0] wb_p_spi_rdat;
 logic [ 3:0] wb_p_spi_sel;
 
+// Wishbone EF SPI
+logic        wb_p_efspi_cyc;
+logic        wb_p_efspi_stb;
+logic        wb_p_efspi_ack;
+logic        wb_p_efspi_we;
+logic [31:0] wb_p_efspi_adr;
+logic [31:0] wb_p_efspi_wdat;
+logic [31:0] wb_p_efspi_rdat;
+logic [ 3:0] wb_p_efspi_sel;
+
+logic        efspi_irq;
+
 // Wishbone RAM
 logic        wb_p_ram_cyc;
 logic        wb_p_ram_stb;
@@ -271,7 +356,6 @@ logic        wb_c_oled_dma_ack;
 logic [31:0] wb_c_oled_dma_adr;
 logic [31:0] wb_c_oled_dma_rdat;
 
-// !! TODO CSR for these !! 
 logic        oled_start;
 logic [ 3:0] oled_presc;
 logic [31:0] oled_spi_adr;
@@ -288,6 +372,26 @@ logic [31:0] wb_p_qspi_mem_adr;
 logic [31:0] wb_p_qspi_mem_wdat;
 logic [31:0] wb_p_qspi_mem_rdat;
 logic [ 3:0] wb_p_qspi_mem_sel;
+
+// EF XIP
+logic        wb_p_ef_xip_cyc;
+logic        wb_p_ef_xip_stb;
+logic        wb_p_ef_xip_ack;
+logic        wb_p_ef_xip_we;
+logic [31:0] wb_p_ef_xip_adr;
+logic [31:0] wb_p_ef_xip_wdat;
+logic [31:0] wb_p_ef_xip_rdat;
+logic [ 3:0] wb_p_ef_xip_sel;
+
+logic        guard_xip;
+
+logic [31:0] xip_wb_brdg_mHRDATA;
+logic        xip_wb_brdg_mHREADY;
+logic        xip_wb_brdg_mHSEL;
+logic        xip_wb_brdg_mHWRITE;
+logic [31:0] xip_wb_brdg_mHADDR;
+logic [ 1:0] xip_wb_brdg_mHTRANS;
+logic        xip_wb_brdg_mHREADYOUT;
 
 // UART
 logic        wb_p_uart_cyc;
@@ -349,38 +453,41 @@ assign rst_c_frv_8_n  = rst_dly_n;
 //          "" 
 //############### 
 
-
-localparam N_CLOCKS = 6;
+localparam N_CLOCKS = 8;
 
 // Sync clock gating such that once controller cannot block the bus
 logic en_frv1_sync_r;
 logic en_frv2_sync_r;
 logic en_frv4_sync_r;
 logic en_frv8_sync_r;
+logic en_frv4ccx_sync_r;
 
 always_ff @(posedge clk_i) begin
   if (~rst_sync_n) begin
-    en_frv1_sync_r <= 1'b1;
-    en_frv2_sync_r <= 1'b1;
-    en_frv4_sync_r <= 1'b1;
-    en_frv8_sync_r <= 1'b1;
+    en_frv1_sync_r    <= 1'b1;
+    en_frv2_sync_r    <= 1'b1;
+    en_frv4_sync_r    <= 1'b1;
+    en_frv8_sync_r    <= 1'b1;
+    en_frv4ccx_sync_r <= 1'b1;
    end else begin
-    if (en_frv1_i)  en_frv1_sync_r <= 1'b1;
-    else            en_frv1_sync_r <= en_frv1_sync_r & wb_c_frv_1_stb;
-    if (en_frv2_i)  en_frv2_sync_r <= 1'b1;
-    else            en_frv2_sync_r <= en_frv2_sync_r & wb_c_frv_2_stb;
-    if (en_frv4_i)  en_frv4_sync_r <= 1'b1;
-    else            en_frv4_sync_r <= en_frv4_sync_r & wb_c_frv_4_stb;
-    if (en_frv8_i)  en_frv8_sync_r <= 1'b1;
-    else            en_frv8_sync_r <= en_frv8_sync_r & wb_c_frv_8_stb;
+    if (en_frv1_i)    en_frv1_sync_r <= 1'b1;
+    else              en_frv1_sync_r <= en_frv1_sync_r & wb_c_frv_1_stb;
+    if (en_frv2_i)    en_frv2_sync_r <= 1'b1;
+    else              en_frv2_sync_r <= en_frv2_sync_r & wb_c_frv_2_stb;
+    if (en_frv4_i)    en_frv4_sync_r <= 1'b1;
+    else              en_frv4_sync_r <= en_frv4_sync_r & wb_c_frv_4_stb;
+    if (en_frv8_i)    en_frv8_sync_r <= 1'b1;
+    else              en_frv8_sync_r <= en_frv8_sync_r & wb_c_frv_8_stb;
+    if (en_frv4ccx_i) en_frv4ccx_sync_r <= 1'b1;
+    else              en_frv4ccx_sync_r <= en_frv4ccx_sync_r & wb_c_frv_4ccx_stb;
   end
 end
 
 logic [N_CLOCKS-1:0] cg_enables;
 logic [N_CLOCKS-1:0] cg_clks;
 
-assign cg_enables = {en_p_i, en_wb_i, en_frv1_sync_r, en_frv2_sync_r, en_frv4_sync_r, en_frv8_sync_r};
-assign {clk_p, clk_wb, clk_c_frv_1, clk_c_frv_2, clk_c_frv_4, clk_c_frv_8} = cg_clks;
+assign cg_enables = {en_p2_i, en_p_i, en_wb_i, en_frv1_sync_r, en_frv2_sync_r, en_frv4_sync_r, en_frv8_sync_r, en_frv4ccx_sync_r};
+assign {clk_p2, clk_p, clk_wb, clk_c_frv_1, clk_c_frv_2, clk_c_frv_4, clk_c_frv_8, clk_c_frv_4ccx} = cg_clks;
 
 `ifdef NO_CLOCK_GATES_TODO
 genvar i;
@@ -401,12 +508,6 @@ generate
 endgenerate
 
 `else
-  //assign clk_p       = clk_i & en_p_i;
-  //assign clk_wb      = clk_i & en_wb_i;
-  //assign clk_c_frv_1 = clk_i & en_frv1_sync_r;
-  //assign clk_c_frv_2 = clk_i & en_frv2_sync_r;
-  //assign clk_c_frv_4 = clk_i & en_frv4_sync_r;
-  //assign clk_c_frv_8 = clk_i & en_frv8_sync_r;
 genvar i;
 generate
 for (i = 0; i < N_CLOCKS; i = i + 1) begin : i_cg
@@ -444,7 +545,7 @@ CSR #(
   .i_wb_cyc             ( wb_p_csr_cyc        ),
   .i_wb_stb             ( wb_p_csr_stb        ),
   .o_wb_stall           ( /* nc */            ),
-  .i_wb_adr             ( wb_p_csr_adr[4:0]   ),
+  .i_wb_adr             ( wb_p_csr_adr[5:0]   ),
   .i_wb_we              ( wb_p_csr_we         ),
   .i_wb_dat             ( wb_p_csr_wdat       ),
   .i_wb_sel             ( wb_p_csr_sel        ),
@@ -455,6 +556,10 @@ CSR #(
   .i_GPI_gpi            ( gpi_i               ),
   .o_GPO_gpo            ( gpo_o               ),
   .o_GPOE_gpoe          ( gpeo_o              ),
+  .o_GPCS_gpcs          ( gpcs_o              ),
+  .o_GPSL_gpsl          ( gpsl_o              ),
+  .o_GPPU_gppu          ( gppu_o              ),
+  .o_GPPD_gppd          ( gppd_o              ),
   .o_SPI_Conf_presc     ( spi_presc           ),
   .o_SPI_Conf_cpol      ( spi_cpol            ),
   .o_SPI_Conf_auto_cs   ( spi_auto_cs         ),
@@ -465,7 +570,9 @@ CSR #(
   .o_OLED_Conf_inc      ( oled_spi_inc        ),
   .o_OLED_Conf_size     ( oled_size           ),
   .o_OLED_Dma_addr      ( oled_spi_adr        ),
-  .i_UART_Irq_irq       ( uart_irq            )
+  .i_Irqs_uart_irq      ( uart_irq            ),
+  .i_Irqs_spi_irq       ( efspi_irq           ),
+  .o_Guard_gd_ef_xip    ( guard_xip           )
 );                               
 
 
@@ -499,13 +606,41 @@ wb_spi i_wb_spi (
   .spi_sdi_i      ( spi_sdi_i     )
 );
 
+                                         
+//           mmmmmm mmmmmm         mmmm  mmmmm  mmmmm        
+//           #      #             #"   " #   "#   #          
+//           #mmmmm #mmmmm        "#mmm  #mmm#"   #          
+//           #      #                 "# #        #          
+//           #mmmmm #             "mmm#" #      mm#mm        
+                                                 
+EF_SPI_WB #(
+  .CDW ( 8 ),
+  .FAW ( 4 )
+) i_EF_SPI_WB (
+  .clk_i  ( clk_p2          ),
+  .rst_i  ( ~rst_p_n        ),
+  .adr_i  ( wb_p_efspi_adr  ),
+  .dat_i  ( wb_p_efspi_wdat ),
+  .dat_o  ( wb_p_efspi_rdat ),
+  .sel_i  ( wb_p_efspi_sel  ),
+  .cyc_i  ( wb_p_efspi_cyc  ),
+  .stb_i  ( wb_p_efspi_stb  ),
+  .ack_o  ( wb_p_efspi_ack  ),
+  .we_i   ( wb_p_efspi_we   ),
+  .IRQ    ( efspi_irq       ),
+  .miso   ( efspi_sdi_i     ),
+  .mosi   ( efspi_sdo_o     ),
+  .csb    ( efspi_cs_o      ),
+  .sclk   ( efspi_sck_o     )
+);   
+
         
-// m    m mmmmm  mmmmm          mmmm   mmmm  mmmmm  mmmmm 
-//  #  #    #    #   "#        m"  "m #"   " #   "#   #   
-//   ##     #    #mmm#"        #    # "#mmm  #mmm#"   #   
-//  m""m    #    #             #    #     "# #        #   
-// m"  "m mm#mm  #              #mm#" "mmm#" #      mm#mm 
-//                                 #                      
+//           m    m mmmmm  mmmmm          mmmm   mmmm  mmmmm  mmmmm 
+//            #  #    #    #   "#        m"  "m #"   " #   "#   #   
+//             ##     #    #mmm#"        #    # "#mmm  #mmm#"   #   
+//            m""m    #    #             #    #     "# #        #   
+//           m"  "m mm#mm  #              #mm#" "mmm#" #      mm#mm 
+//                                          #                      
                                                         
 wb_qspi_mem i_wb_qspi_mem (
   .clk_i          ( clk_p   ),                                                                    
@@ -529,7 +664,69 @@ wb_qspi_mem i_wb_qspi_mem (
   .sd_oen_o       ( qspi_mem_oen_o      )
 );
 
-                            
+          
+//           mmmmmm mmmmmm        m    m mmmmm  mmmmm        
+//           #      #              #  #    #    #   "#       
+//           #mmmmm #mmmmm          ##     #    #mmm#"       
+//           #      #              m""m    #    #            
+//           #mmmmm #             m"  "m mm#mm  #                              
+
+logic gd_wb_xip_ack;
+assign wb_p_ef_xip_ack = gd_wb_xip_ack & guard_xip;
+
+wb_to_ahb3lite i_wb_to_ahb3lite (
+  .clk_i            ( clk_p2                  ),
+  .rst_n_i          ( rst_p_n                 ),
+  // Wishbone; Note: suffix is invered in this ip
+  .from_m_wb_adr_o  ( wb_p_ef_xip_adr         ),
+  .from_m_wb_sel_o  ( wb_p_ef_xip_sel         ),
+  .from_m_wb_we_o   ( wb_p_ef_xip_we          ),
+  .from_m_wb_dat_o  ( wb_p_ef_xip_wdat        ),
+  .from_m_wb_cyc_o  ( wb_p_ef_xip_cyc         ),
+  .from_m_wb_stb_o  ( wb_p_ef_xip_stb         ),
+  .to_m_wb_ack_i    ( gd_wb_xip_ack           ),
+  .to_m_wb_err_i    ( /* nc */                ),
+  .to_m_wb_dat_i    ( wb_p_ef_xip_rdat        ),
+  .from_m_wb_cti_o  ( 3'b0                    ),
+  .from_m_wb_bte_o  ( 2'b0                    ),
+  // to ahb3lite
+  .mHSEL            ( xip_wb_brdg_mHSEL       ),
+  .mHSIZE           ( /* nc */                ),
+  .mHRDATA          ( xip_wb_brdg_mHRDATA     ),
+  .mHRESP           ( 1'b0                    ),
+  .mHREADY          ( xip_wb_brdg_mHREADY     ),
+  .mHREADYOUT       ( xip_wb_brdg_mHREADYOUT  ),
+  .mHWRITE          ( xip_wb_brdg_mHWRITE     ),
+  .mHBURST          ( /* nc */                ),
+  .mHADDR           ( xip_wb_brdg_mHADDR      ),
+  .mHTRANS          ( xip_wb_brdg_mHTRANS     ),
+  .mHWDATA          ( /* nc */                ),
+  .mHPROT           ( /* nc */                )
+);
+
+MS_QSPI_XIP_CACHE_ahbl #(
+  .NUM_LINES ( 32 ),
+  .LINE_SIZE ( 32 )
+) i_MS_QSPI_XIP_CACHE_ahbl (
+    // AHB-Lite Interface
+    .HCLK       ( clk_p2                  ),
+    .HRESETn    ( rst_p_n                 ),
+    .HSEL       ( xip_wb_brdg_mHSEL       ),
+    .HADDR      ( xip_wb_brdg_mHADDR      ),
+    .HTRANS     ( xip_wb_brdg_mHTRANS     ),
+    .HWRITE     ( xip_wb_brdg_mHWRITE     ),
+    .HREADY     ( xip_wb_brdg_mHREADYOUT  ),
+    .HREADYOUT  ( xip_wb_brdg_mHREADY     ),
+    .HRDATA     ( xip_wb_brdg_mHRDATA     ),
+    // Quad I/O
+    .sck        ( xip_sck_o               ),
+    .ce_n       ( xip_cs_on               ),
+    .din        ( xip_sd_i                ),
+    .dout       ( xip_sd_o                ),
+    .douten     ( xip_oen_o               )     
+);
+
+   
 //           m    m   mm   mmmmm mmmmmmm
 //           #    #   ##   #   "#   #   
 //           #    #  #  #  #mmmm"   #   
@@ -702,6 +899,33 @@ frv_8 i_frv_8 (
   .wb_dmem_dat_o ( wb_c_frv_8_dmem_wdat )
 );
 
+frv_4ccx i_frv_4ccx (
+  .clk_i         ( clk_c_frv_4ccx   ),
+  .rst_in        ( rst_c_frv_4ccx_n ),
+  // imem
+  .wb_imem_stb_o ( wb_c_frv_4ccx_imem_stb  ),
+  .wb_imem_cyc_o ( wb_c_frv_4ccx_imem_cyc  ),
+  .wb_imem_adr_o ( wb_c_frv_4ccx_imem_adr  ),
+  .wb_imem_dat_i ( wb_c_frv_4ccx_imem_rdat ),
+  .wb_imem_ack_i ( wb_c_frv_4ccx_imem_ack  ),
+  // dmem
+  .wb_dmem_cyc_o ( wb_c_frv_4ccx_dmem_cyc  ),
+  .wb_dmem_stb_o ( wb_c_frv_4ccx_dmem_stb  ),
+  .wb_dmem_we_o  ( wb_c_frv_4ccx_dmem_we   ),
+  .wb_dmem_ack_i ( wb_c_frv_4ccx_dmem_ack  ),
+  .wb_dmem_be_o  ( wb_c_frv_4ccx_dmem_be   ),
+  .wb_dmem_dat_i ( wb_c_frv_4ccx_dmem_rdat ),
+  .wb_dmem_adr_o ( wb_c_frv_4ccx_dmem_adr  ),
+  .wb_dmem_dat_o ( wb_c_frv_4ccx_dmem_wdat ),
+
+  .ccx_rs_a_o    ( ccx4_rs_a_o             ),
+  .ccx_rs_b_o    ( ccx4_rs_b_o             ),
+  .ccx_res_i     ( ccx4_res_i              ),
+  .ccx_sel_o     ( ccx4_sel_o              ),
+  .ccx_req_o     ( ccx4_req_o              ),
+  .ccx_resp_i    ( ccx4_resp_i             )
+);
+
                                                         
 // mmmmm           m                                      
 //   #    m mm   mm#mm   mmm    m mm   mmm    mmm   m mm  
@@ -768,6 +992,19 @@ wb_intercon i_wb_intercon (
   .wb_fazyrv8_err_o       ( /* nc */            ),
   .wb_fazyrv8_rty_o       ( /* nc */            ),
   //
+  .wb_fazyrv4ccx_adr_i    ( wb_c_frv_4ccx_adr   ),
+  .wb_fazyrv4ccx_dat_i    ( wb_c_frv_4ccx_wdat  ),
+  .wb_fazyrv4ccx_sel_i    ( wb_c_frv_4ccx_be    ),
+  .wb_fazyrv4ccx_we_i     ( wb_c_frv_4ccx_we    ),
+  .wb_fazyrv4ccx_cyc_i    ( wb_c_frv_4ccx_cyc   ),
+  .wb_fazyrv4ccx_stb_i    ( wb_c_frv_4ccx_stb   ),
+  .wb_fazyrv4ccx_cti_i    ( 3'b0                ),
+  .wb_fazyrv4ccx_bte_i    ( 2'b0                ),
+  .wb_fazyrv4ccx_rdt_o    ( wb_c_frv_4ccx_rdat  ),
+  .wb_fazyrv4ccx_ack_o    ( wb_c_frv_4ccx_ack   ),
+  .wb_fazyrv4ccx_err_o    ( /* nc */            ),
+  .wb_fazyrv4ccx_rty_o    ( /* nc */            ),
+  //
   .wb_oled_dma_adr_i      ( wb_c_oled_dma_adr   ),
   .wb_oled_dma_dat_i      ( 32'b0               ),
   .wb_oled_dma_sel_i      ( 4'b0                ),
@@ -833,6 +1070,19 @@ wb_intercon i_wb_intercon (
   .wb_spi_err_i           ( 1'b0                ),
   .wb_spi_rty_i           ( 1'b0                ),
   //
+  .wb_efspi_adr_o         ( wb_p_efspi_adr      ),
+  .wb_efspi_dat_o         ( wb_p_efspi_wdat     ),
+  .wb_efspi_sel_o         ( wb_p_efspi_sel      ),
+  .wb_efspi_we_o          ( wb_p_efspi_we       ),
+  .wb_efspi_cyc_o         ( wb_p_efspi_cyc      ),
+  .wb_efspi_stb_o         ( wb_p_efspi_stb      ),
+  .wb_efspi_cti_o         ( /* nc */            ),
+  .wb_efspi_bte_o         ( /* nc */            ),
+  .wb_efspi_rdt_i         ( wb_p_efspi_rdat     ),
+  .wb_efspi_ack_i         ( wb_p_efspi_ack      ),
+  .wb_efspi_err_i         ( 1'b0                ),
+  .wb_efspi_rty_i         ( 1'b0                ),
+  //
   .wb_csr_adr_o           ( wb_p_csr_adr        ),
   .wb_csr_dat_o           ( wb_p_csr_wdat       ),
   .wb_csr_sel_o           ( wb_p_csr_sel        ),
@@ -844,19 +1094,21 @@ wb_intercon i_wb_intercon (
   .wb_csr_rdt_i           ( wb_p_csr_rdat       ),
   .wb_csr_ack_i           ( wb_p_csr_ack        ),
   .wb_csr_err_i           ( 1'b0                ),
-  .wb_csr_rty_i           ( 1'b0                )
+  .wb_csr_rty_i           ( 1'b0                ),
+  //
+  .wb_efxip_adr_o         ( wb_p_ef_xip_adr     ),
+  .wb_efxip_dat_o         ( wb_p_ef_xip_wdat    ),
+  .wb_efxip_sel_o         ( wb_p_ef_xip_sel     ),
+  .wb_efxip_we_o          ( wb_p_ef_xip_we      ),
+  .wb_efxip_cyc_o         ( wb_p_ef_xip_cyc     ),
+  .wb_efxip_stb_o         ( wb_p_ef_xip_stb     ),
+  .wb_efxip_cti_o         ( /* nc */            ),
+  .wb_efxip_bte_o         ( /* nc */            ),
+  .wb_efxip_rdt_i         ( wb_p_ef_xip_rdat    ),
+  .wb_efxip_ack_i         ( wb_p_ef_xip_ack     ),
+  .wb_efxip_err_i         ( 1'b0                ),
+  .wb_efxip_rty_i         ( 1'b0                )
 );
-
-
-
-
-
-
-
-
-
-
-
 
 
 

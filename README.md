@@ -2,6 +2,65 @@
 
 FazyRV globefish SoC WiP.
 
+## Pin Map
+
+| Pad           | Pin               | Dir | Description                               |
+| ------------- | ----------------- | --- | ----------------------------------------- |
+| input_PAD[0]  | en_wb             | in  | Enable Wishbon bus                        |
+| input_PAD[1]  | en_p2             | in  | Enable secondary peripherals              |
+| input_PAD[2]  | en_p              | in  | Enable peripherals                        |
+| input_PAD[3]  | en_frv1           | in  | Enable 1-bit FazyRV core                  |
+| input_PAD[4]  | en_frv2           | in  | Enable 2-bit FazyRV core                  |
+| input_PAD[5]  | en_frv4           | in  | Enable 4-bit FazyRV core                  |
+| input_PAD[6]  | en_frv8           | in  | Enable 8-bit FazyRV core                  |
+| input_PAD[7]  | en_frv4ccx        | in  | Enable 4-bit FazyRV CCX core              |
+| input_PAD[7]  |                   |     |                                           |
+| input_PAD[8]  |                   |     |                                           |
+| input_PAD[9]  |                   |     |                                           |
+| input_PAD[10] |                   |     |                                           |
+| input_PAD[11] |                   |     |                                           |
+| input_PAD[12] |                   |     |                                           |
+| bidir_PAD[0]  | qspi_mem_cs_rom_n | out | QSPI ROM / Flash chip enable (low active) |
+| bidir_PAD[1]  | qspi_mem_cs_ram_n | out | QSPI RAM chip enable (low active)         |
+| bidir_PAD[2]  | qspi_mem_sck      | out | QSPI clock                                |
+| bidir_PAD[3]  | qspi_mem_sdio[0]  | io  | QSPI bidir data                           |
+| bidir_PAD[4]  | qspi_mem_sdio[1]  | io  | QSPI bidir data                           |
+| bidir_PAD[5]  | qspi_mem_sdio[2]  | io  | QSPI bidir data                           |
+| bidir_PAD[6]  | qspi_mem_sdio[3]  | io  | QSPI bidir data                           |
+| bidir_PAD[7]  | uart_tx           | out | UART TX output                            |
+| bidir_PAD[8]  | uart_rx           | in  | UART RX input                             |
+| bidir_PAD[9]  | spi_oled_sck      | out | SPI OLED clock                            |
+| bidir_PAD[10] | spi_oled_sdo      | out | SPI OLED data                             |
+| bidir_PAD[11] | spi_cs            | out | SPI chip select (low active)              |
+| bidir_PAD[12] | spi_sck           | out | SPI clock                                 |
+| bidir_PAD[13] | spi_sdo           | out | SPI data output (copi)                    |
+| bidir_PAD[14] | spi_sdi           | in  | SPI data input (cipo)                     |
+| bidir_PAD[15] |                   |     |                                           |
+| bidir_PAD[16] |                   |     |                                           |
+| bidir_PAD[17] |                   |     |                                           |
+| bidir_PAD[18] |                   |     |                                           |
+| bidir_PAD[19] |                   |     |                                           |
+| bidir_PAD[20] |                   |     |                                           |
+| bidir_PAD[21] |                   |     |                                           |
+| bidir_PAD[22] |                   |     |                                           |
+| bidir_PAD[23] |                   |     |                                           |
+| bidir_PAD[24] |                   |     |                                           |
+| bidir_PAD[25] |                   |     |                                           |
+| bidir_PAD[26] |                   |     |                                           |
+| bidir_PAD[27] |                   |     |                                           |
+| bidir_PAD[28] |                   |     |                                           |
+| bidir_PAD[29] |                   |     |                                           |
+| bidir_PAD[30] |                   |     |                                           |
+| bidir_PAD[31] |                   |     |                                           |
+| bidir_PAD[32] |                   |     |                                           |
+| bidir_PAD[33] |                   |     |                                           |
+| bidir_PAD[34] |                   |     |                                           |
+| bidir_PAD[35] |                   |     |                                           |
+| bidir_PAD[36] |                   |     |                                           |
+| bidir_PAD[37] |                   |     |                                           |
+| bidir_PAD[38] |                   |     |                                           |
+| bidir_PAD[39] |                   |     |                                           |
+
 ## Memory Map
 
 | Base Address | Name      | Description                    |
@@ -12,6 +71,9 @@ FazyRV globefish SoC WiP.
 | 0x3000_0000  | UART      | UART Peripheral                |
 | 0x4000_0000  | SPI       | SPI Peripheral                 |
 | 0x5000_0000  | CSRs      | GPIOs, SPI Config, Oled Config |
+| 0x6000_0000  | EF_SPI    | Secondary SPI Peripheral       |
+| 0x7000_0000  | EF_XIP    | Secondary XIP Peripheral       |
+
 
 ## Prerequisites
 

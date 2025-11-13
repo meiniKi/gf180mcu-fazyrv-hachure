@@ -21,6 +21,10 @@ _start:
     nop
     nop
     nop
+    nop
+    nop
+    nop
+    nop
     addi x1, zero, 0
     addi x2, zero, 0
     addi x3, zero, 0

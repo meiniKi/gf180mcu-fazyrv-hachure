@@ -25,11 +25,11 @@ clone-pdk: ## Clone the GF180MCU PDK repository
 
 # TODO: only frv1 now; skips drc
 librelane-macro:
-	librelane macros/frv_8/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --skip KLayout.DRC --skip Magic.DRC
+	librelane macros/frv_2/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --skip KLayout.DRC --skip Magic.DRC
 .PHONY: librelane-macro
 
 librelane-macro-openroad:
-	librelane macros/frv_8/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
+	librelane macros/frv_2/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
 .PHONY: librelane-macro-openroad
 
 
