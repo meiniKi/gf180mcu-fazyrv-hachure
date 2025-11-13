@@ -419,36 +419,37 @@ MACROS:
         - pdk_dir::libs.ref/gf180mcu_fd_ip_sram/lib/gf180mcu_fd_ip_sram__sram512x8m8wm1__ss_125C_4v50.lib
     instances:
       # Make sure to specify the SRAMs in pdn_cfg.tcl
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[0].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[0].u_ram.sram_0:
         location: [500, 1500]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[1].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[1].u_ram.sram_0:
         location: [1000, 1500]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[2].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[2].u_ram.sram_0:
         location: [1500, 1500]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[3].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[3].u_ram.sram_0:
         location: [2000, 1500]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[0].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[0].u_ram.sram_0:
         location: [500, 2000]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[1].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[1].u_ram.sram_0:
         location: [1000, 2000]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[2].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[2].u_ram.sram_0:
         location: [1500, 2000]
         orientation: N
-      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[3].u_ram:
+      i_chip_core.i_globefish_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[3].u_ram.sram_0:
         location: [2000, 2000]
         orientation: N
 
 # This is an alternative method compared to
 # specifying the power connections in the RTL
-PDN_MACRO_CONNECTIONS:
-- "i_chip_core.sram_0 VDD VSS VDD VSS"
-- "i_chip_core.sram_1 VDD VSS VDD VSS"
+# TODO
+#PDN_MACRO_CONNECTIONS:
+#- "i_chip_core.sram_0 VDD VSS VDD VSS"
+#- "i_chip_core.sram_1 VDD VSS VDD VSS"
 
 PDN_CFG: dir::pdn_cfg.tcl
 
