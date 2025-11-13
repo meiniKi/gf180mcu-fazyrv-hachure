@@ -79,7 +79,7 @@ _start:
     clear_bss_end:
 
 	li		tp, 0
-    li		sp, 0x20000800
+    li		sp, 0x20001FF0
 	li		a0, 0		// a0 = argc
 	li		a1, 0		// a1 = argv
 	li		a2, 0		// a2 = envp = NULL

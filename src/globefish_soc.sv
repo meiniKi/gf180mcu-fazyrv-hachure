@@ -109,8 +109,8 @@ assign wb_c_frv_1_adr  = wb_c_frv_1_imem_stb ? wb_c_frv_1_imem_adr : wb_c_frv_1_
 assign wb_c_frv_1_we   = wb_c_frv_1_dmem_stb & wb_c_frv_1_dmem_we;
 assign wb_c_frv_1_wdat = wb_c_frv_1_dmem_wdat;
 
-assign wb_c_frv_1_imem_ack  = wb_c_frv_1_ack;
-assign wb_c_frv_1_dmem_ack  = wb_c_frv_1_ack;
+assign wb_c_frv_1_imem_ack  = wb_c_frv_1_ack & wb_c_frv_1_imem_stb;
+assign wb_c_frv_1_dmem_ack  = wb_c_frv_1_ack & wb_c_frv_1_dmem_stb;
 assign wb_c_frv_1_imem_rdat = wb_c_frv_1_rdat;
 assign wb_c_frv_1_dmem_rdat = wb_c_frv_1_rdat;
 
@@ -147,8 +147,8 @@ assign wb_c_frv_2_adr  = wb_c_frv_2_imem_stb ? wb_c_frv_2_imem_adr : wb_c_frv_2_
 assign wb_c_frv_2_we   = wb_c_frv_2_dmem_stb & wb_c_frv_2_dmem_we;
 assign wb_c_frv_2_wdat = wb_c_frv_2_dmem_wdat;
 
-assign wb_c_frv_2_imem_ack  = wb_c_frv_2_ack;
-assign wb_c_frv_2_dmem_ack  = wb_c_frv_2_ack;
+assign wb_c_frv_2_imem_ack  = wb_c_frv_2_ack & wb_c_frv_2_imem_stb;
+assign wb_c_frv_2_dmem_ack  = wb_c_frv_2_ack & wb_c_frv_2_dmem_stb;
 assign wb_c_frv_2_imem_rdat = wb_c_frv_2_rdat;
 assign wb_c_frv_2_dmem_rdat = wb_c_frv_2_rdat;
 
@@ -185,8 +185,8 @@ assign wb_c_frv_4_adr  = wb_c_frv_4_imem_stb ? wb_c_frv_4_imem_adr : wb_c_frv_4_
 assign wb_c_frv_4_we   = wb_c_frv_4_dmem_stb & wb_c_frv_4_dmem_we;
 assign wb_c_frv_4_wdat = wb_c_frv_4_dmem_wdat;
 
-assign wb_c_frv_4_imem_ack  = wb_c_frv_4_ack;
-assign wb_c_frv_4_dmem_ack  = wb_c_frv_4_ack;
+assign wb_c_frv_4_imem_ack  = wb_c_frv_4_ack & wb_c_frv_4_imem_stb;;
+assign wb_c_frv_4_dmem_ack  = wb_c_frv_4_ack & wb_c_frv_4_dmem_stb;;
 assign wb_c_frv_4_imem_rdat = wb_c_frv_4_rdat;
 assign wb_c_frv_4_dmem_rdat = wb_c_frv_4_rdat;
 
@@ -223,8 +223,8 @@ assign wb_c_frv_8_adr  = wb_c_frv_8_imem_stb ? wb_c_frv_8_imem_adr : wb_c_frv_8_
 assign wb_c_frv_8_we   = wb_c_frv_8_dmem_stb & wb_c_frv_8_dmem_we;
 assign wb_c_frv_8_wdat = wb_c_frv_8_dmem_wdat;
 
-assign wb_c_frv_8_imem_ack  = wb_c_frv_8_ack;
-assign wb_c_frv_8_dmem_ack  = wb_c_frv_8_ack;
+assign wb_c_frv_8_imem_ack  = wb_c_frv_8_ack & wb_c_frv_8_imem_stb;;
+assign wb_c_frv_8_dmem_ack  = wb_c_frv_8_ack & wb_c_frv_8_dmem_stb;;
 assign wb_c_frv_8_imem_rdat = wb_c_frv_8_rdat;
 assign wb_c_frv_8_dmem_rdat = wb_c_frv_8_rdat;
 
@@ -583,14 +583,14 @@ tiny_wb_dma_oled_spi #(
   .spi_sdo_o     ( spi_oled_sdo_o     )
 );
                                   
-// mmmmm    mm   m    m
-// #   "#   ##   ##  ##
-// #mmmm"  #  #  # ## #
-// #   "m  #mm#  # "" #
-// #    " #    # #    #
+//          mmmmm    mm   m    m
+//          #   "#   ##   ##  ##
+//          #mmmm"  #  #  # ## #
+//          #   "m  #mm#  # "" #
+//          #    " #    # #    #
 //                     
                                     
-localparam RAM_DEPTH = 4096;     
+localparam RAM_DEPTH = 2048; // words  
 
 wb_ram #( .DEPTH( RAM_DEPTH ) ) i_wb_ram (
   .clk_i  ( clk_p     ),

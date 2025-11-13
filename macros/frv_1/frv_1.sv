@@ -55,7 +55,7 @@ fazyrv_top #(
   .wb_dmem_be_o  ( wb_dmem_be_o   ),
   .wb_dmem_dat_i ( wb_dmem_dat_i  ),
   .wb_dmem_adr_o ( wb_dmem_adr_o  ),
-  .wb_dmem_dat_o ( wb_dmem_dat_o  ),
+  .wb_dmem_dat_o ( wb_dmem_dat_o  )
 );
 
 endmodule
