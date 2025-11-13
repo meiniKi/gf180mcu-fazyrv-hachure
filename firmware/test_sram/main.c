@@ -12,56 +12,60 @@ unsigned long pattern(unsigned long addr, unsigned long seed)
   x += (x << 7);
   x ^= (x >> 17);
   x += (x << 5);
+  return x;
 }
 
 void main(void)
 {
   // Ensure this does not conflict with the stack!
-  uint32_t offsets[] = {1000}; //, 211, 256, 511, 512, 1023, 1024, 2047, 2048, 2050};
+  // Word offsets
+  uint32_t offsets[] = {0, 211, 256, 511, 512, 1023, 1024, 1701};
   unsigned int n_offsets = sizeof(offsets) / sizeof(offsets[0]);
   unsigned long seed;
   uint8_t result;
   uint8_t correct;
 
+  GPO = 1;
+
   // --- write ---
   // off-chip ram
-  //seed = 42UL;
-  //for(unsigned int i = 0; i < n_offsets; ++i)
-  //{
-  //  uint32_t off = offsets[i];
-  //  volatile uint32_t *addr = ADR_SRAM + (off / sizeof(uint32_t));
-  //  *addr = pattern((unsigned long)off, (unsigned long)seed);
-  //}
+  seed = 42UL;
+  for(unsigned int i = 0; i < n_offsets; ++i)
+  {
+    uint32_t off = offsets[i];
+    volatile uint32_t *addr = ADR_SRAM + off;
+    *addr = pattern((unsigned long)off, (unsigned long)seed);
+  }
 
-  GPO = 1;
   // on-chip ram
   seed = 43UL;
   for(unsigned int i = 0; i < n_offsets; ++i)
   {
     uint32_t off = offsets[i];
-    volatile uint32_t *addr = ADR_RAM + (off / sizeof(uint32_t));
-    *addr = pattern((unsigned long)off, (unsigned long)i);
+    volatile uint32_t *addr = ADR_RAM + off;
+    *addr = pattern((unsigned long)off, (unsigned long)seed);
   }
 
   GPO = 2;
   // --- verify ---
   result = 0;
   
-  //correct = 1;
-  //seed = 42UL;
-  //for(unsigned int i = 0; i < n_offsets; ++i)
-  //{
-  //  uint32_t off = offsets[i];
-  //  volatile uint32_t *addr = ADR_SRAM + (off / sizeof(uint32_t));
-  //  uint32_t expected = pattern((unsigned long)off, (unsigned long)seed);
-  //  uint32_t actual   = *addr;
-  //  if (expected != actual)
-  //  {
-  //    correct = 0;
-  //    break;
-  //  }
-  //}
-  //result |= (correct << 1);
+  // off-chip ram
+  correct = 1;
+  seed = 42UL;
+  for(unsigned int i = 0; i < n_offsets; ++i)
+  {
+    uint32_t off = offsets[i];
+    volatile uint32_t *addr = ADR_SRAM + off;
+    uint32_t expected = pattern((unsigned long)off, (unsigned long)seed);
+    uint32_t actual   = *addr;
+    if (expected != actual)
+    {
+      correct = 0;
+      break;
+    }
+  }
+  result |= (correct << 1);
 
   // on-chip ram
   correct = 1;
@@ -69,7 +73,7 @@ void main(void)
   for(unsigned int i = 0; i < n_offsets; ++i)
   {
     uint32_t off = offsets[i];
-    volatile uint32_t *addr = ADR_RAM + (off / sizeof(uint32_t));
+    volatile uint32_t *addr = ADR_RAM + off;
     uint32_t expected = pattern((unsigned long)off, (unsigned long)seed);
     uint32_t actual   = *addr;
     if (expected != actual)
@@ -87,6 +91,8 @@ void main(void)
   GPO = 7;
   GPO = 15;
   GPO = result;
+
+  while(1);
 
   // excpeted at GPO:
   // GPO[0] ... 0 (stuck), 1 (done)

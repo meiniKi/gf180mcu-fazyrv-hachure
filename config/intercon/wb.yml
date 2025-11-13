@@ -21,10 +21,10 @@ parameters:
       size   : 0x00010000
     uart:
       offset : 0x30000000
-      size   : 0x00000004
+      size   : 0x00010000
     spi:
       offset : 0x40000000
-      size   : 0x00000004
+      size   : 0x00010000
     csr:
       offset : 0x50000000
-      size   : 0x00000020
+      size   : 0x00010000
