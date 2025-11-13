@@ -25,3 +25,6 @@
 [submodule "ip/MS_QSPI_XIP_CACHE"]
 	path = ip/MS_QSPI_XIP_CACHE
 	url = https://github.com/efabless/MS_QSPI_XIP_CACHE.git
+[submodule "ip/ahb3lite_wb_bridge"]
+	path = ip/ahb3lite_wb_bridge
+	url = https://github.com/meiniKi/ahb3lite_wb_bridge.git
