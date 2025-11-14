@@ -14,11 +14,11 @@ FazyRV globefish SoC WiP.
 | input_PAD[5]  | en_frv4           | in  | Enable 4-bit FazyRV core                                     |
 | input_PAD[6]  | en_frv8           | in  | Enable 8-bit FazyRV core                                     |
 | input_PAD[7]  | en_frv4ccx        | in  | Enable 4-bit FazyRV CCX core                                 |
-| input_PAD[8]  | ccx_res[0]        | in  | CCX result chunk, Enable 1-bit BRAM FazyRV (if CCX disabled) |
-| input_PAD[9]  | ccx_res[1]        | in  | CCX result chunk, Enable 8-bit BRAM FazyRV (if CCX disabled) |
-| input_PAD[10] | ccx_res[2]        | in  | CCX result chunk                                             |
-| input_PAD[11] | ccx_res[3]        | in  | CCX result chunk                                             |
-| input_PAD[12] | ccx4_res          | in  | CCX handshaking                                              |
+| input_PAD[8]  | ccx4_res[0]       | in  | CCX result chunk, Enable 1-bit BRAM FazyRV (if CCX disabled) |
+| input_PAD[9]  | ccx4_res[1]       | in  | CCX result chunk, Enable 8-bit BRAM FazyRV (if CCX disabled) |
+| input_PAD[10] | ccx4_res[2]       | in  | CCX result chunk                                             |
+| input_PAD[11] | ccx4_res[3]       | in  | CCX result chunk                                             |
+| input_PAD[12] | ccx4_resp         | in  | CCX handshaking                                              |
 | bidir_PAD[0]  | qspi_mem_cs_rom_n | out | QSPI ROM / Flash chip enable (low active)                    |
 | bidir_PAD[1]  | qspi_mem_cs_ram_n | out | QSPI RAM chip enable (low active)                            |
 | bidir_PAD[2]  | qspi_mem_sck      | out | QSPI clock                                                   |

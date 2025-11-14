@@ -129,9 +129,10 @@ PAD_EAST: [
     "dvdd_pads\\[3\\].pad",
 ]
 
+# TODO: pad order
 PAD_NORTH: [
-    "analog\\[1\\].pad",
     "analog\\[0\\].pad",
+    "inputs\\[12\\].pad",
     "bidir\\[39\\].pad",
     "bidir\\[38\\].pad",
     "bidir\\[37\\].pad",

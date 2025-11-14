@@ -17,7 +17,9 @@ pdk = os.getenv("PDK", "gf180mcuD")
 scl = os.getenv("SCL", "gf180mcu_fd_sc_mcu7t5v0")
 gl = os.getenv("GL", False)
 
-hdl_toplevel = "globefish_tb"
+FULL_CHIP = True
+
+hdl_toplevel = "chip_top_tb" if FULL_CHIP is True else "globefish_tb"
 
 async def set_defaults(dut, core):
     assert core in ["1", "2", "4", "8", "4ccx", "1bram", "8bram"]
@@ -41,6 +43,12 @@ async def set_defaults(dut, core):
         dut.en_frv8.value = 1
     elif core == "4ccx":
         dut.en_frv4ccx.value = 1
+    elif core == "1bram":
+        # if en_frv4ccx == 0 -> ccx4_res[0] is en_1bram
+        dut.ccx4_res.value = 1
+    elif core == "8bram":
+        # if en_frv4ccx == 0 -> ccx4_res[1] is en_8bram
+        dut.ccx4_res.value = 2
     else:
         raise NotImplementedError("TODO")
 
@@ -186,8 +194,12 @@ def sim_setup(test_module, firmware):
         # Testbench and helpers
         "spiflash.v",
         "qspi_psram.sv",
-        "globefish_tb.sv",
+        "chip_top_tb.sv" if FULL_CHIP is True else "globefish_tb.sv",
     ]
+    
+    if FULL_CHIP:
+        sources += [proj_path / "../src/chip_core.sv",
+                    proj_path / "../src/chip_top.sv"]
 
     build_args = []
 
