@@ -40,6 +40,7 @@ module CSR #(
   output [31:0] o_OLED_Dma_addr,
   input i_Irqs_uart_irq,
   input i_Irqs_spi_irq,
+  input i_Irqs_spi_rdy,
   output o_Guard_gd_ef_xip
 );
   wire w_register_valid;
@@ -51,7 +52,7 @@ module CSR #(
   wire [12:0] w_register_ready;
   wire [25:0] w_register_status;
   wire [415:0] w_register_read_data;
-  wire [831:0] w_register_value;
+  wire [415:0] w_register_value;
   rggen_wishbone_adapter #(
     .ADDRESS_WIDTH        (ADDRESS_WIDTH),
     .LOCAL_ADDRESS_WIDTH  (6),
@@ -179,7 +180,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[1+:1]),
       .o_register_status        (w_register_status[2+:2]),
       .o_register_read_data     (w_register_read_data[32+:32]),
-      .o_register_value         (w_register_value[64+:32]),
+      .o_register_value         (w_register_value[32+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -243,7 +244,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[2+:1]),
       .o_register_status        (w_register_status[4+:2]),
       .o_register_read_data     (w_register_read_data[64+:32]),
-      .o_register_value         (w_register_value[128+:32]),
+      .o_register_value         (w_register_value[64+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -307,7 +308,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[3+:1]),
       .o_register_status        (w_register_status[6+:2]),
       .o_register_read_data     (w_register_read_data[96+:32]),
-      .o_register_value         (w_register_value[192+:32]),
+      .o_register_value         (w_register_value[96+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -371,7 +372,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[4+:1]),
       .o_register_status        (w_register_status[8+:2]),
       .o_register_read_data     (w_register_read_data[128+:32]),
-      .o_register_value         (w_register_value[256+:32]),
+      .o_register_value         (w_register_value[128+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -435,7 +436,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[5+:1]),
       .o_register_status        (w_register_status[10+:2]),
       .o_register_read_data     (w_register_read_data[160+:32]),
-      .o_register_value         (w_register_value[320+:32]),
+      .o_register_value         (w_register_value[160+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -499,7 +500,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[6+:1]),
       .o_register_status        (w_register_status[12+:2]),
       .o_register_read_data     (w_register_read_data[192+:32]),
-      .o_register_value         (w_register_value[384+:32]),
+      .o_register_value         (w_register_value[192+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -563,7 +564,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[7+:1]),
       .o_register_status        (w_register_status[14+:2]),
       .o_register_read_data     (w_register_read_data[224+:32]),
-      .o_register_value         (w_register_value[448+:32]),
+      .o_register_value         (w_register_value[224+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -711,7 +712,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[8+:1]),
       .o_register_status        (w_register_status[16+:2]),
       .o_register_read_data     (w_register_read_data[256+:32]),
-      .o_register_value         (w_register_value[512+:32]),
+      .o_register_value         (w_register_value[256+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -775,7 +776,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[9+:1]),
       .o_register_status        (w_register_status[18+:2]),
       .o_register_read_data     (w_register_read_data[288+:32]),
-      .o_register_value         (w_register_value[576+:32]),
+      .o_register_value         (w_register_value[288+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -895,7 +896,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[10+:1]),
       .o_register_status        (w_register_status[20+:2]),
       .o_register_read_data     (w_register_read_data[320+:32]),
-      .o_register_value         (w_register_value[640+:32]),
+      .o_register_value         (w_register_value[320+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -935,18 +936,18 @@ module CSR #(
   generate if (1) begin : g_Irqs
     wire w_bit_field_read_valid;
     wire w_bit_field_write_valid;
-    wire [63:0] w_bit_field_mask;
-    wire [63:0] w_bit_field_write_data;
-    wire [63:0] w_bit_field_read_data;
-    wire [63:0] w_bit_field_value;
-    `rggen_tie_off_unused_signals(64, 64'h0000000000000003, w_bit_field_read_data, w_bit_field_value)
+    wire [31:0] w_bit_field_mask;
+    wire [31:0] w_bit_field_write_data;
+    wire [31:0] w_bit_field_read_data;
+    wire [31:0] w_bit_field_value;
+    `rggen_tie_off_unused_signals(32, 32'h00000007, w_bit_field_read_data, w_bit_field_value)
     rggen_default_register #(
       .READABLE       (1),
       .WRITABLE       (0),
       .ADDRESS_WIDTH  (6),
       .OFFSET_ADDRESS (6'h2c),
       .BUS_WIDTH      (32),
-      .DATA_WIDTH     (64)
+      .DATA_WIDTH     (32)
     ) u_register (
       .i_clk                    (i_clk),
       .i_rst_n                  (i_rst_n),
@@ -959,7 +960,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[11+:1]),
       .o_register_status        (w_register_status[22+:2]),
       .o_register_read_data     (w_register_read_data[352+:32]),
-      .o_register_value         (w_register_value[704+:64]),
+      .o_register_value         (w_register_value[352+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),
@@ -1023,6 +1024,34 @@ module CSR #(
         .o_value_unmasked   ()
       );
     end
+    if (1) begin : g_spi_rdy
+      rggen_bit_field #(
+        .WIDTH              (1),
+        .STORAGE            (0),
+        .EXTERNAL_READ_DATA (1),
+        .TRIGGER            (0)
+      ) u_bit_field (
+        .i_clk              (i_clk),
+        .i_rst_n            (i_rst_n),
+        .i_sw_read_valid    (w_bit_field_read_valid),
+        .i_sw_write_valid   (w_bit_field_write_valid),
+        .i_sw_write_enable  (1'b0),
+        .i_sw_mask          (w_bit_field_mask[2+:1]),
+        .i_sw_write_data    (w_bit_field_write_data[2+:1]),
+        .o_sw_read_data     (w_bit_field_read_data[2+:1]),
+        .o_sw_value         (w_bit_field_value[2+:1]),
+        .o_write_trigger    (),
+        .o_read_trigger     (),
+        .i_hw_write_enable  (1'b0),
+        .i_hw_write_data    ({1{1'b0}}),
+        .i_hw_set           ({1{1'b0}}),
+        .i_hw_clear         ({1{1'b0}}),
+        .i_value            (i_Irqs_spi_rdy),
+        .i_mask             ({1{1'b1}}),
+        .o_value            (),
+        .o_value_unmasked   ()
+      );
+    end
   end endgenerate
   generate if (1) begin : g_Guard
     wire w_bit_field_read_valid;
@@ -1036,7 +1065,7 @@ module CSR #(
       .READABLE       (1),
       .WRITABLE       (1),
       .ADDRESS_WIDTH  (6),
-      .OFFSET_ADDRESS (6'h34),
+      .OFFSET_ADDRESS (6'h30),
       .BUS_WIDTH      (32),
       .DATA_WIDTH     (32)
     ) u_register (
@@ -1051,7 +1080,7 @@ module CSR #(
       .o_register_ready         (w_register_ready[12+:1]),
       .o_register_status        (w_register_status[24+:2]),
       .o_register_read_data     (w_register_read_data[384+:32]),
-      .o_register_value         (w_register_value[768+:32]),
+      .o_register_value         (w_register_value[384+:32]),
       .o_bit_field_read_valid   (w_bit_field_read_valid),
       .o_bit_field_write_valid  (w_bit_field_write_valid),
       .o_bit_field_mask         (w_bit_field_mask),

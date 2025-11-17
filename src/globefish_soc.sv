@@ -689,6 +689,7 @@ CSR #(
   .o_OLED_Dma_addr      ( oled_spi_adr        ),
   .i_Irqs_uart_irq      ( uart_irq            ),
   .i_Irqs_spi_irq       ( efspi_irq           ),
+  .i_Irqs_spi_rdy       ( spi_rdy             ),
   .o_Guard_gd_ef_xip    ( guard_xip           )
 );                               
 

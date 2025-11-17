@@ -54,7 +54,8 @@ register_blocks:
         bit_fields:
           - { name: uart_irq, bit_assignment: { width: 1 }, type: ro}
           - { name: spi_irq, bit_assignment: { width: 1 }, type: ro}
-          - { name: reserved, bit_assignment: { width: 31 }, type: reserved } 
+          - { name: spi_rdy, bit_assignment: { width: 1 }, type: ro}
+          - { name: reserved, bit_assignment: { width: 29 }, type: reserved } 
       - name: Guard
         bit_fields:
           - { name: gd_ef_xip, bit_assignment: { width: 1 }, type: rw, initial_value: 0}

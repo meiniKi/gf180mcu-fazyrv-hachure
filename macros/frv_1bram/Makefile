@@ -19,6 +19,7 @@ macro-nodrc:
 .PHONY: macro-nodrc
 
 copy:
+	rm -rf final
 	cp -r runs/${RUN_TAG}/final .
 .PHONY: copy
 

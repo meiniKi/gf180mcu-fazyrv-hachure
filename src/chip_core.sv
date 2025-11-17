@@ -243,7 +243,7 @@ assign bidir_out[23:21]  = {efspi_sdo, efspi_sck, efspi_cs};
 // - sdi
 assign input_pu[15]      = '0;  // np pull up
 assign input_pd[15]      = '0;  // no pull down
-assign spi_sdi           = input_in[15];
+assign efspi_sdi         = input_in[15];
 
 
 // ### XIP: bidir_PAD[29:24]
