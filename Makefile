@@ -24,6 +24,19 @@ clone-pdk: ## Clone the GF180MCU PDK repository
 .PHONY: clone-pdk
 
 
+librelane-macro-test:
+	$(MAKE) -C macros/frv_8bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro-nodrc
+.PHONY: librelane-macro-test
+
+librelane-macro-test-or:
+	librelane macros/frv_8bram/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
+.PHONY: librelane-macro-test-or
+
+
+chip: librelane-macro copy-macro librelane copy-final
+	echo "Done."
+.PHONY: chip
+
 librelane-macro:
 	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro && \
 	$(MAKE) -C macros/frv_2 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro && \
@@ -93,21 +106,20 @@ librelane-klayout: ## Open the last run in KLayout
 	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInKLayout
 .PHONY: librelane-klayout
 
-sim: ## Run RTL simulation with cocotb
-	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 chip_top_tb.py
-.PHONY: sim
 
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram_simple.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_uart.py
-sim-globefish:
-	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
-.PHONY: sim-globefish
+#cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_spi.py
+#cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_efspi.py
+sim:
+	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_xip.py
+.PHONY: sim
 
 
 sim-gl: ## Run gate-level simulation with cocotb
-	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 chip_top_tb.py
+	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim-gl
 
 sim-view: ## View simulation waveforms in GTKWave

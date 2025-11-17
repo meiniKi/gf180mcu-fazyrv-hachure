@@ -5,7 +5,52 @@
 // Usage :  FazyRV globefish SoC
 //
 // Ports
-//  - TODO
+//  - clk_i               System clock
+//  - rst_in              System reset (low active)
+//  - en_p_i              Enable peripherals
+//  - en_p2_i             Enable redundant peripherals
+//  - en_wb_i             Enable Wishbone bus
+//  - en_frv1_i           Enable FazyRV 1-bit
+//  - en_frv2_i           Enable FazyRV 2-bit
+//  - en_frv4_i           Enable FazyRV 4-bit
+//  - en_frv8_i           Enable FazyRV 8-bit
+//  - en_frv4ccx_i        Enable FazyRV 4-bit with CCX interface
+//  - qspi_mem_cs_ram_on  Chip enable: QSPI RAM
+//  - qspi_mem_cs_rom_on  Chip enable: QSPI ROM
+//  - qspi_mem_sck_o      QSPI serial clock
+//  - qspi_mem_sd_i       QSPI data in
+//  - qspi_mem_sd_o       QSPI data out
+//  - qspi_mem_oen_o      QSPI output enable
+//  - ccx4_rs_a_o         CCX operand a chunk
+//  - ccx4_rs_b_o         CCX operand b chunk
+//  - ccx4_res_i          CCX result
+//  - ccx4_sel_o          CCX select
+//  - ccx4_req_o          CCX request
+//  - ccx4_resp_i         CCX response
+//  - uart_tx_o           UART transmit
+//  - uart_rx_i           UART receive
+//  - spi_oled_sck_o      OLED serial clock
+//  - spi_oled_sdo_o      OLED data out
+//  - gpi_i               GPIO: input
+//  - gpo_o               GPIO: output
+//  - gpeo_o              GPIO: output enable
+//  - gpcs_o              GPIO: cmos buffer / schmidt trigger
+//  - gpsl_o              GPIO: slew rate
+//  - gppu_o              GPIO: pull up
+//  - gppd_o              GPIO: pull down
+//  - spi_cs_o            SPI chip select
+//  - spi_sck_o           SPI serial clock
+//  - spi_sdo_o           SPI data out
+//  - spi_sdi_i           SPI data in
+//  - efspi_cs_o          EF SPI chip select
+//  - efspi_sck_o         EF SPI serial clock
+//  - efspi_sdo_o         EF SPI data out
+//  - efspi_sdi_i         EF SPI data in
+//  - xip_cs_on           XIP chip select
+//  - xip_sck_o           XIP serial clock
+//  - xip_sd_i            XIP data in
+//  - xip_sd_o            XIP data out
+//  - xip_oen_o           XIP output enable
 // -----------------------------------------------------------------------------
 
 module globefish_soc (
