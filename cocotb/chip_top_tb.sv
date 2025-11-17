@@ -170,6 +170,16 @@ spiflash i_spiflash (
   .io2 ( mem_sdio[2]  ),
   .io3 ( mem_sdio[3]  )
 );
+
+spiflash i_spiflash_2 (
+  .csb ( xip_cs_n     ),
+  .clk ( xip_sck      ),
+  .io0 ( xip_sdio[0]  ),
+  .io1 ( xip_sdio[1]  ),
+  .io2 ( xip_sdio[2]  ),
+  .io3 ( xip_sdio[3]  )
+);
+
                                    
 // mmmmm   mmmm  mmmmm    mm   m    m
 // #   "# #"   " #   "#   ##   ##  ##

@@ -6,3 +6,4 @@ sim_build/
 final/
 wb.core
 .venv
+.vscode

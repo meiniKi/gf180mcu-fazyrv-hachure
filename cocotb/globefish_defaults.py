@@ -23,7 +23,7 @@ hdl_toplevel = "chip_top_tb" if FULL_CHIP is True else "globefish_tb"
 async def set_defaults(dut, core):
     assert core in ["1", "2", "4", "8", "4ccx", "1bram", "8bram"]
     dut.en_p.value = 1
-    dut.en_p2.value = 0
+    dut.en_p2.value = 1
     dut.en_wb.value = 1
 
     dut.en_frv1.value = 0
