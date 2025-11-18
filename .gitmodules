@@ -1,6 +1,6 @@
 [submodule "ip/FazyRV"]
 	path = ip/FazyRV
-	url = git@github.com:meiniKi/FazyRV.git
+	url = https://github.com/meiniKi/FazyRV.git
 [submodule "ip/wb_intercon"]
 	path = ip/wb_intercon
 	url = https://github.com/olofk/wb_intercon.git
@@ -12,7 +12,7 @@
 	url = https://github.com/bmartini/verilog-arbiter.git
 [submodule "ip/FazyRV-ccx"]
 	path = ip/FazyRV-ccx
-	url = git@github.com:meiniKi/FazyRV.git
+	url = https://github.com/meiniKi/FazyRV.git
 [submodule "ip/ahb3lite_wb_bridge"]
 	path = ip/ahb3lite_wb_bridge
 	url = https://github.com/meiniKi/ahb3lite_wb_bridge.git
