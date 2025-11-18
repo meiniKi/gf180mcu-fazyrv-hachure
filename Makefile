@@ -25,11 +25,11 @@ clone-pdk: ## Clone the GF180MCU PDK repository
 
 
 librelane-macro-test:
-	$(MAKE) -C macros/frv_8bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro-nodrc
+	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro-nodrc
 .PHONY: librelane-macro-test
 
 librelane-macro-test-or:
-	librelane macros/frv_8bram/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
+	librelane macros/frv_1/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
 .PHONY: librelane-macro-test-or
 
 
@@ -135,7 +135,7 @@ sim:
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_spi.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_efspi.py
 sim-gl: ## Run gate-level simulation with cocotb
-	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram_simple.py
+	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram.py
 .PHONY: sim-gl
 
 sim-view: ## View simulation waveforms in GTKWave
