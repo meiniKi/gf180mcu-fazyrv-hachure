@@ -25,7 +25,7 @@ clone-pdk: ## Clone the GF180MCU PDK repository
 
 
 librelane-macro-test:
-	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro-nodrc
+	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro
 .PHONY: librelane-macro-test
 
 librelane-macro-test-or:
@@ -76,6 +76,17 @@ copy-macro:
 	$(MAKE) -C macros/frv_1bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" copy && \
 	$(MAKE) -C macros/frv_8bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" copy
 .PHONY: copy-macro
+
+backup-macro:
+	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup && \
+	$(MAKE) -C macros/frv_2 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup && \
+	$(MAKE) -C macros/frv_4 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup && \
+	$(MAKE) -C macros/frv_8 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup && \
+	$(MAKE) -C macros/frv_4ccx PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup && \
+	$(MAKE) -C macros/frv_1bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup && \
+	$(MAKE) -C macros/frv_8bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" backup
+.PHONY: backup-macro
+
 
 clean-macro:
 	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" clean && \

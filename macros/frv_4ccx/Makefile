@@ -23,6 +23,12 @@ copy:
 	cp -r runs/${RUN_TAG}/final .
 .PHONY: copy
 
+backup:
+	rm -rf backup_run
+	mkdir -p backup_run
+	cp -r runs/${RUN_TAG}/ backup_run
+.PHONY: backup
+
 clean:
 	rm -rf runs
 	rm -rf final
