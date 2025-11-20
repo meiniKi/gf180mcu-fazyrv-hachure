@@ -209,7 +209,7 @@ IGNORE_DISCONNECTED_MODULES:
 CLOCK_PORT: clk_PAD
 CLOCK_NET: clk_pad/Y
 
-CLOCK_PERIOD: 40 # 25 MHz
+CLOCK_PERIOD: 50 # 25 MHz
 
 # Floorplanning
 FP_SIZING: absolute
@@ -409,7 +409,7 @@ MACROS:
         - dir::../macros/frv_4ccx/final/lib/max_ss_125C_4v50/frv_4ccx__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_4ccx:
-        location: [2745, 1894]
+        location: [2745, 2144]
         orientation: N
 
   frv_1bram:
@@ -428,7 +428,7 @@ MACROS:
         - dir::../macros/frv_1bram/final/lib/max_ss_125C_4v50/frv_1bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_1bram:
-        location: [1047, 1894]
+        location: [1047, 2144]
         orientation: N
 
   frv_8bram:
@@ -447,7 +447,7 @@ MACROS:
         - dir::../macros/frv_8bram/final/lib/max_ss_125C_4v50/frv_8bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_8bram:
-        location: [1901, 1894]
+        location: [1901, 2144]
         orientation: N
 
 
@@ -468,16 +468,16 @@ MACROS:
     instances:
       # Make sure to specify the SRAMs in pdn_cfg.tcl
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [1490, 2430]
+        location: [ 490, 3570]
         orientation: N
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [1990, 2430]
+        location: [ 990, 3570]
         orientation: N
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [2490, 2430]
+        location: [ 490, 4140]
         orientation: N
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [2990, 2430]
+        location: [ 990, 4140]
         orientation: N
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[0].u_ram.sram_0:
         location: [1490, 3000]
