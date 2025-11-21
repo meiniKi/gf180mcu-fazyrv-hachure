@@ -204,12 +204,13 @@ IGNORE_DISCONNECTED_MODULES:
 - gf180mcu_fd_io__bi_24t
 - gf180mcu_ws_ip__id
 - gf180mcu_ws_ip__logo
+- gf180mcu_hachure_ip__logo
 
 # Clock
 CLOCK_PORT: clk_PAD
 CLOCK_NET: clk_pad/Y
 
-CLOCK_PERIOD: 70 # 25 MHz
+CLOCK_PERIOD: 100 # 25 MHz
 
 # Floorplanning
 FP_SIZING: absolute
@@ -220,12 +221,15 @@ CORE_AREA: [442, 442, 3490, 4680]
 
 # Increase for more logic
 # on your die
-PL_TARGET_DENSITY_PCT: 60
+PL_TARGET_DENSITY_PCT: 55
 GRT_ALLOW_CONGESTION: true
 
 # Fix antenna violations after DRT
 DRT_ANTENNA_REPAIR_ITERS: 10
 DRT_ANTENNA_MARGIN: 10 # %
+
+# Fix hold violations
+GRT_RESIZER_HOLD_SLACK_MARGIN: 0.2
 
 # PDN - Straps
 PDN_VWIDTH: 5
@@ -320,7 +324,21 @@ MACROS:
         location: [3762.75, 4952.75]
         orientation: N
 
-  # TODO: pdc for controller macros!!!!
+  gf180mcu_hachure_ip__logo:
+    gds:
+      - dir::../ip/gf180mcu_hachure_ip__logo/gds/gf180mcu_hachure_ip__logo.gds
+    lef:
+      - dir::../ip/gf180mcu_hachure_ip__logo/lef/gf180mcu_hachure_ip__logo.lef
+    vh:
+      - dir::../ip/gf180mcu_hachure_ip__logo/vh/gf180mcu_hachure_ip__logo.v
+    lib:
+      "*":
+        - dir::../ip/gf180mcu_hachure_ip__logo/lib/gf180mcu_hachure_ip__logo.lib
+    instances:
+      hachure_logo:
+        location: [3175, 1325]
+        orientation: N
+
   frv_1:
     gds:
       - dir::../macros/frv_1/final/gds/frv_1.gds
@@ -337,7 +355,7 @@ MACROS:
         - dir::../macros/frv_1/final/lib/max_ss_125C_4v50/frv_1__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_1:
-        location: [ 584, 540]
+        location: [ 584, 510]
         orientation: N
 
   frv_2:
@@ -356,7 +374,7 @@ MACROS:
         - dir::../macros/frv_2/final/lib/max_ss_125C_4v50/frv_2__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_2:
-        location: [1283, 540]
+        location: [1283, 510]
         orientation: N
 
   frv_4:
@@ -375,7 +393,7 @@ MACROS:
         - dir::../macros/frv_4/final/lib/max_ss_125C_4v50/frv_4__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_4:
-        location: [1989, 540]
+        location: [1989, 510]
         orientation: N
 
   frv_8:
@@ -394,7 +412,7 @@ MACROS:
         - dir::../macros/frv_8/final/lib/max_ss_125C_4v50/frv_8__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_8:
-        location: [2704, 540]
+        location: [2704, 510]
         orientation: N
 
   frv_4ccx:
@@ -413,7 +431,7 @@ MACROS:
         - dir::../macros/frv_4ccx/final/lib/max_ss_125C_4v50/frv_4ccx__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_4ccx:
-        location: [2725, 2100]
+        location: [2725, 2000]
         orientation: N
 
   frv_1bram:
@@ -432,7 +450,7 @@ MACROS:
         - dir::../macros/frv_1bram/final/lib/max_ss_125C_4v50/frv_1bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_1bram:
-        location: [1148, 2100]
+        location: [1148, 2000]
         orientation: N
 
   frv_8bram:
@@ -451,7 +469,7 @@ MACROS:
         - dir::../macros/frv_8bram/final/lib/max_ss_125C_4v50/frv_8bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_8bram:
-        location: [1931, 2100]
+        location: [1931, 2000]
         orientation: N
 
 
@@ -472,53 +490,65 @@ MACROS:
     instances:
       # Make sure to specify the SRAMs in pdn_cfg.tcl
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [ 940, 2895]
-        orientation: N
+        location: [ 534, 2607]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [1480, 2895]
-        orientation: N
+        location: [ 534, 3137]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [2020, 2895]
-        orientation: N
+        location: [ 534, 3667]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [2560, 2895]
-        orientation: N
+        location: [ 534, 4197]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [ 940, 3505]
-        orientation: N
+        location: [1129, 2607]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [1480, 3505]
-        orientation: N
+        location: [1129, 3137]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [2020, 3505]
-        orientation: N
+        location: [1129, 3667]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [2560, 3505]
-        orientation: N
+        location: [1129, 4197]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [ 940, 4115]
-        orientation: N
+        location: [1724, 2607]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [1480, 4115]
-        orientation: N
+        location: [1724, 3137]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [2020, 4115]
-        orientation: N
+        location: [1724, 3667]
+        orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [2560, 4115]
-        orientation: N
-#      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-#        location: [1490, 4140]
-#        orientation: N
-#      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-#        location: [1990, 4140]
-#        orientation: N
-#      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-#        location: [2490, 4140]
-#        orientation: N
-#      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-#        location: [2990, 4140]
-#        orientation: N
+        location: [1724, 4197]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[0].u_ram.sram_0:
+        location: [2319, 2607]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[1].u_ram.sram_0:
+        location: [2319, 3137]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[2].u_ram.sram_0:
+        location: [2319, 3667]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[3].u_ram.sram_0:
+        location: [2319, 4197]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[0].u_ram.sram_0:
+        location: [2914, 2607]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[1].u_ram.sram_0:
+        location: [2914, 3137]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[2].u_ram.sram_0:
+        location: [2914, 3667]
+        orientation: E
+      i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[3].u_ram.sram_0:
+        location: [2914, 4197]
+        orientation: E
 
 # This is an alternative method compared to
 # specifying the power connections in the RTL

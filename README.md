@@ -1,10 +1,35 @@
-# gf180mcu FazyRV hachure SoC
+<img align="right" src="doc/logos/hachure.png" alt="Spacing" width="20%" height="20%">
 
-FazyRV hachure SoC WiP.
+# gf180mcu FazyRV Hachure SoC
+
+**Note: WiP**
+
+FazyRV _Hachure_ is a System on Chip that integrates seven different variants of the bit-serial FazyRV RISC-V core in one chip for testing and research purposes. The instances include 1-, 2-, 4-, and 8-bit FazyRV variants as well as a 4-bit FazyRV-CCX variant with a custom instruction interface. All instances can be clock-gated and operated individually or concurrently. They are arbitrated and share a system Wishbone bus.
 
 ![Block Diagram](doc/block.png)
 
+
+## Boot Addresses
+
+The boot addresses are offset to allow each core to execute its own firmware.
+
+
+| Core                     | Instance    | Boot Addr |
+| ------------------------ | ----------- | --------- |
+| FazyRV 1-bit (LOGIC)     | i_frv_1     | 0x10      |
+| FazyRV 2-bit (LOGIC)     | i_frv_2     | 0x20      |
+| FazyRV 4-bit (LOGIC)     | i_frv_4     | 0x30      |
+| FazyRV 8-bit (LOGIC)     | i_frv_8     | 0x40      |
+| FazyRV 4-bit CCX (LOGIC) | i_frv_4ccx  | 0x60      |
+| FazyRV 1-bit (BRAM)      | i_frv_1bram | 0x70      |
+| FazyRV 8-bit (BRAM)      | i_frv_8bram | 0x80      |
+
+**Note:** `0x50` is left out intentionally.
+
+
 ## Pin Map
+
+Pin map of the top-level chip.
 
 | Pad           | Pin               | Package | Dir | Description                                                  |
 | ------------- | ----------------- | ------- | --- | ------------------------------------------------------------ |
@@ -68,6 +93,8 @@ FazyRV hachure SoC WiP.
 
 ## Memory Map
 
+Addresses of peripherals connected to the Wishbone bus. All peripherals are reachable from any FazyRV core.
+
 | Base Address | Name      | Description                    |
 | ------------ | --------- | ------------------------------ |
 | 0x0000_0000  | XIP_ROM   | QSPI XIP ROM                   |
@@ -83,9 +110,7 @@ FazyRV hachure SoC WiP.
 ## Run Implementation
 ```shell
 nix-shell
-make librelane-macro-nodrv-fast # or make librelane-macro or make librelane-macro-nodrc
-make copy-macro
-make librelane # or make librelane-nodrc
+make librelane
 make copy-final
 ```
 

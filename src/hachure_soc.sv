@@ -971,7 +971,7 @@ tiny_wb_dma_oled_spi #(
                                     
 //localparam RAM_DEPTH = 2048; // words  
 
-localparam RAM_DEPTH = 3*512; // words  
+localparam RAM_DEPTH = 5*512; // words  
 
 wb_ram #( .DEPTH( RAM_DEPTH ) ) i_wb_ram (
   `ifdef USE_POWER_PINS

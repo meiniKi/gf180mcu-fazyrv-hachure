@@ -191,6 +191,7 @@ def sim_setup(test_module, firmware):
         # Custom IP
         proj_path / "../ip/gf180mcu_ws_ip__id/vh/gf180mcu_ws_ip__id.v",
         proj_path / "../ip/gf180mcu_ws_ip__logo/vh/gf180mcu_ws_ip__logo.v",
+        proj_path / "../ip/gf180mcu_hachure_ip__logo/vh/gf180mcu_hachure_ip__logo.v",
         
         # UART IP
         proj_path / "../ip/EF_IP_UTIL/hdl/ef_util_lib.v",

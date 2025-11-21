@@ -202,6 +202,10 @@ module chip_top #(
     (* keep *)
     gf180mcu_ws_ip__logo wafer_space_logo ();
 
+    // hachure logo
+    (* keep *)
+    gf180mcu_hachure_ip__logo hachure_logo ();
+
 endmodule
 
 `default_nettype wire
