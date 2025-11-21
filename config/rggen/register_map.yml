@@ -1,0 +1,62 @@
+register_blocks:
+  - name: CSR
+    byte_size: 56
+    registers:
+      - name: GPI
+        bit_fields: 
+          - { name: gpi, bit_assignment: { width: 4 }, type: ro}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: GPO
+        bit_fields: 
+          - { name: gpo, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: GPOE
+        bit_fields: 
+          - { name: gpoe, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: GPCS
+        bit_fields: 
+          - { name: gpcs, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: GPSL
+        bit_fields: 
+          - { name: gpsl, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: GPPU
+        bit_fields: 
+          - { name: gppu, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: GPPD
+        bit_fields: 
+          - { name: gppd, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 28 }, type: reserved }
+      - name: SPI_Conf
+        bit_fields: 
+          - { name: presc, bit_assignment: { width: 4 }, type: rw, initial_value: 1}
+          - { name: cpol, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: auto_cs, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: size, bit_assignment: { width: 2 }, type: rw, initial_value: 1}
+          - { name: reserved, bit_assignment: { width: 24 }, type: reserved }
+      - name: OLED_Start_Status
+        bit_fields: 
+          - { name: start_rdy, bit_assignment: { width: 1 }, type: rowo, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 31 }, type: reserved } 
+      - name: OLED_Conf
+        bit_fields:          
+          - { name: presc, bit_assignment: { width: 4 }, type: rw, initial_value: 1}
+          - { name: inc, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 3 }, type: reserved } 
+          - { name: size, bit_assignment: { width: 14 }, type: rw, initial_value: 0}
+      - name: OLED_Dma
+        bit_fields:
+          - { name: addr, bit_assignment: { width: 32 }, type: rw, initial_value: 0}
+      - name: Irqs
+        bit_fields:
+          - { name: uart_irq, bit_assignment: { width: 1 }, type: ro}
+          - { name: spi_irq, bit_assignment: { width: 1 }, type: ro}
+          - { name: spi_rdy, bit_assignment: { width: 1 }, type: ro}
+          - { name: reserved, bit_assignment: { width: 29 }, type: reserved } 
+      - name: Guard
+        bit_fields:
+          - { name: gd_ef_xip, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 31 }, type: reserved } 

@@ -9,9 +9,9 @@ module chip_top #(
     parameter NUM_DVSS_PADS = 10,
 
     // Signal pads
-    parameter NUM_INPUT_PADS = 12,
-    parameter NUM_BIDIR_PADS = 40,
-    parameter NUM_ANALOG_PADS = 2
+    parameter NUM_INPUT_PADS = 16,
+    parameter NUM_BIDIR_PADS = 37,
+    parameter NUM_ANALOG_PADS = 1
     )(
     `ifdef USE_POWER_PINS
     inout  wire VDD,
@@ -201,6 +201,10 @@ module chip_top #(
     // wafer.space logo - can be removed
     (* keep *)
     gf180mcu_ws_ip__logo wafer_space_logo ();
+
+    // hachure logo
+    (* keep *)
+    gf180mcu_hachure_ip__logo hachure_logo ();
 
 endmodule
 

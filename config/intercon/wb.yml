@@ -1,0 +1,42 @@
+vlnv: meiniki:gf180fazyrv:wb:0
+parameters:
+  endian: little
+  hosts:
+    fazyrv1:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv2:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv4:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv8:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv4ccx:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv1bram:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    fazyrv8bram:
+      devices: [qspi_ram_rom, ram, uart, spi, csr, efspi, efxip]
+    oled_dma:
+      devices: [qspi_ram_rom, ram] 
+  devices:
+    qspi_ram_rom:
+      offset : 0x00000000
+      size   : 0x1F000000
+    ram:
+      offset : 0x20000000
+      size   : 0x00010000
+    uart:
+      offset : 0x30000000
+      size   : 0x00010000
+    spi:
+      offset : 0x40000000
+      size   : 0x00010000
+    csr:
+      offset : 0x50000000
+      size   : 0x00010000
+    efspi:
+      offset : 0x60000000
+      size   : 0x00010000
+    efxip:
+      offset : 0x70000000
+      size   : 0x00010000

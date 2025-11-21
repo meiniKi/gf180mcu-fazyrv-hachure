@@ -17,7 +17,10 @@ pdk = os.getenv("PDK", "gf180mcuD")
 scl = os.getenv("SCL", "gf180mcu_fd_sc_mcu7t5v0")
 gl = os.getenv("GL", False)
 
-hdl_toplevel = "chip_top"
+hdl_toplevel = "hachure_tb"
+
+simple_test = { 'firmware': '../firmware/simple/build/simple.hex' }
+
 
 async def set_defaults(dut):
     dut.input_PAD.value = 0
@@ -113,6 +116,10 @@ def chip_top_runner():
         # Custom IP
         proj_path / "../ip/gf180mcu_ws_ip__id/vh/gf180mcu_ws_ip__id.v",
         proj_path / "../ip/gf180mcu_ws_ip__logo/vh/gf180mcu_ws_ip__logo.v",
+        proj_path / "../ip/gf180mcu_hachure_ip__logo/vh/gf180mcu_hachure_ip__logo.v",
+        
+        # Testbench
+        #"hachure_tb.sv",
     ]
 
     build_args = []

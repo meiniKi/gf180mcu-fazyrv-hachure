@@ -1,0 +1,2 @@
+module gf180mcu_hachure_ip__logo;
+endmodule

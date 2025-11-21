@@ -1,0 +1,62 @@
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_hadd.v
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_fadd.v
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_cmp.v
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_decode.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_decode_mem1.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_alu.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_cntrl.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_spm_a.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_spm_d.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_pc.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_shftreg.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_ram_sp.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_ram_dp.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_rf_lut.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_rf.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_csr.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_core.sv
+read_verilog -sv -defer ../../ip/FazyRV/rtl/fazyrv_top.sv
+read_verilog -sv -defer frv_1bram.sv
+
+hierarchy -check -top frv_1bram
+proc_clean
+proc_rmdead
+proc_prune
+proc_init
+proc_arst
+proc_rom
+proc_mux
+proc_dlatch
+proc_dff
+proc_memwr
+proc_clean
+check
+opt_expr
+flatten
+opt_expr
+opt_clean
+opt -nodffe -nosdff
+fsm
+opt
+wreduce
+peepopt
+opt_clean
+alumacc
+share
+opt
+memory -nomap
+opt_clean
+opt -fast -full
+memory_map
+opt -full
+techmap
+opt -fast
+abc -fast
+opt -fast
+hierarchy -check
+stat
+check
+opt_clean
+clean -purge
+
+write_verilog -noattr -nohex -nodec frv_1bram_nl.sv
