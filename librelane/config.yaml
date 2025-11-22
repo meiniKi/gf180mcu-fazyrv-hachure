@@ -213,8 +213,8 @@ CLOCK_NET: clk_pad/Y
 CLOCK_PERIOD: 100 # 25 MHz
 
 # Fix hold violations
-PL_RESIZER_HOLD_SLACK_MARGIN: 0.2
-GRT_RESIZER_HOLD_SLACK_MARGIN: 0.1
+PL_RESIZER_HOLD_SLACK_MARGIN: 0.5
+GRT_RESIZER_HOLD_SLACK_MARGIN: 0.35
 
 # Floorplanning
 FP_SIZING: absolute
@@ -225,12 +225,12 @@ CORE_AREA: [442, 442, 3490, 4680]
 
 # Increase for more logic
 # on your die
-PL_TARGET_DENSITY_PCT: 55
+PL_TARGET_DENSITY_PCT: 40
 GRT_ALLOW_CONGESTION: true
 
 # Fix antenna violations after DRT
 DRT_ANTENNA_REPAIR_ITERS: 10
-DRT_ANTENNA_MARGIN: 10 # %
+DRT_ANTENNA_MARGIN: 7.5 # %
 
 # Fix hold violations
 GRT_RESIZER_HOLD_SLACK_MARGIN: 0.2
@@ -435,7 +435,7 @@ MACROS:
         - dir::../macros/frv_4ccx/final/lib/max_ss_125C_4v50/frv_4ccx__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_4ccx:
-        location: [2725, 2000]
+        location: [2657, 1950]
         orientation: N
 
   frv_1bram:
@@ -454,7 +454,7 @@ MACROS:
         - dir::../macros/frv_1bram/final/lib/max_ss_125C_4v50/frv_1bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_1bram:
-        location: [1148, 2000]
+        location: [654, 1950]
         orientation: N
 
   frv_8bram:
@@ -473,7 +473,7 @@ MACROS:
         - dir::../macros/frv_8bram/final/lib/max_ss_125C_4v50/frv_8bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_8bram:
-        location: [1931, 2000]
+        location: [1650, 1950]
         orientation: N
 
 
@@ -553,6 +553,16 @@ MACROS:
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[3].u_ram.sram_0:
         location: [2914, 4197]
         orientation: E
+
+
+ROUTING_OBSTRUCTIONS:
+ - [Metal4,  584,  510, 1187,  936] # frv_1
+ - [Metal4, 1283,  510, 1895,  942] # frv_2
+ - [Metal4, 1989,  510, 2610,  948] # frv_4
+ - [Metal4, 2704,  510, 3348,  964] # frv_8
+ - [Metal4,  654, 1950, 1343, 2435] # frv_1bram
+ - [Metal4, 1650, 1950, 2349, 2443] # frv_8bram
+ - [Metal4, 2657, 1950, 3280, 2390] # frv_4ccx
 
 # This is an alternative method compared to
 # specifying the power connections in the RTL
