@@ -231,20 +231,20 @@ add_pdn_stripe -grid sram_macros_WE -layer Metal4 -width 2.36 -offset 1.18 -spac
 
 # Controller
 
-define_pdn_grid \
-    -macro \
-    -instances i_chip_core.i_hachure_soc.i_frv.* \
-    -name controller_0 \
-    -starts_with POWER \
-    -halo "$::env(PDN_HORIZONTAL_HALO) $::env(PDN_VERTICAL_HALO)"
-
-add_pdn_connect \
-    -grid controller_0 \
-    -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
-
-add_pdn_connect \
-    -grid controller_0 \
-    -layers "$::env(PDN_VERTICAL_LAYER) Metal3"
-
-add_pdn_stripe -grid controller_0 -layer Metal4 -width 2.36 -offset 1.18 -spacing 0.28 -pitch 426.86 -starts_with GROUND -number_of_straps 2
+#define_pdn_grid \
+#    -macro \
+#    -instances i_chip_core.i_hachure_soc.i_frv.* \
+#    -name controller_0 \
+#    -starts_with POWER \
+#    -halo "$::env(PDN_HORIZONTAL_HALO) $::env(PDN_VERTICAL_HALO)"
+#
+#add_pdn_connect \
+#    -grid controller_0 \
+#    -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
+#
+#add_pdn_connect \
+#    -grid controller_0 \
+#    -layers "$::env(PDN_VERTICAL_LAYER) Metal3"
+#
+#add_pdn_stripe -grid controller_0 -layer Metal4 -width 2.36 -offset 1.18 -spacing 0.28 -pitch 426.86 -starts_with GROUND -number_of_straps 2
 

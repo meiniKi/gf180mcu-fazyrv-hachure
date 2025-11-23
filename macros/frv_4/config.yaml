@@ -4,12 +4,12 @@ VERILOG_FILES: dir::frv_4_nl.sv
 CLOCK_PORT: clk_i
 CLOCK_PERIOD: 50 # 20ns = 50MHz
 
-FP_SIZING: relative
-#DIE_AREA: [0, 0, 50, 50]
+FP_SIZING: absolute
+DIE_AREA: [0.0, 0.0, 620.325, 437.36]
 #PDN_MULTILAYER: false
 #RT_MAX_LAYER: TopMetal1
 
-FP_ASPECT_RATIO: 0.7
+#FP_ASPECT_RATIO: 0.7
 PL_TARGET_DENSITY_PCT: 60
 
 MAX_FANOUT_CONSTRAINT: 10
@@ -44,6 +44,11 @@ PDN_EXTEND_TO: boundary
 PDN_MULTILAYER: false
 RT_MAX_LAYER: Metal4
 
+# Antenna
+DRT_ANTENNA_REPAIR_ITERS: 10
+DRT_ANTENNA_MARGIN: 10
+
+
 #PDN_CORE_RING: True
 # Maximum metal width without slotting: 30um
 #PDN_CORE_RING_VWIDTH: 5
@@ -56,6 +61,8 @@ VDD_NETS:
 - VDD
 GND_NETS:
 - VSS
+
+IO_PIN_ORDER_CFG: dir::pin_order.cfg
 
 # Reduce wasted space
 TOP_MARGIN_MULT: 1
