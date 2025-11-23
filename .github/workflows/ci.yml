@@ -63,6 +63,8 @@ jobs:
           nix develop --command make sim
       - name: Implement the Chip
         run: |
+          nix develop --command librelane-macro-nodrc
+          nix develop --command copy-macro
           nix develop --command make librelane-nodrc
           make copy-final
           nix develop --command make render-image

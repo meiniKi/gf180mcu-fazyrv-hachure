@@ -230,7 +230,7 @@ GRT_ALLOW_CONGESTION: true
 
 # Fix antenna violations after DRT
 DRT_ANTENNA_REPAIR_ITERS: 10
-DRT_ANTENNA_MARGIN: 7.5 # %
+DRT_ANTENNA_MARGIN: 10 # %
 
 # Fix hold violations
 GRT_RESIZER_HOLD_SLACK_MARGIN: 0.2
@@ -359,7 +359,7 @@ MACROS:
         - dir::../macros/frv_1/final/lib/max_ss_125C_4v50/frv_1__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_1:
-        location: [ 584, 510]
+        location: [ 584, 500]
         orientation: N
 
   frv_2:
@@ -378,7 +378,7 @@ MACROS:
         - dir::../macros/frv_2/final/lib/max_ss_125C_4v50/frv_2__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_2:
-        location: [1283, 510]
+        location: [1283, 500]
         orientation: N
 
   frv_4:
@@ -397,7 +397,7 @@ MACROS:
         - dir::../macros/frv_4/final/lib/max_ss_125C_4v50/frv_4__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_4:
-        location: [1989, 510]
+        location: [1989, 500]
         orientation: N
 
   frv_8:
@@ -416,7 +416,7 @@ MACROS:
         - dir::../macros/frv_8/final/lib/max_ss_125C_4v50/frv_8__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_8:
-        location: [2704, 510]
+        location: [2704, 500]
         orientation: N
 
   frv_4ccx:
@@ -556,13 +556,15 @@ MACROS:
 
 
 ROUTING_OBSTRUCTIONS:
- - [Metal4,  584,  510, 1187,  936] # frv_1
- - [Metal4, 1283,  510, 1895,  942] # frv_2
- - [Metal4, 1989,  510, 2610,  948] # frv_4
- - [Metal4, 2704,  510, 3348,  964] # frv_8
+ - [Metal4,  584,  500, 1187,  936] # frv_1
+ - [Metal4, 1283,  500, 1895,  942] # frv_2
+ - [Metal4, 1989,  500, 2610,  948] # frv_4
+ - [Metal4, 2704,  500, 3348,  964] # frv_8
  - [Metal4,  654, 1950, 1343, 2435] # frv_1bram
  - [Metal4, 1650, 1950, 2349, 2443] # frv_8bram
  - [Metal4, 2657, 1950, 3280, 2390] # frv_4ccx
+ - [Metal3, 3175, 1325, 3400, 1700] # logo
+ - [Metal4, 3175, 1325, 3400, 1700] # logo
 
 # This is an alternative method compared to
 # specifying the power connections in the RTL

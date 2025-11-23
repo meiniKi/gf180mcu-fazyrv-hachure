@@ -44,6 +44,11 @@ PDN_EXTEND_TO: boundary
 PDN_MULTILAYER: false
 RT_MAX_LAYER: Metal4
 
+# Antenna
+DRT_ANTENNA_REPAIR_ITERS: 10
+DRT_ANTENNA_MARGIN: 10
+
+
 #PDN_CORE_RING: True
 # Maximum metal width without slotting: 30um
 #PDN_CORE_RING_VWIDTH: 5
@@ -56,6 +61,8 @@ VDD_NETS:
 - VDD
 GND_NETS:
 - VSS
+
+IO_PIN_ORDER_CFG: dir::pin_order.cfg
 
 # Reduce wasted space
 TOP_MARGIN_MULT: 1
