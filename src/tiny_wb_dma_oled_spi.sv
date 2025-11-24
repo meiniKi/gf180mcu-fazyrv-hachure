@@ -26,6 +26,9 @@
 //  - spi_inc_i still increments within one word to save some area
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module tiny_wb_dma_oled_spi #(
   parameter MAX_SPI_LENGTH  = 128*64/8,
   parameter PREFETCH        = 1

@@ -28,6 +28,34 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' || !(startsWith(github.ref_name, 'version-') || github.ref_name == 'main' || github.ref_name == 'dev') }}
 
 jobs:
+  rtl-sim:
+    runs-on: ubuntu-24.04
+    name: RTL Simulation
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: oss-cad-suite
+        uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2025-11-14'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: gcc
+        uses: ./.github/actions/riscv_toolchain
+      - name: Create macro netlists
+        run: |
+          make macro-nl
+      - name: Build firmware
+        run: |
+          make firmware
+      - name: Run RTL simulation
+        run: |
+          make sim
+      - name: Create summary
+        run: |
+          echo "# RTL Sim" >> $GITHUB_STEP_SUMMARY
+          cat cocotb/sim_build_test_toggle/test_toggle_results.xml >> $GITHUB_STEP_SUMMARY
+
   chip:
     runs-on: ubuntu-24.04
     name: Build the Chip
@@ -41,6 +69,15 @@ jobs:
           remove-codeql: "true"
           remove-docker-images: "true"
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: oss-cad-suite
+        uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2025-11-14'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: gcc
+        uses: ./.github/actions/riscv_toolchain
       - name: Setup Nix
         uses: ./.github/actions/setup_nix
         with:
@@ -58,19 +95,25 @@ jobs:
       - name: Clone the PDK
         run: |
           make clone-pdk
-      - name: Run RTL simulation
-        run: |
-          nix develop --command make sim
       - name: Implement the Chip
         run: |
-          nix develop --command librelane-macro-nodrc
-          nix develop --command copy-macro
+          nix develop --command make librelane-macro-nodrc
+          nix develop --command make copy-macro
           nix develop --command make librelane-nodrc
           make copy-final
           nix develop --command make render-image
-      - name: Create summary
+      - name: Create Implementation Summary
         run: |
           echo "# Manufacturability" >> $GITHUB_STEP_SUMMARY
+          echo "## Macros" >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_1/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_2/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_4/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_8/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_4ccx/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_1bram/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_8bram/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          echo "## Chip" >> $GITHUB_STEP_SUMMARY
           cat librelane/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
       - name: Upload GDS
         uses: actions/upload-artifact@v4
@@ -82,6 +125,13 @@ jobs:
         with:
           name: image
           path: img/*.png
+      - name: Build firmware
+        run: |
+          make firmware
       - name: Run GL simulation
         run: |
-          nix develop --command make sim-gl
+          make sim-gl
+      - name: Gate-level Sim Summary
+        run: |
+          echo "# GL Sim" >> $GITHUB_STEP_SUMMARY
+          cat cocotb/sim_build_test_toggle/test_toggle_results.xml >> $GITHUB_STEP_SUMMARY

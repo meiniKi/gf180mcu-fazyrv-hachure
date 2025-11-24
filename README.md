@@ -2,8 +2,6 @@
 
 # gf180mcu FazyRV Hachure SoC
 
-**Note: WiP**
-
 FazyRV _Hachure_ is a System on Chip that integrates seven different variants of the bit-serial FazyRV RISC-V core in one chip for testing and research purposes. The instances include 1-, 2-, 4-, and 8-bit FazyRV variants as well as a 4-bit FazyRV-CCX variant with a custom instruction interface. All instances can be clock-gated and operated individually or concurrently. They are arbitrated and share a system Wishbone bus.
 
 ![Block Diagram](doc/block.png)
@@ -109,10 +107,36 @@ Addresses of peripherals connected to the Wishbone bus. All peripherals are reac
 
 ## Run Implementation
 ```shell
+git submodule update --init --recursive
+make clone-pdk
 nix-shell
+make librelane-macro-fast
+make copy-macro
 make librelane
 make copy-final
 ```
+
+## RTL Simulation
+```shell
+git submodule update --init --recursive
+make macro-nl
+make sim
+```
+Note: Simulation times can get quite long. Select the test(s) to run in the Makefile target.
+
+
+## Gate-Level Simulation
+```shell
+git submodule update --init --recursive
+make clone-pdk
+nix-shell
+make librelane-macro-fast
+make copy-macro
+make librelane
+make copy-final
+make sim-gl
+```
+Note: Simulation times can get quite long. Select the test(s) to run in the Makefile target.
 
 ## Precheck
 

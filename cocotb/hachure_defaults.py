@@ -224,6 +224,7 @@ def sim_setup(test_module, firmware):
     runner = get_runner(sim)
     runner.build(
         sources=sources,
+        build_dir='sim_build_' + test_module,
         hdl_toplevel=hdl_toplevel,
         defines=defines,
         always=True,
@@ -231,6 +232,8 @@ def sim_setup(test_module, firmware):
         build_args=build_args,
         waves=True,
     )
+    
+    assert Path(firmware).exists(), "Firmware file not found."
 
     plusargs = ['-fst', '+firmware={}'.format(os.path.abspath(firmware))]
 

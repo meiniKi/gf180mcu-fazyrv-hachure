@@ -13,6 +13,9 @@
 //  - dat_o   Read data output 
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module ram512x32 (
   `ifdef USE_POWER_PINS
   inout  wire          VDD,

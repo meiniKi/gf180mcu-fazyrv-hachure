@@ -53,6 +53,9 @@
 //  - xip_oen_o           XIP output enable
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module hachure_soc (
   `ifdef USE_POWER_PINS
   inout  wire         VDD,
@@ -460,6 +463,7 @@ logic [31:0] wb_p_spi_wdat;
 logic [31:0] wb_p_spi_rdat;
 logic [ 3:0] wb_p_spi_sel;
 
+
 // Wishbone EF SPI
 logic        wb_p_efspi_cyc;
 logic        wb_p_efspi_stb;
@@ -550,7 +554,6 @@ logic uart_irq;
 logic [4:0] rst_delay_cnt;
 logic       rst_dly_n;
 logic       rst_sync_n;
-logic       rst_deassert;
 
 reset_sync i_reset_sync (
   .clk_i          ( clk_i       ),

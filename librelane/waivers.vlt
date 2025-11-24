@@ -1,0 +1,527 @@
+`verilator_config
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/chip_core.sv" -match "Bits of signal are not used: 'bidir_in'[32:30,25:17,12:0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/hachure_soc.sv" -match "Bits of signal are not used: 'wb_p_csr_adr'[31:6]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/hachure_soc.sv" -match "Bits of signal are not used: 'wb_p_ram_adr'[31:14,1:0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/hachure_soc.sv" -match "Bits of signal are not used: 'wb_p_qspi_mem_adr'[31:29,27:24,1:0]*"
+
+// lint_off -rule SYNCASYNCNET -file "*/src/reset_sync.sv" -match "Signal flopped as both synchronous and async: 'chip_top.i_chip_core.i_hachure_soc.i_reset_sync.sync_ff3_r'*"
+
+// lint_off -rule SYNCASYNCNET -file "*/src/gen/wb_intercon.v" -match "Signal flopped as both synchronous and async: 'chip_top.i_chip_core.i_hachure_soc.__Vcellinp__i_wb_intercon__wb_rst_i'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_write_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_read_trigger'*"
+
+// lint_off -rule PINCONNECTEMPTY -file "*/src/gen/CSR.v" -match "Instance pin connected by name with empty reference: 'o_value_unmasked'*"
+
+// lint_off -rule PINMISSING -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Instance has missing pin: 'rst_n'*"
+
+// lint_off -rule PINMISSING -file "*/ip/EF_SPI/hdl/rtl/EF_SPI.v" -match "Instance has missing pin: 'csb'*"
+
+// lint_off -rule PINMISSING -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Instance has missing pin: 'rst_n'*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/gf180mcu_ws_ip__id/vh/gf180mcu_ws_ip__id.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/gf180mcu_ws_ip__logo/vh/gf180mcu_ws_ip__logo.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/gf180mcu_hachure_ip__logo/vh/gf180mcu_hachure_ip__logo.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_1/final/vh/frv_1.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_2/final/vh/frv_2.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_4/final/vh/frv_4.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_8/final/vh/frv_8.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_4ccx/final/vh/frv_4ccx.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_1bram/final/vh/frv_1bram.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/macros/frv_8bram/final/vh/frv_8bram.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/gf180mcu/gf180mcuD/libs.ref/gf180mcu_fd_ip_sram/verilog/gf180mcu_fd_ip_sram__sram512x8m8wm1__blackbox.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_mux.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_default_register.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_register_common.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_wishbone_adapter.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_address_decoder.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/src/reset_sync.sv" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/src/gen/CSR.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/verilog-arbiter/src/arbiter.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/wb_intercon/rtl/verilog/wb_cdc.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/wb_intercon/rtl/verilog/wb_arbiter.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/wb_intercon/rtl/verilog/wb_data_resize.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/wb_intercon/rtl/verilog/wb_mux.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/src/gen/wb_intercon.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule TIMESCALEMOD -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
+// lint_off -rule GENUNNAMED -file "*/src/wb_qspi_mem.sv" -match "Unnamed generate block 'genblk1' (IEEE 1800-2023 27.6)*"
+
+// lint_off -rule GENUNNAMED -file "*/src/wb_qspi_mem.sv" -match "Unnamed generate block 'genblk1' (IEEE 1800-2023 27.6)*"
+
+// lint_off -rule GENUNNAMED -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Unnamed generate block 'genblk3' (IEEE 1800-2023 27.6)*"
+
+// lint_off -rule VARHIDDEN -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Declaration of signal hides declaration in upper scope: 'i'*"
+
+// lint_off -rule VARHIDDEN -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Declaration of signal hides declaration in upper scope: 'i'*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Operator ADD expects 32 bits on the LHS, but LHS's SEL generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Operator ASSIGNDLY expects 10 bits on the Assign RHS, but Assign RHS's CONST '5'h0' generates 5 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'write_valid' generates 32 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator FUNCREF 'get_sw_write_update' expects 32 bits on the Function Argument, but Function Argument's VARREF 'i_sw_write_valid' generates 1 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'write_valid' generates 14 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator FUNCREF 'get_sw_write_update' expects 14 bits on the Function Argument, but Function Argument's VARREF 'i_sw_write_valid' generates 1 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'write_valid' generates 2 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator FUNCREF 'get_sw_write_update' expects 2 bits on the Function Argument, but Function Argument's VARREF 'i_sw_write_valid' generates 1 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'write_valid' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator FUNCREF 'get_sw_write_update' expects 4 bits on the Function Argument, but Function Argument's VARREF 'i_sw_write_valid' generates 1 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'write_valid' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator FUNCREF 'get_sw_write_update' expects 4 bits on the Function Argument, but Function Argument's VARREF 'i_sw_write_valid' generates 1 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator ASSIGN expects 1 bits on the Assign RHS, but Assign RHS's VARREF 'write_valid' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Operator FUNCREF 'get_sw_write_update' expects 4 bits on the Function Argument, but Function Argument's VARREF 'i_sw_write_valid' generates 1 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/src/wb_ram.sv" -match "Operator SHIFTL expects 5 bits on the LHS, but LHS's CONST '1'h1' generates 1 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/ahb3lite_wb_bridge/wb_to_ahb3lite.v" -match "Operator ADD expects 32 bits on the RHS, but RHS's CONST '3'h4' generates 3 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RXDATA_WIRE' generates 8 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'CFG_REG' generates 2 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'CTRL_REG' generates 3 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'PR_REG' generates 8 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'STATUS_WIRE' generates 8 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RX_FIFO_LEVEL_WIRE' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RX_FIFO_THRESHOLD_REG' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RX_FIFO_FLUSH_REG' generates 1 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'TX_FIFO_LEVEL_WIRE' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'TX_FIFO_THRESHOLD_REG' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'TX_FIFO_FLUSH_REG' generates 1 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'IM_REG' generates 6 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'MIS_REG' generates 6 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RIS_REG' generates 6 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'IC_REG' generates 6 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Operator ASSIGNW expects 8 bits on the Assign RHS, but Assign RHS's VARREF 'dat_i' generates 32 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RXDATA_WIRE' generates 9 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'PR_REG' generates 16 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'CTRL_REG' generates 5 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'CFG_REG' generates 14 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'MATCH_REG' generates 9 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RX_FIFO_LEVEL_WIRE' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RX_FIFO_THRESHOLD_REG' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RX_FIFO_FLUSH_REG' generates 1 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'TX_FIFO_LEVEL_WIRE' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'TX_FIFO_THRESHOLD_REG' generates 4 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'TX_FIFO_FLUSH_REG' generates 1 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'IM_REG' generates 10 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'MIS_REG' generates 10 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'RIS_REG' generates 10 bits.*"
+
+// lint_off -rule WIDTHEXPAND -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator COND expects 32 bits on the Conditional True, but Conditional True's VARREF 'IC_REG' generates 10 bits.*"
+
+// lint_off -rule WIDTHTRUNC -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Operator ASSIGNW expects 9 bits on the Assign RHS, but Assign RHS's VARREF 'dat_i' generates 32 bits.*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Bits of signal are not used: 'adr_i'[31:16]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Bits of signal are not used: 'dat_i'[31:16]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Signal is not used: 'wb_byte_sel'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Signal is not used: 'tx_full'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v" -match "Signal is not used: 'rx_empty'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Bits of signal are not used: 'adr_i'[31:16]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Bits of signal are not used: 'dat_i'[31:8]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v" -match "Signal is not used: 'wb_byte_sel'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/ahb3lite_wb_bridge/wb_to_ahb3lite.v" -match "Signal is not used: 'from_m_wb_sel_o'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/ahb3lite_wb_bridge/wb_to_ahb3lite.v" -match "Signal is not used: 'from_m_wb_bte_o'*"
+
+// lint_off -rule UNUSEDPARAM -file "*/ip/ahb3lite_wb_bridge/wb_to_ahb3lite.v" -match "Parameter is not used: 'BUSY'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Signal is not used: 'c_A'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Signal is not used: 'last_HSEL'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Bits of signal are not used: 'last_HADDR'[31:24]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Signal is not used: 'last_HWRITE'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Signal is not used: 'last_HTRANS'*"
+
+// lint_off -rule BLKSEQ -file "*/ip/verilog-arbiter/src/arbiter.v"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Signal is not used: 'w_register_value'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:4]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:8]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:8]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:1]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:1]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:22,7:5]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:22,7:5]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:3]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:3]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_mask'[31:1]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/src/gen/CSR.v" -match "Bits of signal are not used: 'w_bit_field_write_data'[31:1]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_IP_UTIL/hdl/ef_util_lib.v" -match "Signal is not used: 'rst_n'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_wishbone_adapter.v" -match "Bits of signal are not used: 'w_bus_status'[0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_clk'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_rst_n'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_sw_read_valid'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_sw_mask'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_sw_write_data'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_hw_write_enable'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_hw_write_data'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_hw_set'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_hw_clear'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Bits of signal are not used: 'write_valid'[3:1]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'w_sw_update'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'w_hw_update'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_bit_field.v" -match "Signal is not used: 'i_value'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Bits of signal are not used: 'A_h'[4:0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Bits of signal are not used: 'offset'[1:0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/wb_intercon/rtl/verilog/wb_mux.v" -match "Signal is not used: 'wb_rst_i'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/wb_intercon/rtl/verilog/wb_arbiter.v" -match "Signal is not used: 'grant'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Signal is not used: 'i_register_status'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Bits of signal are not used: 'delta'[31:6]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_register_common.v" -match "Signal is not used: 'i_clk'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_register_common.v" -match "Signal is not used: 'i_rst_n'*"
+
+// lint_off -rule UNUSEDPARAM -file "*/ip/rggen-verilog-rtl/rggen_register_common.v" -match "Parameter is not used: 'DATA_BYTE_WIDTH'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_register_common.v" -match "Bits of signal are not used: 'delta'[31:6]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/EF_SPI/hdl/rtl/spi_master.v" -match "Signal is not used: 'start'*"
+
+// lint_off -rule UNUSEDPARAM -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Parameter is not used: 'LINE_CYCLES'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Signal is not used: 'data_0'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Signal is not used: 'data_1'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v" -match "Signal is not used: 'data_15'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/verilog-arbiter/src/arbiter.v" -match "Bits of signal are not used: 'token_wrap'[15]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_address_decoder.v" -match "Bits of signal are not used: 'i_address'[1:0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_address_decoder.v" -match "Signal is not used: 'i_additional_match'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_address_decoder.v" -match "Bits of signal are not used: 'address'[1:0]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_address_decoder.v" -match "Bits of signal are not used: 'delta'[31:6]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_mux.v" -match "Signal is not used: 'i_select'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_address_decoder.v" -match "Signal is not used: 'i_access'*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Bits of signal are not used: 'n'[31:16]*"
+
+// lint_off -rule UNUSEDSIGNAL -file "*/ip/rggen-verilog-rtl/rggen_or_reducer.v" -match "Bits of signal are not used: 'n'[31:16]*"
+
+// lint_off -rule VARHIDDEN -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Declaration of signal hides declaration in upper scope: 'i'*"
+
+// lint_off -rule VARHIDDEN -file "*/ip/rggen-verilog-rtl/rggen_adapter_common.v" -match "Declaration of signal hides declaration in upper scope: 'i'*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_IP_UTIL/hdl/ef_util_lib.v" -match "Case values incompletely covered (example pattern 0x0)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_IP_UTIL/hdl/ef_util_lib.v" -match "Case values incompletely covered (example pattern 0x0)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Case values incompletely covered (example pattern 0x3)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v" -match "Case values incompletely covered (example pattern 0x3)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_IP_UTIL/hdl/ef_util_lib.v" -match "Case values incompletely covered (example pattern 0x0)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_UART/hdl/rtl/EF_UART.v" -match "Case values incompletely covered (example pattern 0x0)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_UART/hdl/rtl/EF_UART.v" -match "Case values incompletely covered (example pattern 0x6)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_IP_UTIL/hdl/ef_util_lib.v" -match "Case values incompletely covered (example pattern 0x0)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_UART/hdl/rtl/EF_UART.v" -match "Case values incompletely covered (example pattern 0x0)*"
+
+// lint_off -rule CASEINCOMPLETE -file "*/ip/EF_UART/hdl/rtl/EF_UART.v" -match "Case values incompletely covered (example pattern 0x6)*"

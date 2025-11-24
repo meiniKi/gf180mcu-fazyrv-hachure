@@ -37,6 +37,17 @@ chip: librelane-macro copy-macro librelane copy-final
 	echo "Done."
 .PHONY: chip
 
+
+macro-nl:
+	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl && \
+	$(MAKE) -C macros/frv_2 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl && \
+	$(MAKE) -C macros/frv_4 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl && \
+	$(MAKE) -C macros/frv_8 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl && \
+	$(MAKE) -C macros/frv_4ccx PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl && \
+	$(MAKE) -C macros/frv_1bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl && \
+	$(MAKE) -C macros/frv_8bram PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" nl
+.PHONY: macro-nl
+
 librelane-macro:
 	$(MAKE) -C macros/frv_1 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro && \
 	$(MAKE) -C macros/frv_2 PDK_ROOT="$(PDK_ROOT)" PDK="${PDK}" macro && \
@@ -102,7 +113,6 @@ librelane-macro-openroad:
 	librelane macros/frv_8/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInOpenROAD
 .PHONY: librelane-macro-openroad
 
-
 librelane: ## Run LibreLane flow (synthesis, PnR, verification)
 	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk
 .PHONY: librelane
@@ -127,6 +137,9 @@ librelane-klayout: ## Open the last run in KLayout
 	librelane librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --last-run --flow OpenInKLayout
 .PHONY: librelane-klayout
 
+firmware:
+	$(MAKE) -C firmware firmware
+.PHONY: firmware
 
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram_simple.py
@@ -134,8 +147,10 @@ librelane-klayout: ## Open the last run in KLayout
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_uart.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_spi.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_efspi.py
+
+# Only toggle is run in CI due to long runtime
 sim:
-	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_xip.py
+	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim
 
 
@@ -145,8 +160,10 @@ sim:
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_uart.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_spi.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_efspi.py
+
+# Only toggle is run in CI due to long runtime
 sim-gl: ## Run gate-level simulation with cocotb
-	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram.py
+	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim-gl
 
 sim-view: ## View simulation waveforms in GTKWave
@@ -159,8 +176,23 @@ copy-final: ## Copy final output files from the last run
 .PHONY: copy-final
 
 
-SRC_SOC =   src/reset_sync.sv \
+SRC_SOC =   src/chip_top.sv \
+			src/chip_core.sv \
+			ip/rggen-verilog-rtl/rggen_mux.v \
+			ip/rggen-verilog-rtl/rggen_bit_field.v \
+			ip/rggen-verilog-rtl/rggen_default_register.v \
+			ip/rggen-verilog-rtl/rggen_adapter_common.v \
+			ip/rggen-verilog-rtl/rggen_register_common.v \
+			ip/rggen-verilog-rtl/rggen_wishbone_adapter.v \
+			ip/rggen-verilog-rtl/rggen_address_decoder.v \
+			ip/rggen-verilog-rtl/rggen_or_reducer.v \
+			src/reset_sync.sv \
 			src/gen/CSR.v \
+			ip/verilog-arbiter/src/arbiter.v \
+			ip/wb_intercon/rtl/verilog/wb_cdc.v \
+			ip/wb_intercon/rtl/verilog/wb_arbiter.v \
+			ip/wb_intercon/rtl/verilog/wb_data_resize.v \
+			ip/wb_intercon/rtl/verilog/wb_mux.v     \
 			src/gen/wb_intercon.v \
 			src/ram512x8.sv \
 			src/ram512x32.sv \
@@ -168,24 +200,16 @@ SRC_SOC =   src/reset_sync.sv \
 			src/wb_spi.sv \
 			src/wb_qspi_mem.sv \
 			src/tiny_wb_dma_oled_spi.sv \
-			macros/frv_1/frv_1_nl.sv \
 			src/hachure_soc.sv \
-			ip/rggen-verilog-rtl/rggen_adapter_common.v \
-			ip/rggen-verilog-rtl/rggen_wishbone_adapter.v \
-			ip/rggen-verilog-rtl/rggen_mux.v \
-			ip/rggen-verilog-rtl/rggen_bit_field.v \
-			ip/rggen-verilog-rtl/rggen_default_register.v \
-			ip/rggen-verilog-rtl/rggen_register_common.v \
-			ip/rggen-verilog-rtl/rggen_address_decoder.v \
-			ip/rggen-verilog-rtl/rggen_or_reducer.v \
-			ip/verilog-arbiter/src/arbiter.v \
-      		ip/wb_intercon/rtl/verilog/wb_cdc.v \
-      		ip/wb_intercon/rtl/verilog/wb_arbiter.v \
-      		ip/wb_intercon/rtl/verilog/wb_data_resize.v \
-      		ip/wb_intercon/rtl/verilog/wb_mux.v \
 			ip/EF_IP_UTIL/hdl/ef_util_lib.v \
 			ip/EF_UART/hdl/rtl/EF_UART.v \
-			ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v
+			ip/EF_UART/hdl/rtl/bus_wrappers/EF_UART_WB.v \
+			ip/EF_SPI/hdl/rtl/spi_master.v \
+			ip/EF_SPI/hdl/rtl/EF_SPI.v \
+			ip/EF_SPI/hdl/rtl/bus_wrappers/EF_SPI_WB.v \
+			ip/ahb3lite_wb_bridge/wb_to_ahb3lite.v \
+			ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v \
+			ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v
 
 
 INC_SOC =   ip/rggen-verilog-rtl

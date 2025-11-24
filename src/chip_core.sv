@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: © 2025 Meinhard Kissich
 // SPDX-License-Identifier: Apache-2.0
 
+`timescale 1ns/1ps
 `default_nettype none
 
 module chip_core #(
