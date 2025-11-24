@@ -41,7 +41,7 @@ jobs:
           version: '2025-11-14'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: gcc
-        uses: ./.github/workflows/setup-riscv-toolchain
+        uses: ./.github/actions/riscv_toolchain
       - name: Create macro netlists
         run: |
           make librelane-macro-nl
@@ -77,7 +77,7 @@ jobs:
           version: '2025-11-14'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: gcc
-        uses: ./.github/workflows/setup-riscv-toolchain
+        uses: ./.github/actions/riscv_toolchain
       - name: Setup Nix
         uses: ./.github/actions/setup_nix
         with:
