@@ -18,6 +18,9 @@
 //  - wb_dat_o
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module wb_ram #(
   parameter DEPTH=1024
 ) (

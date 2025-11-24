@@ -10,6 +10,8 @@
 //  - sync_reset_on     Sync reset ouput, low active
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
 
 module reset_sync (
   input  logic clk_i,

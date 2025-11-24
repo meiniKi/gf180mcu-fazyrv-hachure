@@ -53,6 +53,9 @@
 //  - xip_oen_o           XIP output enable
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module hachure_soc (
   `ifdef USE_POWER_PINS
   inout  wire         VDD,
@@ -455,10 +458,9 @@ logic        wb_p_spi_cyc;
 logic        wb_p_spi_stb;
 logic        wb_p_spi_ack;
 logic        wb_p_spi_we;
-logic [31:0] wb_p_spi_adr;
 logic [31:0] wb_p_spi_wdat;
 logic [31:0] wb_p_spi_rdat;
-logic [ 3:0] wb_p_spi_sel;
+
 
 // Wishbone EF SPI
 logic        wb_p_efspi_cyc;
@@ -550,7 +552,6 @@ logic uart_irq;
 logic [4:0] rst_delay_cnt;
 logic       rst_dly_n;
 logic       rst_sync_n;
-logic       rst_deassert;
 
 reset_sync i_reset_sync (
   .clk_i          ( clk_i       ),
@@ -1333,9 +1334,9 @@ wb_intercon i_wb_intercon (
   .wb_uart_err_i          ( 1'b0                ),
   .wb_uart_rty_i          ( 1'b0                ),
   //
-  .wb_spi_adr_o           ( wb_p_spi_adr        ),
+  .wb_spi_adr_o           ( /* nc */            ),
   .wb_spi_dat_o           ( wb_p_spi_wdat       ),
-  .wb_spi_sel_o           ( wb_p_spi_sel        ),
+  .wb_spi_sel_o           ( /* nc */            ),
   .wb_spi_we_o            ( wb_p_spi_we         ),
   .wb_spi_cyc_o           ( wb_p_spi_cyc        ),
   .wb_spi_stb_o           ( wb_p_spi_stb        ),

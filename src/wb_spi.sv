@@ -31,6 +31,9 @@
 //  - spi_sdi_i     Spi phy SDI.
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module wb_spi (
   input  logic        rst_in,
   input  logic        clk_i,

@@ -68,8 +68,7 @@ VERILOG_FILES:
 - dir::../ip/MS_QSPI_XIP_CACHE/hdl/rtl/MS_QSPI_XIP_CACHE.v
 - dir::../ip/MS_QSPI_XIP_CACHE/hdl/rtl/bus_wrappers/MS_QSPI_XIP_CACHE_ahbl.v
 
-#LINTER_VLT:
-#- dir::../librelane/waivers.vlt
+LINTER_VLT: dir::../librelane/waivers.vlt
 
 VERILOG_DEFINES:
 - CLKG_GF180

@@ -44,7 +44,7 @@ jobs:
         uses: ./.github/actions/riscv_toolchain
       - name: Create macro netlists
         run: |
-          make librelane-macro-nl
+          make macro-nl
       - name: Build firmware
         run: |
           make firmware
@@ -97,8 +97,8 @@ jobs:
           make clone-pdk
       - name: Implement the Chip
         run: |
-          nix develop --command librelane-macro-nodrc
-          nix develop --command copy-macro
+          nix develop --command make librelane-macro-nodrc
+          nix develop --command make copy-macro
           nix develop --command make librelane-nodrc
           make copy-final
           nix develop --command make render-image

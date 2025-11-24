@@ -33,6 +33,9 @@
 //     to the same address in RAM. Make sure that this case cannot occur.
 // -----------------------------------------------------------------------------
 
+`timescale 1ns/1ps
+`default_nettype none
+
 module wb_qspi_mem (
   input  logic        clk_i,
   input  logic        rst_in,
