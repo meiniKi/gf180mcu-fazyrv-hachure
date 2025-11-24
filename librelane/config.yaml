@@ -434,7 +434,7 @@ MACROS:
         - dir::../macros/frv_4ccx/final/lib/max_ss_125C_4v50/frv_4ccx__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_4ccx:
-        location: [2777, 1980]
+        location: [2762, 2030]
         orientation: N
 
   frv_1bram:
@@ -453,7 +453,7 @@ MACROS:
         - dir::../macros/frv_1bram/final/lib/max_ss_125C_4v50/frv_1bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_1bram:
-        location: [534, 2030]
+        location: [549, 2030]
         orientation: N
 
   frv_8bram:
@@ -472,7 +472,7 @@ MACROS:
         - dir::../macros/frv_8bram/final/lib/max_ss_125C_4v50/frv_8bram__max_ss_125C_4v50.lib
     instances:
       i_chip_core.i_hachure_soc.i_frv_8bram:
-        location: [1650, 2030]
+        location: [1650, 1980]
         orientation: N
 
 
@@ -559,9 +559,9 @@ ROUTING_OBSTRUCTIONS:
  - [Metal4, 1283,  490, 1895,  932] # frv_2
  - [Metal4, 1989,  490, 2610,  938] # frv_4
  - [Metal4, 2704,  490, 3348,  954] # frv_8
- - [Metal4,  534, 2030, 1223, 2515] # frv_1bram
- - [Metal4, 1650, 2030, 2349, 2523] # frv_8bram
- - [Metal4, 2777, 1980, 3400, 2420] # frv_4ccx
+ - [Metal4,  549, 2030, 1238, 2515] # frv_1bram
+ - [Metal4, 1650, 1980, 2349, 2473] # frv_8bram
+ - [Metal4, 2762, 2030, 3385, 2470] # frv_4ccx
  - [Metal3, 3200, 1325, 3425, 1700] # logo
  - [Metal4, 3200, 1325, 3425, 1700] # logo
 
