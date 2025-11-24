@@ -14,7 +14,7 @@ runs:
       run: |
         mkdir -p .riscv-gnu-toolchain
         cd .riscv-gnu-toolchain
-        wget -q -O - https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2025.11.21/riscv32-elf-ubuntu-24.04-gcc.tar.xz | tar -jx --transform "s/riscv/riscv32/"
+        wget -q -O - https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2025.11.21/riscv32-elf-ubuntu-24.04-gcc.tar.xz | tar -Jx --transform "s/riscv/riscv32/"
         cd ..
 
     - shell: bash
