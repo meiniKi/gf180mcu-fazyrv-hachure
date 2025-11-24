@@ -120,6 +120,7 @@ make copy-final
 ```shell
 git submodule update --init --recursive
 make macro-nl
+make firmware
 make sim
 ```
 Note: Simulation times can get quite long. Select the test(s) to run in the Makefile target.
@@ -134,6 +135,7 @@ make librelane-macro-fast
 make copy-macro
 make librelane
 make copy-final
+make firmware
 make sim-gl
 ```
 Note: Simulation times can get quite long. Select the test(s) to run in the Makefile target.
