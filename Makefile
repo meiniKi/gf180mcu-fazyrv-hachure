@@ -134,8 +134,10 @@ librelane-klayout: ## Open the last run in KLayout
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_uart.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_spi.py
 #cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_efspi.py
+
+# Only toggle is run in CI due to long runtime
 sim:
-	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_xip.py
+	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim
 
 
@@ -145,8 +147,10 @@ sim:
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_uart.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_spi.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_efspi.py
+
+# Only toggle is run in CI due to long runtime
 sim-gl: ## Run gate-level simulation with cocotb
-	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram.py
+	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim-gl
 
 sim-view: ## View simulation waveforms in GTKWave
