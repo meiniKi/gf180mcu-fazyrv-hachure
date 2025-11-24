@@ -43,6 +43,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+      - name: oss-cad-suite
+        uses: YosysHQ/setup-oss-cad-suite@v3
+        with:
+          version: '2025-11-14'
       - name: Setup Nix
         uses: ./.github/actions/setup_nix
         with:
