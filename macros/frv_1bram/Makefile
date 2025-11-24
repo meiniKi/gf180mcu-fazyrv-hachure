@@ -8,6 +8,10 @@ ifndef PDK
 $(error PDK_ROOT is not set. Please pass it: make PDK=pdk)
 endif
 
+nl:
+	yosys -s prep.ys
+.PHONY: nl
+
 macro:
 	yosys -s prep.ys
 	librelane config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk
