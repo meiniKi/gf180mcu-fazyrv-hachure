@@ -41,6 +41,8 @@ jobs:
           remove-codeql: "true"
           remove-docker-images: "true"
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - name: Setup Nix
         uses: ./.github/actions/setup_nix
         with:
@@ -71,6 +73,15 @@ jobs:
       - name: Create summary
         run: |
           echo "# Manufacturability" >> $GITHUB_STEP_SUMMARY
+          echo "## Macros" >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_1/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_2/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_4/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_8/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_4ccx/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_1bram/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          cat macros/frv_8bram/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
+          echo "## Chip" >> $GITHUB_STEP_SUMMARY
           cat librelane/runs/*/*-misc-reportmanufacturability/manufacturability.rpt >> $GITHUB_STEP_SUMMARY
       - name: Upload GDS
         uses: actions/upload-artifact@v4
