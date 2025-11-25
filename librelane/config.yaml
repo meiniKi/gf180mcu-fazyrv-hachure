@@ -224,8 +224,18 @@ CORE_AREA: [442, 442, 3490, 4680]
 
 # Increase for more logic
 # on your die
-PL_TARGET_DENSITY_PCT: 35
+PL_TARGET_DENSITY_PCT: 38
 GRT_ALLOW_CONGESTION: true
+
+# Post global placement
+DESIGN_REPAIR_MAX_SLEW_PCT: 40
+DESIGN_REPAIR_MAX_CAP_PCT: 30
+DESIGN_REPAIR_MAX_WIRE_LENGTH: 0
+
+# Post global routing repair
+GRT_DESIGN_REPAIR_MAX_CAP_PCT: 20
+GRT_DESIGN_REPAIR_MAX_SLEW_PCT: 30
+GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH: 0
 
 # Fix antenna violations after DRT
 DRT_ANTENNA_REPAIR_ITERS: 10
@@ -241,6 +251,7 @@ PDN_VSPACING: 1
 PDN_HSPACING: 1
 PDN_VPITCH: 75
 PDN_HPITCH: 75
+FP_PDN_VOFFSET: 20
 
 # PDN - Core ring
 PDN_CORE_RING: True
@@ -493,77 +504,79 @@ MACROS:
     instances:
       # Make sure to specify the SRAMs in pdn_cfg.tcl
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [ 534, 2607]
+        location: [ 500, 2607]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [ 534, 3137]
+        location: [ 500, 3152]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [ 534, 3667]
+        location: [ 500, 3677]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[0].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [ 534, 4197]
+        location: [ 500, 4207]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [1129, 2607]
+        location: [1090, 2607]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [1129, 3137]
+        location: [1090, 3152]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [1129, 3667]
+        location: [1090, 3677]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[1].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [1129, 4197]
+        location: [1090, 4207]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [1724, 2607]
+        location: [1723.5, 2607]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [1724, 3137]
+        location: [1723.5, 3152]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [1724, 3667]
+        location: [1723.5, 3677]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[2].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [1724, 4197]
+        location: [1723.5, 4207]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [2319, 2607]
+        location: [2357, 2607]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [2319, 3137]
+        location: [2357, 3152]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [2319, 3667]
+        location: [2357, 3677]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[3].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [2319, 4197]
+        location: [2357, 4207]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[0].u_ram.sram_0:
-        location: [2914, 2607]
+        location: [2947, 2607]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[1].u_ram.sram_0:
-        location: [2914, 3137]
+        location: [2947, 3152]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[2].u_ram.sram_0:
-        location: [2914, 3667]
+        location: [2947, 3677]
         orientation: E
       i_chip_core.i_hachure_soc.i_wb_ram.gen_ram_bank[4].i_ram512x32.gen_ram8[3].u_ram.sram_0:
-        location: [2914, 4197]
+        location: [2947, 4207]
         orientation: E
 
 
 ROUTING_OBSTRUCTIONS:
- - [Metal4,  584,  490, 1187,  916] # frv_1
- - [Metal4, 1283,  490, 1895,  922] # frv_2
- - [Metal4, 1989,  490, 2610,  928] # frv_4
- - [Metal4, 2704,  490, 3348,  944] # frv_8
- - [Metal4,  559, 2030, 1248, 2515] # frv_1bram
- - [Metal4, 1550, 1980, 2349, 2373] # frv_8bram
- - [Metal4, 2750, 2030, 3373, 2470] # frv_4ccx
  - [Metal3, 3200, 1325, 3425, 1700] # logo
  - [Metal4, 3200, 1325, 3425, 1700] # logo
+
+# - [Metal4,  584,  490, 1187,  916] # frv_1
+# - [Metal4, 1283,  490, 1895,  922] # frv_2
+# - [Metal4, 1989,  490, 2610,  928] # frv_4
+# - [Metal4, 2704,  490, 3348,  944] # frv_8
+# - [Metal4,  559, 2030, 1248, 2515] # frv_1bram
+# - [Metal4, 1550, 1980, 2249, 2373] # frv_8bram
+# - [Metal4, 2750, 2030, 3373, 2470] # frv_4ccx
+
 
 # This is an alternative method compared to
 # specifying the power connections in the RTL
