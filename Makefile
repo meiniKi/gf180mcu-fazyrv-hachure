@@ -175,6 +175,10 @@ copy-final: ## Copy final output files from the last run
 	cp -r librelane/runs/${RUN_TAG}/final/ final/
 .PHONY: copy-final
 
+render-image: ## Render an image from the final layout (after copy-final)
+	mkdir -p img/
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 scripts/lay2img.py final/gds/${TOP}.gds img/${TOP}.png --width 1024 --oversampling 4
+.PHONY: copy-final
 
 SRC_SOC =   src/chip_top.sv \
 			src/chip_core.sv \

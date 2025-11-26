@@ -4,7 +4,16 @@
 
 FazyRV _Hachure_ is a System on Chip that integrates seven different variants of the bit-serial FazyRV RISC-V core in one chip for testing and research purposes. The instances include 1-, 2-, 4-, and 8-bit FazyRV variants as well as a 4-bit FazyRV-CCX variant with a custom instruction interface. All instances can be clock-gated and operated individually or concurrently. They are arbitrated and share a system Wishbone bus.
 
-![Block Diagram](doc/block.png)
+<table>
+<tr>
+<td>
+<img src="./doc/chip.png" />
+</td>
+<td>
+<img src="./doc/block.png" />
+</td>
+</tr>
+</table>
 
 
 ## Boot Addresses
