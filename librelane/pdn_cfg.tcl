@@ -195,23 +195,6 @@ add_pdn_connect \
 
 # SRAM macros
 
-#define_pdn_grid \
-#    -macro \
-#    -instances ".*sram_0" \
-#    -name sram_macros_WE \
-#    -starts_with POWER \
-#    -halo "$::env(PDN_HORIZONTAL_HALO) $::env(PDN_VERTICAL_HALO)"
-#
-#add_pdn_connect \
-#    -grid sram_macros_WE \
-#    -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
-#
-#add_pdn_connect \
-#    -grid sram_macros_WE \
-#    -layers "$::env(PDN_VERTICAL_LAYER) Metal3"
-#
-#add_pdn_stripe -grid sram_macros_WE -layer Metal4 -width 2.36 -offset 1.18 -spacing 0.28 -pitch 479.88 -starts_with GROUND -number_of_straps 2
-
 define_pdn_grid \
     -macro \
     -instances ".*sram_0" \
@@ -227,24 +210,25 @@ add_pdn_connect \
     -grid sram_macros_WE \
     -layers "$::env(PDN_VERTICAL_LAYER) Metal3"
 
-add_pdn_stripe -grid sram_macros_WE -layer Metal4 -width 2.36 -offset 1.18 -spacing 0.28 -pitch 479.88 -starts_with GROUND -number_of_straps 2
+# Add stripes on W/E edges of SRAM
+add_pdn_stripe \
+    -grid sram_macros_WE \
+    -layer Metal4 \
+    -width 2.36 \
+    -offset 1.18 \
+    -spacing 0.28 \
+    -pitch 479.88 \
+    -starts_with GROUND \
+    -number_of_straps 2
 
-# Controller
-
-#define_pdn_grid \
-#    -macro \
-#    -instances i_chip_core.i_hachure_soc.i_frv.* \
-#    -name controller_0 \
-#    -starts_with POWER \
-#    -halo "$::env(PDN_HORIZONTAL_HALO) $::env(PDN_VERTICAL_HALO)"
-#
-#add_pdn_connect \
-#    -grid controller_0 \
-#    -layers "$::env(PDN_VERTICAL_LAYER) $::env(PDN_HORIZONTAL_LAYER)"
-#
-#add_pdn_connect \
-#    -grid controller_0 \
-#    -layers "$::env(PDN_VERTICAL_LAYER) Metal3"
-#
-#add_pdn_stripe -grid controller_0 -layer Metal4 -width 2.36 -offset 1.18 -spacing 0.28 -pitch 426.86 -starts_with GROUND -number_of_straps 2
-
+# Since the above stripes block the top level PDN at Metal4, add some more stripes
+# to improve the PDN's integrity and ensure a better connection for the macro.
+add_pdn_stripe \
+    -grid sram_macros_WE \
+    -layer Metal4 \
+    -width 4.00 \
+    -offset 46.48 \
+    -spacing 0.28 \
+    -pitch 48.48 \
+    -starts_with GROUND \
+    -number_of_straps 9
