@@ -454,10 +454,10 @@ MACROS:
         orientation: E
 
 
-ROUTING_OBSTRUCTIONS:
- - [Metal3, 3200, 1325, 3425, 1700] # logo
- - [Metal4, 3200, 1325, 3425, 1700] # logo
-
+#ROUTING_OBSTRUCTIONS:
+# - [Metal3, 3200, 1325, 3425, 1700] # logo
+# - [Metal4, 3200, 1325, 3425, 1700] # logo
+# - [Metal5, 3200, 1325, 3425, 1700] # logo
 # - [Metal4,  584,  490, 1187,  916] # frv_1
 # - [Metal4, 1283,  490, 1895,  922] # frv_2
 # - [Metal4, 1989,  490, 2610,  928] # frv_4
