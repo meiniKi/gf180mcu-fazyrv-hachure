@@ -1,0 +1,2 @@
+module gf180mcu_fazyrv_ip__logo;
+endmodule

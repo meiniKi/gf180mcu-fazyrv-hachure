@@ -207,6 +207,10 @@ module chip_top #(
     (* keep *)
     gf180mcu_hachure_ip__logo hachure_logo ();
 
+    // fazyrv logo
+    (* keep *)
+    gf180mcu_fazyrv_ip__logo fazyrv_logo ();
+
 endmodule
 
 `default_nettype wire
