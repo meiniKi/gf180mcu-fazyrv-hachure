@@ -2,15 +2,15 @@ VERSION 5.7 ;
   NOWIREEXTENSIONATPIN ON ;
   DIVIDERCHAR "/" ;
   BUSBITCHARS "[]" ;
-MACRO gf180mcu_hachure_ip__logo
+MACRO gf180mcu_fazyrv_ip__logo
   CLASS BLOCK ;
-  FOREIGN gf180mcu_hachure_ip__logo ;
+  FOREIGN gf180mcu_fazyrv_ip__logo ;
   ORIGIN 0.000 0.000 ;
   SIZE 143.25 BY 143.25 ;
   OBS
       LAYER Metal5 ;
         RECT 0.0 0.0 143.25 143.25 ;
   END
-END gf180mcu_hachure_ip__logo
+END gf180mcu_fazyrv_ip__logo
 END LIBRARY
 

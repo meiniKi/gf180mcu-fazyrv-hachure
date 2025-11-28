@@ -152,6 +152,8 @@
 
 // lint_off -rule TIMESCALEMOD -file "*/ip/gf180mcu_hachure_ip__logo/vh/gf180mcu_hachure_ip__logo.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
 
+// lint_off -rule TIMESCALEMOD -file "*/ip/gf180mcu_fazyrv_ip__logo/vh/gf180mcu_fazyrv_ip__logo.v" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
+
 // lint_off -rule TIMESCALEMOD -file "*/macros/frv_1/final/vh/frv_1.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
 
 // lint_off -rule TIMESCALEMOD -file "*/macros/frv_2/final/vh/frv_2.vh" -match "Timescale missing on this module as other modules have it (IEEE 1800-2023 3.14.2.3)*"
