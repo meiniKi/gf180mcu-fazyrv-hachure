@@ -106,7 +106,7 @@ logic         ccx4_resp;
 
 assign bidir_oe[1:0]    = '1;  // output
 assign bidir_cs[1:0]    = '0;  // dont care; cmos buffer 
-assign bidir_sl[1:0]    = '1;  // fast slew rate
+assign bidir_sl[1:0]    = '0;  // fast slew rate
 assign bidir_ie[1:0]    = '0;  // input disable
 assign bidir_pu[1:0]    = '0;  // no pull
 assign bidir_pd[1:0]    = '0;  // no pull
@@ -128,7 +128,7 @@ assign {en_frv4ccx, en_frv8, en_frv4, en_frv2, en_frv1, en_p2, en_p, en_wb} = in
 //  - ccx4_sel
 assign bidir_oe[ 3: 2]  = '1;  // output
 assign bidir_cs[ 3: 2]  = '0;  // dont care; cmos buffer 
-assign bidir_sl[ 3: 2]  = '1;  // fast slew rate
+assign bidir_sl[ 3: 2]  = '0;  // fast slew rate
 assign bidir_ie[ 3: 2]  = '0;  // input disable
 assign bidir_pu[ 3: 2]  = '0;  // no pull
 assign bidir_pd[ 3: 2]  = '0;  // no pull
@@ -138,7 +138,7 @@ assign bidir_out[3: 2]  = ccx4_sel;
 //  - ccx4_req
 assign bidir_oe[4]      = '1;  // output
 assign bidir_cs[4]      = '0;  // dont care; cmos buffer 
-assign bidir_sl[4]      = '1;  // fast slew rate
+assign bidir_sl[4]      = '0;  // fast slew rate
 assign bidir_ie[4]      = '0;  // input disable
 assign bidir_pu[4]      = '0;  // no pull
 assign bidir_pd[4]      = '0;  // no pull
@@ -153,7 +153,7 @@ assign ccx4_resp        = input_in[8];
 //  - ccx4_rs_a
 assign bidir_oe[ 8: 5]  = '1;  // output
 assign bidir_cs[ 8: 5]  = '0;  // dont care; cmos buffer 
-assign bidir_sl[ 8: 5]  = '1;  // fast slew rate
+assign bidir_sl[ 8: 5]  = '0;  // fast slew rate
 assign bidir_ie[ 8: 5]  = '0;  // input disable
 assign bidir_pu[ 8: 5]  = '0;  // no pull
 assign bidir_pd[ 8: 5]  = '0;  // no pull
@@ -163,7 +163,7 @@ assign bidir_out[ 8: 5] = ccx4_rs_a;
 //  - ccx4_rs_b
 assign bidir_oe[12: 9]  = '1;  // output
 assign bidir_cs[12: 9]  = '0;  // dont care; cmos buffer 
-assign bidir_sl[12: 9]  = '1;  // fast slew rate
+assign bidir_sl[12: 9]  = '0;  // fast slew rate
 assign bidir_ie[12: 9]  = '0;  // input disable
 assign bidir_pu[12: 9]  = '0;  // no pull
 assign bidir_pd[12: 9]  = '0;  // no pull
@@ -196,7 +196,7 @@ assign bidir_out[16:13] = gpo;
 // - tx
 assign bidir_oe[17]    = '1;  // output
 assign bidir_cs[17]    = '0;  // dont care; cmos buffer 
-assign bidir_sl[17]    = '1;  // fast slew rate
+assign bidir_sl[17]    = '0;  // fast slew rate
 assign bidir_ie[17]    = '0;  // input disable
 assign bidir_pu[17]    = '0;  // no pull
 assign bidir_pd[17]    = '0;  // no pull
@@ -215,7 +215,7 @@ assign uart_rx         = input_in[13];
 // - cs, sck, sdo
 assign bidir_oe[20:18]   = '1;  // output
 assign bidir_cs[20:18]   = '0;  // dont care; cmos buffer 
-assign bidir_sl[20:18]   = '1;  // fast slew rate
+assign bidir_sl[20:18]   = '0;  // fast slew rate
 assign bidir_ie[20:18]   = '0;  // input disable
 assign bidir_pu[20:18]   = '0;  // no pull
 assign bidir_pd[20:18]   = '0;  // no pull
@@ -234,7 +234,7 @@ assign spi_sdi           = input_in[14];
 // - cs, sck, sdo
 assign bidir_oe[23:21]   = '1;  // output
 assign bidir_cs[23:21]   = '0;  // dont care; cmos buffer 
-assign bidir_sl[23:21]   = '1;  // fast slew rate
+assign bidir_sl[23:21]   = '0;  // fast slew rate
 assign bidir_ie[23:21]   = '0;  // input disable
 assign bidir_pu[23:21]   = '0;  // no pull
 assign bidir_pd[23:21]   = '0;  // no pull
@@ -253,7 +253,7 @@ assign efspi_sdi         = input_in[15];
 //  - xip_cs_n 
 assign bidir_oe[24]   = '1;  // output
 assign bidir_cs[24]   = '0;  // dont care; cmos buffer 
-assign bidir_sl[24]   = '1;  // fast slew rate
+assign bidir_sl[24]   = '0;  // fast slew rate
 assign bidir_ie[24]   = '0;  // input disable
 assign bidir_pu[24]   = '0;  // no pull
 assign bidir_pd[24]   = '0;  // no pull
@@ -263,7 +263,7 @@ assign bidir_out[24]  = xip_cs_n;
 //  - xip_sck
 assign bidir_oe[25]   = '1;  // output
 assign bidir_cs[25]   = '0;  // dont care; cmos buffer 
-assign bidir_sl[25]   = '1;  // fast slew rate
+assign bidir_sl[25]   = '0;  // fast slew rate
 assign bidir_ie[25]   = '0;  // input disable
 assign bidir_pu[25]   = '0;  // no pull
 assign bidir_pd[25]   = '0;  // no pull
@@ -272,7 +272,7 @@ assign bidir_out[25]  = xip_sck;
 
 //  - xip_sd i/o
 assign bidir_cs[29:26] = '0;  // cmos buffer 
-assign bidir_sl[29:26] = '1;  // fast slew rate
+assign bidir_sl[29:26] = '0;  // fast slew rate
 assign bidir_pu[29:26] = '0;  // no pull
 assign bidir_pd[29:26] = '0;  // no pull
 
@@ -288,7 +288,7 @@ assign xip_sdi          = bidir_in[29:26];  // input data
 //  - cs_mem 
 assign bidir_oe[31:30]  = '1;  // output
 assign bidir_cs[31:30]  = '0;  // dont care; cmos buffer 
-assign bidir_sl[31:30]  = '1;  // fast slew rate
+assign bidir_sl[31:30]  = '0;  // fast slew rate
 assign bidir_ie[31:30]  = '0;  // input disable
 assign bidir_pu[31:30]  = '0;  // no pull
 assign bidir_pd[31:30]  = '0;  // no pull
@@ -298,7 +298,7 @@ assign bidir_out[31:30] = {qspi_mem_cs_ram_n, qspi_mem_cs_rom_n};
 //  - qspi_mem_sck
 assign bidir_oe[32]     = '1;  // output
 assign bidir_cs[32]     = '0;  // dont care; cmos buffer 
-assign bidir_sl[32]     = '1;  // fast slew rate
+assign bidir_sl[32]     = '0;  // fast slew rate
 assign bidir_ie[32]     = '0;  // input disable
 assign bidir_pu[32]     = '0;  // no pull
 assign bidir_pd[32]     = '0;  // no pull
@@ -307,7 +307,7 @@ assign bidir_out[32]    = qspi_mem_sck;
 
 //  - qspi_mem_sd i/o
 assign bidir_cs[36:33]  = '0;  // cmos buffer 
-assign bidir_sl[36:33]  = '1;  // fast slew rate
+assign bidir_sl[36:33]  = '0;  // fast slew rate
 assign bidir_pu[36:33]  = '0;  // no pull
 assign bidir_pd[36:33]  = '0;  // no pull
 
