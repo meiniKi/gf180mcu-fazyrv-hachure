@@ -51,6 +51,9 @@
 //  - xip_sd_i            XIP data in
 //  - xip_sd_o            XIP data out
 //  - xip_oen_o           XIP output enable
+//  - csr_slew_o          Ouputs slew rate setting
+//  - csr_pu_o            Inputs pull up setting
+//  - csr_pd_o            Inputs pull down setting
 // -----------------------------------------------------------------------------
 
 `timescale 1ns/1ps
@@ -115,7 +118,11 @@ module hachure_soc (
   output logic        xip_sck_o,
   input  logic [ 3:0] xip_sd_i,
   output logic [ 3:0] xip_sd_o,
-  output logic [ 3:0] xip_oen_o
+  output logic [ 3:0] xip_oen_o,
+  // Misc slew and pull configs
+  output logic [19:0] csr_slew_o,
+  output logic [ 3:0] csr_pu_o,
+  output logic [ 3:0] csr_pd_o
 );
 
                                    
@@ -172,7 +179,7 @@ logic en_frv8bram_sync_r;
 //   ## ##"   #     #     #""""   """m 
 //   #   #  mm#mm   #     "#mm"  "mmm" 
 //
-//####################################   
+//####################################
 
 // FazyRV 1-bit
 logic        wb_c_frv_1_imem_stb;
@@ -706,41 +713,45 @@ endgenerate
 CSR #(
   .USE_STALL ( 0 )
 ) i_CSR (
-  .i_clk                ( clk_p               ),
-  .i_rst_n              ( rst_p_n             ),
-  .i_wb_cyc             ( wb_p_csr_cyc        ),
-  .i_wb_stb             ( wb_p_csr_stb        ),
-  .o_wb_stall           ( /* nc */            ),
-  .i_wb_adr             ( wb_p_csr_adr[5:0]   ),
-  .i_wb_we              ( wb_p_csr_we         ),
-  .i_wb_dat             ( wb_p_csr_wdat       ),
-  .i_wb_sel             ( wb_p_csr_sel        ),
-  .o_wb_ack             ( wb_p_csr_ack        ),
-  .o_wb_err             ( /* nc */            ),
-  .o_wb_rty             ( /* nc */            ),
-  .o_wb_dat             ( wb_p_csr_rdat       ),
-  .i_GPI_gpi            ( gpi_i               ),
-  .o_GPO_gpo            ( gpo_o               ),
-  .o_GPOE_gpoe          ( gpeo_o              ),
-  .o_GPCS_gpcs          ( gpcs_o              ),
-  .o_GPSL_gpsl          ( gpsl_o              ),
-  .o_GPPU_gppu          ( gppu_o              ),
-  .o_GPPD_gppd          ( gppd_o              ),
-  .o_SPI_Conf_presc     ( spi_presc           ),
-  .o_SPI_Conf_cpol      ( spi_cpol            ),
-  .o_SPI_Conf_auto_cs   ( spi_auto_cs         ),
-  .o_SPI_Conf_size      ( spi_size            ),
-  .o_OLED_Start_Status_start_rdy ( oled_start ),
-  .i_OLED_Start_Status_start_rdy ( oled_rdy   ),
-  .o_OLED_Conf_presc    ( oled_presc          ),
-  .o_OLED_Conf_inc      ( oled_spi_inc        ),
-  .o_OLED_Conf_size     ( oled_size           ),
-  .o_OLED_Dma_addr      ( oled_spi_adr        ),
-  .i_Irqs_uart_irq      ( uart_irq            ),
-  .i_Irqs_spi_irq       ( efspi_irq           ),
-  .i_Irqs_spi_rdy       ( spi_rdy             ),
-  .o_Guard_gd_ef_xip    ( guard_xip           )
-);                               
+  .i_clk                          ( clk_p               ),
+  .i_rst_n                        ( rst_p_n             ),
+  .i_wb_cyc                       ( wb_p_csr_cyc        ),
+  .i_wb_stb                       ( wb_p_csr_stb        ),
+  .o_wb_stall                     ( /* nc */            ),
+  .i_wb_adr                       ( wb_p_csr_adr[5:0]   ),
+  .i_wb_we                        ( wb_p_csr_we         ),
+  .i_wb_dat                       ( wb_p_csr_wdat       ),
+  .i_wb_sel                       ( wb_p_csr_sel        ),
+  .o_wb_ack                       ( wb_p_csr_ack        ),
+  .o_wb_err                       ( /* nc */            ),
+  .o_wb_rty                       ( /* nc */            ),
+  .o_wb_dat                       ( wb_p_csr_rdat       ),
+  .i_GPI_gpi                      ( gpi_i               ),
+  .o_GPO_gpo                      ( gpo_o               ),
+  .o_GPOE_gpoe                    ( gpeo_o              ),
+  .o_GPCS_gpcs                    ( gpcs_o              ),
+  .o_GPSL_gpsl                    ( gpsl_o              ),
+  .o_GPPU_gppu                    ( gppu_o              ),
+  .o_GPPD_gppd                    ( gppd_o              ),
+  .o_SPI_Conf_presc               ( spi_presc           ),
+  .o_SPI_Conf_cpol                ( spi_cpol            ),
+  .o_SPI_Conf_auto_cs             ( spi_auto_cs         ),
+  .o_SPI_Conf_size                ( spi_size            ),
+  .o_OLED_Start_Status_start_rdy  ( oled_start          ),
+  .i_OLED_Start_Status_start_rdy  ( oled_rdy            ),
+  .o_OLED_Conf_presc              ( oled_presc          ),
+  .o_OLED_Conf_inc                ( oled_spi_inc        ),
+  .o_OLED_Conf_size               ( oled_size           ),
+  .o_OLED_Dma_addr                ( oled_spi_adr        ),
+  .i_Irqs_uart_irq                ( uart_irq            ),
+  .i_Irqs_spi_irq                 ( efspi_irq           ),
+  .i_Irqs_spi_rdy                 ( spi_rdy             ),
+  .o_Guard_gd_ef_xip              ( guard_xip           ),
+  .o_Misc_Slew_Rate_bidir_sl      ( csr_slew_o          ),
+  .o_Misc_Pull_pu                 ( csr_pu_o            ),
+  .o_Misc_Pull_pd                 ( csr_pd_o            )
+);
+
 /* verilator lint_on PINCONNECTEMPTY */
 
 //          mmmm  mmmmm  mmmmm 

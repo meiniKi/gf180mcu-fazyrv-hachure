@@ -114,6 +114,214 @@ Addresses of peripherals connected to the Wishbone bus. All peripherals are reac
 | 0x7000_0000  | EF_XIP    | Secondary XIP Peripheral       |
 
 
+## CSR Map
+
+| Name                                        | Offset | Usage                   |
+| :------------------------------------------ | :----- | :---------------------- |
+| [GPI](#CSR-GPI)                             | 0x00   | GPIO input value        |
+| [GPO](#CSR-GPO)                             | 0x04   | GPIO output value       |
+| [GPOE](#CSR-GPOE)                           | 0x08   | GPIO output enable      |
+| [GPCS](#CSR-GPCS)                           | 0x0c   | GPIO input type         |
+| [GPSL](#CSR-GPSL)                           | 0x10   | GPIO slew rate          |
+| [GPPU](#CSR-GPPU)                           | 0x14   | GPIO pull up            |
+| [GPPD](#CSR-GPPD)                           | 0x18   | GPIO pull down          |
+| [SPI_Conf](#CSR-SPI_Conf)                   | 0x1c   | $\mu$SPI config         |
+| [OLED_Start_Status](#CSR-OLED_Start_Status) | 0x20   | OLED driver control     |
+| [OLED_Conf](#CSR-OLED_Conf)                 | 0x24   | OLED driver config      |
+| [OLED_Dma](#CSR-OLED_Dma)                   | 0x28   | OLED driver DMA address |
+| [Irqs](#CSR-Irqs)                           | 0x2c   | IRQ flags               |
+| [Guard](#CSR-Guard)                         | 0x30   | Bus gards               |
+| [Misc_Slew_Rate](#CSR-Misc_Slew_Rate)       | 0x34   | Slew rate configs       |
+| [Misc_Pull](#CSR-Misc_Pull)                 | 0x38   | Pull pp/down configs    |
+
+
+### <div id="CSR-GPI"></div>GPI: 0x00
+
+Input value of the GPIO pins.
+
+| Name     | Bits   | type     | initial_value | Comment |
+| :------- | :----- | :------- | :------------ | :------ |
+| gpi      | [3:0]  | ro       |               |         |
+| reserved | [31:4] | reserved |               |         |
+
+
+### <div id="CSR-GPO"></div>GPO: 0x04
+
+Output value of the GPIO pins.
+
+| Name     | Bits   | type     | initial_value | Comment |
+| :------- | :----- | :------- | :------------ | :------ |
+| gpo      | [3:0]  | rw       | 0x0           |         |
+| reserved | [31:4] | reserved |               |         |
+
+
+### <div id="CSR-GPOE"></div>GPOE: 0x08
+
+GPIO ouptut enable.
+
+| Name     | Bits   | type     | initial_value | Comment      |
+| :------- | :----- | :------- | :------------ | :----------- |
+| gpoe     | [3:0]  | rw       | 0x0           | Enable: high |
+| reserved | [31:4] | reserved |               |              |
+
+
+### <div id="CSR-GPCS"></div>GPCS: 0x0C
+
+GPIO input type.
+
+| Name     | Bits   | type     | initial_value | Comment                                 |
+| :------- | :----- | :------- | :------------ | :-------------------------------------- |
+| gpcs     | [3:0]  | rw       | 0x0           | CMOS buffer: low; Schmitt Trigger: high |
+| reserved | [31:4] | reserved |               |                                         |
+
+
+### <div id="CSR-GPSL"></div>GPSL: 0x10
+
+GPIO slew rate.
+
+| Name     | Bits   | type     | initial_value | Comment               |
+| :------- | :----- | :------- | :------------ | :-------------------- |
+| gpsl     | [3:0]  | rw       | 0x0           | fast: low; slow: high |
+| reserved | [31:4] | reserved |               |                       |
+
+
+### <div id="CSR-GPPU"></div>GPPU: 0x14
+
+GPIO pull up.
+
+| Name     | Bits   | type     | initial_value | Comment      |
+| :------- | :----- | :------- | :------------ | :----------- |
+| gppu     | [3:0]  | rw       | 0x0           | enable: high |
+| reserved | [31:4] | reserved |               |              |
+
+
+### <div id="CSR-GPPD"></div>GPPD: 0x18
+
+GPIO pull down.
+
+| Name     | Bits   | type     | initial_value | Comment      |
+| :------- | :----- | :------- | :------------ | :----------- |
+| gppu     | [3:0]  | rw       | 0x0           | enable: high |
+| reserved | [31:4] | reserved |               |              |
+
+
+### <div id="CSR-SPI_Conf"></div>SPI_Conf: 0x1C
+
+Configure the µSPI. 
+
+| Name     | Bits   | type     | initial_value | Comment                                |
+| :------- | :----- | :------- | :------------ | :------------------------------------- |
+| presc    | [3:0]  | rw       | 0x1           | Clock prescaler                        |
+| cpol     | [4]    | rw       | 0x0           | SPI CPOL                               |
+| auto_cs  | [5]    | rw       | 0x0           | Automatically assert CS (enable: high) |
+| size     | [7:6]  | rw       | 0x1           | Number of bytes to transmit            |
+| reserved | [31:8] | reserved |               |                                        |
+
+
+### <div id="CSR-OLED_Start_Status"></div>OLED_Start_Status: 0x20
+
+OLED driver start (write) and ready (read) flag.
+
+| Name      | Bits   | type     | initial_value | Comment       |
+| :-------- | :----- | :------- | :------------ | :------------ |
+| start_rdy | [0]    | rowo     | 0x0           | Start / ready |
+| reserved  | [31:1] | reserved |               |               |
+
+
+### <div id="CSR-OLED_Conf"></div>OLED_Conf: 0x24
+
+OLED driver config.
+
+| Name     | Bits   | type     | initial_value | Comment                              |
+| :------- | :----- | :------- | :------------ | :----------------------------------- |
+| presc    | [3:0]  | rw       | 0x1           | Clock prescaler                      |
+| inc      | [4]    | rw       | 0x0           | Increment DMA address (enable: high) |
+| reserved | [7:5]  | reserved |               |                                      |
+| size     | [21:8] | rw       | 0x0000        | Frame buffer size                    |
+
+
+### <div id="CSR-OLED_Dma"></div>OLED_Dma: 0x28
+
+OLED driver DMA start address.
+
+| Name | Bits   | type | initial_value | Comment           |
+| :--- | :----- | :--- | :------------ | :---------------- |
+| addr | [31:0] | rw   | 0x00000000    | DMA start address |
+
+
+### <div id="CSR-Irqs"></div>Irqs: 0x2C
+
+Read IRQ and status flags.
+
+| Name     | Bits   | type     | initial_value | Comment     |
+| :------- | :----- | :------- | :------------ | :---------- |
+| uart_irq | [0]    | ro       |               | EF_UART IRQ |
+| spi_irq  | [1]    | ro       |               | EF_SPI IRQ  |
+| spi_rdy  | [2]    | ro       |               | µSPI ready  |
+| reserved | [31:3] | reserved |               |             |
+
+
+### <div id="CSR-Guard"></div>Guard: 0x30
+
+Disable the Wishbone-ahb3lite bridge.
+
+| Name      | Bits   | type     | initial_value | Comment      |
+| :-------- | :----- | :------- | :------------ | :----------- |
+| gd_ef_xip | [0]    | rw       | 0x0           | enable: high |
+| reserved  | [31:1] | reserved |               |              |
+
+
+### <div id="CSR-Misc_Slew_Rate"></div>Misc_Slew_Rate: 0x34
+
+Set slew rate of various Hachure output pins in case a slower slew rate is needed.
+
+| Name     | Bits    | type     | initial_value | Comment               |
+| :------- | :------ | :------- | :------------ | :-------------------- |
+| bidir_sl | [18:0]  | rw       | 0x00000       | fast: low; slow: high |
+| reserved | [31:19] | reserved |               |                       |
+
+| Bit          | Pin             |
+| :----------- | :-------------- |
+| bidir_sl[0]  | OLED driver sck |
+| bidir_sl[1]  | OLED driver sdo |
+| bidir_sl[2]  | CCX4 sel        |
+| bidir_sl[3]  | CCX4 request    |
+| bidir_sl[4]  | CCX4 rs a       |
+| bidir_sl[5]  | CCX4 rs b       |
+| bidir_sl[6]  | UART tx         |
+| bidir_sl[7]  | µSPI cs         |
+| bidir_sl[8]  | µSPI sck        |
+| bidir_sl[9]  | µSPI sdo        |
+| bidir_sl[10] | EF_SPI cs       |
+| bidir_sl[11] | EF_SPI sck      |
+| bidir_sl[12] | EF_SPI sdo      |
+| bidir_sl[13] | XIP cs          |
+| bidir_sl[14] | XIP sck         |
+| bidir_sl[15] | XIP sdio        |
+| bidir_sl[16] | QSPI ROM cs     |
+| bidir_sl[17] | QSPI RAM cs     |
+| bidir_sl[18] | QSPI sck        |
+| bidir_sl[19] | QSPI sdio       |
+
+
+### <div id="CSR-Misc_Pull"></div>Misc_Pull: 0x38
+
+Set pull up/down of various Hachure output pins in case it is needed.
+
+| Name     | Bits   | type     | initial_value | Comment                |
+| :------- | :----- | :------- | :------------ | :--------------------- |
+| pu       | [3:0]  | rw       | 0x0           | pull up enable: high   |
+| pd       | [7:4]  | rw       | 0x0           | pull down enable: high |
+| reserved | [31:8] | reserved |               |                        |
+
+| Bit      | Pin                |
+| :------- | :----------------- |
+| pu/pd[0] | CCX4 response flag |
+| pu/pd[1] | CCX4 result        |
+| pu/pd[2] | µSPI sdi           |
+| pu/pd[3] | EF_SPI sdi         |
+
+
 ## Run Implementation
 ```shell
 git submodule update --init --recursive

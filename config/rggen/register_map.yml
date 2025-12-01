@@ -1,6 +1,6 @@
 register_blocks:
   - name: CSR
-    byte_size: 56
+    byte_size: 64
     registers:
       - name: GPI
         bit_fields: 
@@ -60,3 +60,12 @@ register_blocks:
         bit_fields:
           - { name: gd_ef_xip, bit_assignment: { width: 1 }, type: rw, initial_value: 0}
           - { name: reserved, bit_assignment: { width: 31 }, type: reserved } 
+      - name: Misc_Slew_Rate
+        bit_fields:
+          - { name: bidir_sl, bit_assignment: { width: 20 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 12 }, type: reserved } 
+      - name: Misc_Pull
+        bit_fields:
+          - { name: pu, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: pd, bit_assignment: { width: 4 }, type: rw, initial_value: 0}
+          - { name: reserved, bit_assignment: { width: 24 }, type: reserved } 
