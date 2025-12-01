@@ -47,6 +47,11 @@ logic [ 3:0] gpsl;
 logic [ 3:0] gppu;
 logic [ 3:0] gppd;
 
+// Misc slew and pull
+logic [19:0] csr_slew;
+logic [ 3:0] csr_pu;
+logic [ 3:0] csr_pd;
+
 // SPI
 //
 logic spi_cs;
@@ -162,7 +167,11 @@ hachure_soc i_hachure_soc (
   .xip_sck_o          ( xip_sck         ),
   .xip_sd_i           ( xip_sdi         ),
   .xip_sd_o           ( xip_sdo         ),
-  .xip_oen_o          ( xip_oen         )
+  .xip_oen_o          ( xip_oen         ),
+  //
+  .csr_slew_o         ( csr_slew        ),
+  .csr_pu_o           ( csr_pu          ),
+  .csr_pd_o           ( csr_pd          )
 );
                               
 // mmmmmm ""#                  #     
