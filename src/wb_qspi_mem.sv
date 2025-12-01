@@ -72,8 +72,8 @@ localparam INSTR_ROM_QRD = 32'b???1_???1_???1_???0_???1_???0_???1_???1; // (SPI 
 localparam RAM_INSTR_TO_QSPI = 32'b???0_???0_???1_???1_???0_???1_???0_???1; // (SPI 8'h35 == 8'b0011_0101);
 */
 
-// TODO: does the above cause the error?
-
+// Hardwire the don't cares to zero to run through librelane
+//
 localparam INSTR_RAM_QRD = 32'b0000_1011_0000_0000_0000_0000_0000_0000; // (QSPI 8'h0B == 8'b0000_1011)
 localparam INSTR_RAM_QWD = 32'b0011_1000_0000_0000_0000_0000_0000_0000; // (QSPI 8'h38 == 8'b0011_1000)
 localparam INSTR_ROM_QRD = 32'b0001_0001_0001_0000_0001_0000_0001_0001; // (SPI 8'hEB == 8'b1110_1011)

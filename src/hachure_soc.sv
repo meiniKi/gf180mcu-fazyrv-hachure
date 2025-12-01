@@ -599,8 +599,6 @@ localparam N_CLOCKS = 10;
 logic en_frv1bram;
 logic en_frv8bram;
 
-// TODO: consider using the 2 unused analog pins for
-//       these enable singals 
 assign en_frv1bram = ~en_frv4ccx_i & ccx4_res_i[0];
 assign en_frv8bram = ~en_frv4ccx_i & ccx4_res_i[1];
 
@@ -656,7 +654,7 @@ assign {  clk_p2,
           clk_c_frv_1bram,
           clk_c_frv_8bram } = cg_clks;
 
-`ifndef NO_CLOCK_GATES_TODO
+`ifndef NO_CLOCK_GATES
 genvar i;
 generate
   for (i = 0; i < N_CLOCKS; i = i + 1) begin : i_cg
