@@ -5,7 +5,7 @@ TOP = chip_top
 
 PDK_ROOT ?= $(MAKEFILE_DIR)/gf180mcu
 PDK ?= gf180mcuD
-PDK_TAG ?= 1.1.2
+PDK_TAG ?= 1.3.1
 
 AVAILABLE_SLOTS = 1x1 0p5x1 1x0p5 0p5x0p5
 DEFAULT_SLOT = 1x1
@@ -132,7 +132,7 @@ librelane: ## Run LibreLane flow (synthesis, PnR, verification)
 .PHONY: librelane
 
 librelane-nodrc: ## Run LibreLane flow without DRC checks
-	librelane librelane/slots/slot_${SLOT}.yaml librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --skip KLayout.DRC --skip Magic.DRC
+	librelane librelane/slots/slot_${SLOT}.yaml librelane/config.yaml --pdk ${PDK} --pdk-root ${PDK_ROOT} --manual-pdk --skip KLayout.Antenna --skip KLayout.DRC --skip Magic.DRC
 .PHONY: librelane-nodrc
 
 librelane-klayoutdrc: ## Run LibreLane flow without magic DRC checks
@@ -167,7 +167,6 @@ sim:
 	cd cocotb; PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim
 
-
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram_simple.py
 #cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_sram.py
@@ -179,6 +178,10 @@ sim:
 sim-gl: ## Run gate-level simulation with cocotb
 	cd cocotb; GL=1 PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 test_toggle.py
 .PHONY: sim-gl
+
+librelane-padring: ## Only create the padring
+	PDK_ROOT=${PDK_ROOT} PDK=${PDK} python3 scripts/padring.py librelane/slots/slot_${SLOT}.yaml librelane/config.yaml
+.PHONY: librelane-padring
 
 sim-view: ## View simulation waveforms in GTKWave
 	gtkwave cocotb/sim_build/chip_top.fst

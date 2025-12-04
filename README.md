@@ -357,6 +357,3 @@ make sim-gl
 ```
 Note: Simulation times can get quite long. Select the test(s) to run in the Makefile target.
 
-## Precheck
-
-[gf180mcu-precheck](https://github.com/wafer-space/gf180mcu-precheck)
