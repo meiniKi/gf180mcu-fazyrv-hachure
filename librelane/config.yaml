@@ -167,6 +167,8 @@ MAGIC_GDS_FLATGLOB:
 # flattened to form a "filltrans" layer
 - "COMP_fill_cell"
 - "Poly2_fill_cell"
+- "COMP_FILL"
+- "POLY2_FILL"
 # Foundry provided SRAMs
 - "*$$*"
 - "M1_N*"
