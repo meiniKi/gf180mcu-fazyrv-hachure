@@ -9,3 +9,4 @@ wb.core
 .vscode
 run_backup
 img/
+*.lyrdb

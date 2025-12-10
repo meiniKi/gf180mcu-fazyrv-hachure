@@ -8,8 +8,8 @@ meta:
     #Checker.KLayoutDRC: null
 
     # Disable KLayout antenna check
-    KLayout.Antenna: null
-    Checker.KLayoutAntenna: null
+    #KLayout.Antenna: null
+    #Checker.KLayoutAntenna: null
 
     # Disable KLayout density check
     #KLayout.Density: null
@@ -78,6 +78,7 @@ VERILOG_INCLUDE_DIRS:
 
 # Enable plugin for better SystemVerilog support
 # USE_SLANG: True
+# SLANG_ARGUMENTS: ['--keep-hierarchy']
 
 # Slightly smaller file sizes
 PRIMARY_GDSII_STREAMOUT_TOOL: klayout
@@ -125,11 +126,11 @@ DESIGN_REPAIR_MAX_WIRE_LENGTH: 280
 # Post global routing repair
 GRT_DESIGN_REPAIR_MAX_SLEW_PCT: 35
 GRT_DESIGN_REPAIR_MAX_CAP_PCT: 20
-GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH: 500
+GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH: 480
 
 # Fix antenna violations after DRT
-DRT_ANTENNA_REPAIR_ITERS: 10
-DRT_ANTENNA_MARGIN: 10 # %
+DRT_ANTENNA_REPAIR_ITERS: 15
+DRT_ANTENNA_MARGIN: 20 # %
 
 # Fix hold violations
 GRT_RESIZER_HOLD_SLACK_MARGIN: 0.3
@@ -162,10 +163,6 @@ PDN_CORE_HORIZONTAL_LAYER: Metal3
 MAGIC_GDS_FLATGLOB:
 # For contacts
 - "*_CDNS_*"
-# COMP and Poly2 filler cells need to be 
-# flattened to form a "filltrans" layer
-- "COMP_fill_cell"
-- "Poly2_fill_cell"
 # Foundry provided SRAMs
 - "*$$*"
 - "M1_N*"
@@ -189,10 +186,18 @@ MAGIC_GDS_FLATGLOB:
 - "xdec_*"
 - "ypredec*"
 - "xpredec*"
-- "xdec8_*"
 - "prexdec_*"
+- "xdec8_*"
+- "xdec16_*"
 - "xdec32_*"
 - "sa_*"
+
+# Since we cannot meet the minimum density limit on Metal2,
+# ignore active metal on previous and subsequent layers
+# (DM.5_DM.7 and DM.4_DM.6). Dummy metal is moved to active
+# metal during the precheck.
+KLAYOUT_FILLER_OPTIONS:
+  Metal2_ignore_active: true
 
 # Because we have multiple power pads for one power domain
 MAGIC_EXT_UNIQUE: notopports
